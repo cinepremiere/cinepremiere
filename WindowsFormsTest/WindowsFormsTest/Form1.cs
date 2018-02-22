@@ -71,6 +71,7 @@ namespace WindowsFormsTest
         private void TxtUsuario_TextChanged(object sender, EventArgs e)
         {
             //ultima actualizacion de prueba 
+            //aya ayayayaya
         }
     }
 }
