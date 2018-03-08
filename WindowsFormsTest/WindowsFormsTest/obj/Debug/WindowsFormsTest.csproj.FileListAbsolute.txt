@@ -17,3 +17,6 @@ D:\7° Semestre\Ingenieria de Software I\WindowsFormsTest\WindowsFormsTest\obj\D
 D:\7° Semestre\Ingenieria de Software I\WindowsFormsTest\WindowsFormsTest\obj\Debug\WindowsFormsTest.Properties.Resources.resources
 D:\7° Semestre\Ingenieria de Software I\WindowsFormsTest\WindowsFormsTest\obj\Debug\WindowsFormsTest.csproj.GenerateResource.Cache
 D:\7° Semestre\Ingenieria de Software I\WindowsFormsTest\WindowsFormsTest\obj\Debug\WindowsFormsTest.csproj.CoreCompileInputs.cache
+C:\Users\computo\Documents\GitHub\cinepremiere\WindowsFormsTest\WindowsFormsTest\bin\Debug\WindowsFormsTest.exe.config
+C:\Users\computo\Documents\GitHub\cinepremiere\WindowsFormsTest\WindowsFormsTest\obj\Debug\WindowsFormsTest.exe
+C:\Users\computo\Documents\GitHub\cinepremiere\WindowsFormsTest\WindowsFormsTest\obj\Debug\WindowsFormsTest.pdb
