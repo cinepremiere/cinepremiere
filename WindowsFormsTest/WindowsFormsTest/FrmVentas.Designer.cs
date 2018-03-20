@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsTest
 {
-    partial class Ventas
+    partial class FrmVentas
     {
         /// <summary>
         /// Required designer variable.
