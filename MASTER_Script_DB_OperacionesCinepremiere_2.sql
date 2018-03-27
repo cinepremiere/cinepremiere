@@ -8,6 +8,7 @@ create table TipoUsuario
 (
 	claveTipoUsuario smallint primary key,
 	tipoUsuario nvarchar(25) not null,--1 = Adminstrador, 2 = Gerente, 3 = Supervisor de Cajas, 4 = Cajero, 5 = TEST/ROOT
+	status bit not null,
 )
 go
 create table Usuarios
