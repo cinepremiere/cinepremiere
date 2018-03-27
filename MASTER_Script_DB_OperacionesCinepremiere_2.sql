@@ -1,6 +1,6 @@
-create database DB_OperacionesCinepremium_2
+create database DB_CinePremier
 go
-use DB_OperacionesCinepremium_2
+use DB_CinePremier
 go
 set dateformat 'dmy'
 go
@@ -66,6 +66,13 @@ create table Checador
 	horasalida date not null,
 )
 go
+create table TipoCliente
+(
+	claveTipoCliente int primary key,
+	tipoCliente char(15) not null,
+	status bit not null,
+)
+go
 create table Clientes
 (
 	claveCliente nvarchar(5) primary key,
@@ -89,10 +96,11 @@ create table Clientes
 	tipoCliente int references TipoCliente(claveTipoCliente) not null,
 )
 go
-create table TipoCliente
+create table TipoSala
 (
-	claveTipoCliente int primary key,
-	tipoCliente char(15) not null,
+	claveTipoSala smallint primary key,
+	capacidad smallint not null,
+	descripcion nvarchar(50),
 	status bit not null,
 )
 go
@@ -101,13 +109,6 @@ create table Salas
 	claveSala char(5) primary key,
 	claveTipoSala smallint references TipoSala(claveTipoSala),
 	status bit not null,
-)
-go
-create table TipoSala
-(
-	claveTipoSala smallint primary key,
-	capacidad smallint not null,
-	descripcion nvarchar(50),
 )
 go
 create table Peliculas
@@ -125,10 +126,10 @@ go
 create table Funciones
 (
 	claveFuncion nvarchar(5) primary key,
-	claveSala nvarchar (5) references Salas(claveSala) not null,
+	claveSala char (5) references Salas(claveSala) not null,
 	clavePelicula nvarchar (5) references Peliculas (clavePelicula) not null,
 	claveTipoFuncion smallint references TipoFuncion(claveTipoFuncion),
-	claveIdioma smallint references Idioma(idIdioma),
+	claveIdioma smallint references Idioma(claveIdioma),
 	claveSubtitulos smallint references Subtitulos(claveSubtitulos),
 	fecha date not null,
 	hora time not null,
@@ -146,19 +147,9 @@ create table Boletos
 	fechaHoraImpresion date not null,
 )
 go
-create table Ventas
-(
-	claveVenta nvarchar(5) primary key,
-	claveCliente nvarchar(5) references Clientes(claveCliente) null,
-	claveUsuario nvarchar(5) references Usuarios(claveUsuario) not null,
-	fechaVenta date not null,
-	horaVenta time not null,
-	importeTotal money not null,
- )
- go
- create table DetallesVentas
+create table DetallesVentas
  (
-	claveVenta nvarchar(5) references Ventas(claveVenta),
+	claveDetalleVenta nvarchar(5) primary key,
 	boleto nvarchar(5) references Boletos(boleto) not null,
 	descuento money,
 	iva money,
@@ -166,3 +157,15 @@ create table Ventas
 	importeParcial money not null,
  )
  go
+create table Ventas
+(
+	claveVenta int primary key,
+	claveDetalleVenta nvarchar(5) references DetallesVentas(claveDetalleVenta),
+	claveCliente nvarchar(5) references Clientes(claveCliente) null,
+	claveUsuario nvarchar(5) references Usuarios(claveUsuario) not null,
+	fechaVenta date not null,
+	horaVenta time not null,
+	importeTotal money not null,
+ )
+ go
+ 
