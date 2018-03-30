@@ -159,6 +159,7 @@ create table Funciones
 	fecha date not null,
 	hora time not null,
 	disponible bit not null,
+	imgPath varchar(50) not null,
 )
 ALTER TABLE Funciones
 ADD CONSTRAINT col_disp2 DEFAULT 1 FOR disponible
