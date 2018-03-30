@@ -143,6 +143,7 @@ create table Peliculas
 	fechaRetiro date not null,
 	duracion time not null,
 	disponible bit not null,
+	indice bigint not null unique identity(1,1),
 )
 ALTER TABLE Peliculas
 ADD CONSTRAINT col_disp1 DEFAULT 1 FOR disponible
