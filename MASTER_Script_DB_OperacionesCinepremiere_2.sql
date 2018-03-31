@@ -65,7 +65,7 @@ create table TipoFuncion
 	claveTipoFuncion smallint primary key identity(1, 1),
 	tipoFuncion char(15) not null unique,--2DR, 3DR, 4DX, IMAX2D, IMAX3D, 3DVIP, 2DVIP, RV
 	precio money not null,
-	descripcion char(15),
+	descripcion char(15) null,
 	status bit not null,
 )
 ALTER TABLE TipoFuncion
@@ -75,9 +75,9 @@ create table Checador
 (
 	claveUsuario bigint references Usuarios(claveUsuario) not null,
 	horaIngreso date not null,
-	horaSalidaComida date not null,
-	horaregresoComida date not null,
-	horasalida date not null,
+	horaSalidaComida date null,
+	horaregresoComida date null,
+	horasalida date null,
 )
 go
 create table TipoCliente
@@ -119,7 +119,7 @@ create table TipoSala
 (
 	claveTipoSala smallint primary key identity(1, 1),
 	capacidad smallint not null unique,
-	descripcion nvarchar(50),
+	descripcion nvarchar(50) null,
 	status bit not null,
 )
 ALTER TABLE TipoSala
@@ -128,7 +128,7 @@ go
 create table Salas
 (
 	claveSala smallint primary key identity(1, 1),
-	claveTipoSala smallint references TipoSala(claveTipoSala),
+	claveTipoSala smallint references TipoSala(claveTipoSala) not null,
 	status bit not null,
 )
 ALTER TABLE Salas
@@ -153,9 +153,9 @@ create table Funciones
 	claveFuncion bigint primary key identity(1, 1),
 	claveSala smallint references Salas(claveSala) not null,
 	clavePelicula char(100) references Peliculas (claveNombrePelicula) not null,
-	claveTipoFuncion smallint references TipoFuncion(claveTipoFuncion),
-	claveIdioma smallint references Idioma(claveIdioma),
-	claveSubtitulos smallint references Subtitulos(claveSubtitulos),
+	claveTipoFuncion smallint references TipoFuncion(claveTipoFuncion) not null,
+	claveIdioma smallint references Idioma(claveIdioma) not null,
+	claveSubtitulos smallint references Subtitulos(claveSubtitulos) not null,
 	fecha date not null,
 	hora time not null,
 	disponible bit not null,
@@ -194,6 +194,6 @@ create table DetallesVentas
 	importeParcial money not null,
  )
 ALTER TABLE DetallesVentas
-ADD CONSTRAINT col_desc DEFAULT 1 FOR descuento,
-CONSTRAINT col_iva DEFAULT 1 FOR iva
+ADD CONSTRAINT col_desc DEFAULT 0 FOR descuento,
+CONSTRAINT col_iva DEFAULT 0 FOR iva
 go
