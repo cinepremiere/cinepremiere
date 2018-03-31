@@ -83,7 +83,7 @@ go
 create table TipoCliente
 (
 	claveTipoCliente smallint primary key identity(1, 1),
-	tipoCliente char(15) not null unique,
+	tipoCliente char(15) not null unique,--preferente, vip, premier
 	status bit not null,
 )
 ALTER TABLE TipoCliente
