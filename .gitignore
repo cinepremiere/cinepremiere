@@ -1,0 +1,16 @@
+
+*.ide
+WindowsFormsTest/.vs/WindowsFormsTest/v15/.suo
+WindowsFormsTest/WindowsFormsTest/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+*.cache
+*.ide
+WindowsFormsTest/.vs/WindowsFormsTest/v15/.suo
+WindowsFormsTest/.vs/WindowsFormsTest/v14/.suo
+*.ide
+*.cache
+*.cache
+*.ide
+*.ide
+*.ide
+WindowsFormsTest/.vs/WindowsFormsTest/v15/Server/sqlite3/storage.ide-shm
+WindowsFormsTest/.vs/WindowsFormsTest/v15/Server/sqlite3/storage.ide-wal
