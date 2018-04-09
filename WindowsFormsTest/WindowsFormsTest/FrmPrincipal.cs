@@ -16,5 +16,17 @@ namespace WindowsFormsTest
         {
             InitializeComponent();
         }
+
+        private void agregarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmPeliculas frmPeliculas = new FrmPeliculas();
+            frmPeliculas.Show();
+        }
+
+        private void membresíasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmClientes frmClientes = new FrmClientes();
+            frmClientes.Show();
+        }
     }
 }
