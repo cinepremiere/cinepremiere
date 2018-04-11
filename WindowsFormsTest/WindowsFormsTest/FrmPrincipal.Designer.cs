@@ -178,7 +178,7 @@
             // uusariosToolStripMenuItem
             // 
             this.uusariosToolStripMenuItem.Name = "uusariosToolStripMenuItem";
-            this.uusariosToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.uusariosToolStripMenuItem.Size = new System.Drawing.Size(164, 30);
             this.uusariosToolStripMenuItem.Text = "Uusarios";
             // 
             // funcionesToolStripMenuItem
@@ -194,6 +194,7 @@
             this.agregarOModificarToolStripMenuItem.Name = "agregarOModificarToolStripMenuItem";
             this.agregarOModificarToolStripMenuItem.Size = new System.Drawing.Size(256, 30);
             this.agregarOModificarToolStripMenuItem.Text = "Agregar o Modificar";
+            this.agregarOModificarToolStripMenuItem.Click += new System.EventHandler(this.agregarOModificarToolStripMenuItem_Click);
             // 
             // FrmPrincipal
             // 

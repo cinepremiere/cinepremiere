@@ -28,5 +28,11 @@ namespace WindowsFormsTest
             FrmClientes frmClientes = new FrmClientes();
             frmClientes.Show();
         }
+
+        private void agregarOModificarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmFunciones frmFunciones = new FrmFunciones();
+            frmFunciones.Show();
+        }
     }
 }
