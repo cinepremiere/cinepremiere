@@ -34,6 +34,9 @@
             this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ventasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generarVentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.boletosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.membresíasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tarjetaDeDescuentosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancelarVentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.películasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agregarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,12 +45,8 @@
             this.ventasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.rHToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uusariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.funcionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agregarOModificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.boletosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.membresíasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tarjetaDeDescuentosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,13 +103,32 @@
             this.membresíasToolStripMenuItem,
             this.tarjetaDeDescuentosToolStripMenuItem});
             this.generarVentaToolStripMenuItem.Name = "generarVentaToolStripMenuItem";
-            this.generarVentaToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.generarVentaToolStripMenuItem.Size = new System.Drawing.Size(212, 30);
             this.generarVentaToolStripMenuItem.Text = "Generar Venta";
+            // 
+            // boletosToolStripMenuItem
+            // 
+            this.boletosToolStripMenuItem.Name = "boletosToolStripMenuItem";
+            this.boletosToolStripMenuItem.Size = new System.Drawing.Size(270, 30);
+            this.boletosToolStripMenuItem.Text = "Boletos";
+            // 
+            // membresíasToolStripMenuItem
+            // 
+            this.membresíasToolStripMenuItem.Name = "membresíasToolStripMenuItem";
+            this.membresíasToolStripMenuItem.Size = new System.Drawing.Size(270, 30);
+            this.membresíasToolStripMenuItem.Text = "Membresías";
+            this.membresíasToolStripMenuItem.Click += new System.EventHandler(this.membresíasToolStripMenuItem_Click);
+            // 
+            // tarjetaDeDescuentosToolStripMenuItem
+            // 
+            this.tarjetaDeDescuentosToolStripMenuItem.Name = "tarjetaDeDescuentosToolStripMenuItem";
+            this.tarjetaDeDescuentosToolStripMenuItem.Size = new System.Drawing.Size(270, 30);
+            this.tarjetaDeDescuentosToolStripMenuItem.Text = "Tarjeta de Descuentos";
             // 
             // cancelarVentaToolStripMenuItem
             // 
             this.cancelarVentaToolStripMenuItem.Name = "cancelarVentaToolStripMenuItem";
-            this.cancelarVentaToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.cancelarVentaToolStripMenuItem.Size = new System.Drawing.Size(212, 30);
             this.cancelarVentaToolStripMenuItem.Text = "Cancelar Venta";
             // 
             // películasToolStripMenuItem
@@ -140,20 +158,19 @@
             // estadísticasToolStripMenuItem
             // 
             this.estadísticasToolStripMenuItem.Name = "estadísticasToolStripMenuItem";
-            this.estadísticasToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.estadísticasToolStripMenuItem.Size = new System.Drawing.Size(186, 30);
             this.estadísticasToolStripMenuItem.Text = "Estadísticas";
             // 
             // ventasToolStripMenuItem1
             // 
             this.ventasToolStripMenuItem1.Name = "ventasToolStripMenuItem1";
-            this.ventasToolStripMenuItem1.Size = new System.Drawing.Size(252, 30);
+            this.ventasToolStripMenuItem1.Size = new System.Drawing.Size(186, 30);
             this.ventasToolStripMenuItem1.Text = "Ventas";
             // 
             // rHToolStripMenuItem
             // 
             this.rHToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.uusariosToolStripMenuItem,
-            this.clientesToolStripMenuItem});
+            this.uusariosToolStripMenuItem});
             this.rHToolStripMenuItem.Name = "rHToolStripMenuItem";
             this.rHToolStripMenuItem.Size = new System.Drawing.Size(48, 29);
             this.rHToolStripMenuItem.Text = "RH";
@@ -161,14 +178,8 @@
             // uusariosToolStripMenuItem
             // 
             this.uusariosToolStripMenuItem.Name = "uusariosToolStripMenuItem";
-            this.uusariosToolStripMenuItem.Size = new System.Drawing.Size(164, 30);
+            this.uusariosToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
             this.uusariosToolStripMenuItem.Text = "Uusarios";
-            // 
-            // clientesToolStripMenuItem
-            // 
-            this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(164, 30);
-            this.clientesToolStripMenuItem.Text = "Clientes";
             // 
             // funcionesToolStripMenuItem
             // 
@@ -183,25 +194,6 @@
             this.agregarOModificarToolStripMenuItem.Name = "agregarOModificarToolStripMenuItem";
             this.agregarOModificarToolStripMenuItem.Size = new System.Drawing.Size(256, 30);
             this.agregarOModificarToolStripMenuItem.Text = "Agregar o Modificar";
-            // 
-            // boletosToolStripMenuItem
-            // 
-            this.boletosToolStripMenuItem.Name = "boletosToolStripMenuItem";
-            this.boletosToolStripMenuItem.Size = new System.Drawing.Size(276, 30);
-            this.boletosToolStripMenuItem.Text = "Boletos";
-            // 
-            // membresíasToolStripMenuItem
-            // 
-            this.membresíasToolStripMenuItem.Name = "membresíasToolStripMenuItem";
-            this.membresíasToolStripMenuItem.Size = new System.Drawing.Size(270, 30);
-            this.membresíasToolStripMenuItem.Text = "Membresías";
-            this.membresíasToolStripMenuItem.Click += new System.EventHandler(this.membresíasToolStripMenuItem_Click);
-            // 
-            // tarjetaDeDescuentosToolStripMenuItem
-            // 
-            this.tarjetaDeDescuentosToolStripMenuItem.Name = "tarjetaDeDescuentosToolStripMenuItem";
-            this.tarjetaDeDescuentosToolStripMenuItem.Size = new System.Drawing.Size(270, 30);
-            this.tarjetaDeDescuentosToolStripMenuItem.Text = "Tarjeta de Descuentos";
             // 
             // FrmPrincipal
             // 
@@ -234,7 +226,6 @@
         private System.Windows.Forms.ToolStripMenuItem estadísticasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ventasToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem uusariosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generarVentaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cancelarVentaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem agregarToolStripMenuItem;
