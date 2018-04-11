@@ -55,6 +55,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clientes.cs" />
+    <Compile Include="FrmClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmClientes.Designer.cs">
+      <DependentUpon>FrmClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFunciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFunciones.Designer.cs">
+      <DependentUpon>FrmFunciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +86,7 @@
     <Compile Include="FrmPrincipal.Designer.cs">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Funciones.cs" />
     <Compile Include="Peliculas.cs" />
     <Compile Include="ProcesosBD.cs" />
     <Compile Include="Program.cs" />
@@ -83,11 +97,20 @@
     <Compile Include="FrmVentas.Designer.cs">
       <DependentUpon>FrmVentas.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FrmClientes.resx">
+      <DependentUpon>FrmClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFunciones.resx">
+      <DependentUpon>FrmFunciones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPeliculas.resx">
       <DependentUpon>FrmPeliculas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPrincipal.resx">
+      <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

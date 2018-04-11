@@ -42,11 +42,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.numDuracion = new System.Windows.Forms.NumericUpDown();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.dgvPeliculas = new System.Windows.Forms.DataGridView();
             this.chbDisponible = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.txtArchivoBD = new System.Windows.Forms.TextBox();
-            this.btnModificar = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.dgvPeliculas = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.numDuracion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPeliculas)).BeginInit();
             this.SuspendLayout();
@@ -107,7 +108,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(482, 283);
+            this.btnGuardar.Location = new System.Drawing.Point(885, 285);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(150, 39);
             this.btnGuardar.TabIndex = 6;
@@ -171,30 +172,13 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(326, 283);
+            this.btnCancel.Location = new System.Drawing.Point(729, 285);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(150, 39);
             this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // dgvPeliculas
-            // 
-            this.dgvPeliculas.AllowUserToAddRows = false;
-            this.dgvPeliculas.AllowUserToDeleteRows = false;
-            this.dgvPeliculas.AllowUserToOrderColumns = true;
-            this.dgvPeliculas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            this.dgvPeliculas.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.dgvPeliculas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dgvPeliculas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPeliculas.Location = new System.Drawing.Point(33, 346);
-            this.dgvPeliculas.Name = "dgvPeliculas";
-            this.dgvPeliculas.ReadOnly = true;
-            this.dgvPeliculas.RowTemplate.Height = 28;
-            this.dgvPeliculas.Size = new System.Drawing.Size(1040, 237);
-            this.dgvPeliculas.TabIndex = 15;
-            this.dgvPeliculas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPeliculas_CellClick);
             // 
             // chbDisponible
             // 
@@ -222,25 +206,46 @@
             this.txtArchivoBD.Size = new System.Drawing.Size(652, 26);
             this.txtArchivoBD.TabIndex = 18;
             // 
-            // btnModificar
+            // label7
             // 
-            this.btnModificar.Location = new System.Drawing.Point(638, 283);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(150, 39);
-            this.btnModificar.TabIndex = 6;
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnGuardar_Click);
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(34, 294);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(59, 20);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "Buscar";
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.Location = new System.Drawing.Point(99, 294);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(624, 26);
+            this.txtBuscar.TabIndex = 20;
+            // 
+            // dgvPeliculas
+            // 
+            this.dgvPeliculas.AllowUserToAddRows = false;
+            this.dgvPeliculas.AllowUserToDeleteRows = false;
+            this.dgvPeliculas.AllowUserToOrderColumns = true;
+            this.dgvPeliculas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPeliculas.Location = new System.Drawing.Point(33, 342);
+            this.dgvPeliculas.Name = "dgvPeliculas";
+            this.dgvPeliculas.ReadOnly = true;
+            this.dgvPeliculas.RowTemplate.Height = 28;
+            this.dgvPeliculas.Size = new System.Drawing.Size(1002, 345);
+            this.dgvPeliculas.TabIndex = 21;
             // 
             // FrmPeliculas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1096, 839);
+            this.Controls.Add(this.dgvPeliculas);
+            this.Controls.Add(this.txtBuscar);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.txtArchivoBD);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.chbDisponible);
-            this.Controls.Add(this.dgvPeliculas);
             this.Controls.Add(this.numDuracion);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -248,7 +253,6 @@
             this.Controls.Add(this.dtmEstreno);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.cmbDistrib);
             this.Controls.Add(this.label3);
@@ -283,10 +287,11 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown numDuracion;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.DataGridView dgvPeliculas;
         private System.Windows.Forms.CheckBox chbDisponible;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtArchivoBD;
-        private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtBuscar;
+        private System.Windows.Forms.DataGridView dgvPeliculas;
     }
 }

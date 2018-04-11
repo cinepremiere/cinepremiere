@@ -37,3 +37,6 @@ F:\UVM\Tareas UVM\07 Septimo Semestre\Ing. de Software I\Parcial 1\cinepremiere\
 F:\UVM\Tareas UVM\07 Septimo Semestre\Ing. de Software I\Parcial 1\cinepremiere\WindowsFormsTest\WindowsFormsTest\bin\Debug\EntityFramework.xml
 F:\UVM\Tareas UVM\07 Septimo Semestre\Ing. de Software I\Parcial 1\cinepremiere\WindowsFormsTest\WindowsFormsTest\bin\Debug\EntityFramework.SqlServer.xml
 F:\UVM\Tareas UVM\07 Septimo Semestre\Ing. de Software I\Parcial 1\cinepremiere\WindowsFormsTest\WindowsFormsTest\obj\Debug\WindowsFormsTest.csproj.CopyComplete
+F:\UVM\Tareas UVM\07 Septimo Semestre\Ing. de Software I\Parcial 1\cinepremiere\WindowsFormsTest\WindowsFormsTest\obj\Debug\WindowsFormsTest.FrmPrincipal.resources
+F:\UVM\Tareas UVM\07 Septimo Semestre\Ing. de Software I\Parcial 1\cinepremiere\WindowsFormsTest\WindowsFormsTest\obj\Debug\WindowsFormsTest.FrmClientes.resources
+F:\UVM\Tareas UVM\07 Septimo Semestre\Ing. de Software I\Parcial 1\cinepremiere\WindowsFormsTest\WindowsFormsTest\obj\Debug\WindowsFormsTest.FrmFunciones.resources
