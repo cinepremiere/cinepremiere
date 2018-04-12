@@ -17,7 +17,9 @@ namespace WindowsFormsTest
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new FrmLogin());
-            Application.Run(new FrmPeliculas());
+            //Application.Run(new FrmPeliculas());
+            //Application.Run(new FrmClientes());
+            Application.Run(new FrmPrincipal());
         }
     }
 }
