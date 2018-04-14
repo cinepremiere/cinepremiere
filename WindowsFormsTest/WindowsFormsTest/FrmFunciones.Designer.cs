@@ -54,9 +54,11 @@
             // 
             // cmbPeliculas
             // 
+            this.cmbPeliculas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPeliculas.FormattingEnabled = true;
             this.cmbPeliculas.Location = new System.Drawing.Point(90, 4);
             this.cmbPeliculas.Name = "cmbPeliculas";
+            this.cmbPeliculas.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cmbPeliculas.Size = new System.Drawing.Size(420, 28);
             this.cmbPeliculas.TabIndex = 0;
             // 
@@ -80,6 +82,7 @@
             // 
             // cmbSalas
             // 
+            this.cmbSalas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSalas.FormattingEnabled = true;
             this.cmbSalas.Location = new System.Drawing.Point(573, 4);
             this.cmbSalas.Name = "cmbSalas";
@@ -97,6 +100,7 @@
             // 
             // cmbTipoFuncion
             // 
+            this.cmbTipoFuncion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoFuncion.FormattingEnabled = true;
             this.cmbTipoFuncion.Location = new System.Drawing.Point(915, 4);
             this.cmbTipoFuncion.Name = "cmbTipoFuncion";
@@ -114,6 +118,7 @@
             // 
             // cmbIdioma
             // 
+            this.cmbIdioma.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbIdioma.FormattingEnabled = true;
             this.cmbIdioma.Location = new System.Drawing.Point(90, 71);
             this.cmbIdioma.Name = "cmbIdioma";
@@ -131,6 +136,7 @@
             // 
             // cmbSubtitulos
             // 
+            this.cmbSubtitulos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSubtitulos.FormattingEnabled = true;
             this.cmbSubtitulos.Location = new System.Drawing.Point(309, 71);
             this.cmbSubtitulos.Name = "cmbSubtitulos";
@@ -166,10 +172,14 @@
             // dtmHoraProy
             // 
             this.dtmHoraProy.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtmHoraProy.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dtmHoraProy.Location = new System.Drawing.Point(950, 76);
+            this.dtmHoraProy.MinDate = new System.DateTime(2017, 1, 1, 0, 0, 0, 0);
             this.dtmHoraProy.Name = "dtmHoraProy";
+            this.dtmHoraProy.ShowUpDown = true;
             this.dtmHoraProy.Size = new System.Drawing.Size(200, 26);
             this.dtmHoraProy.TabIndex = 13;
+            this.dtmHoraProy.Value = new System.DateTime(2018, 4, 12, 23, 0, 0, 0);
             // 
             // chkPeliDisp
             // 
@@ -199,12 +209,13 @@
             // 
             // btnExaminar
             // 
-            this.btnExaminar.Location = new System.Drawing.Point(833, 159);
+            this.btnExaminar.Location = new System.Drawing.Point(832, 154);
             this.btnExaminar.Name = "btnExaminar";
-            this.btnExaminar.Size = new System.Drawing.Size(125, 26);
+            this.btnExaminar.Size = new System.Drawing.Size(131, 39);
             this.btnExaminar.TabIndex = 17;
             this.btnExaminar.Text = "Examinar";
             this.btnExaminar.UseVisualStyleBackColor = true;
+            this.btnExaminar.Click += new System.EventHandler(this.btnExaminar_Click);
             // 
             // btnGuardar
             // 
