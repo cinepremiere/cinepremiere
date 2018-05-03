@@ -28,160 +28,202 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvVenta = new System.Windows.Forms.DataGridView();
-            this.dgvPeli = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvHorario = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgvBoletos = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgvAsientos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvIVA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvDescuento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.lblAsientos = new System.Windows.Forms.Label();
-            this.BtnRegresar = new System.Windows.Forms.Button();
-            this.btnFinalizar = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVenta)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.dgvVentas = new System.Windows.Forms.DataGridView();
+            this.ImgPelicula = new System.Windows.Forms.DataGridViewImageColumn();
+            this.NombrePelicula = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NombreCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewButtonColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
             this.SuspendLayout();
             // 
-            // dgvVenta
+            // dgvVentas
             // 
-            this.dgvVenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvVenta.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgvPeli,
-            this.dgvHorario,
-            this.dgvBoletos,
-            this.dgvAsientos,
-            this.dgvSubTotal,
-            this.dgvIVA,
-            this.dgvDescuento,
-            this.dgvTotal});
-            this.dgvVenta.Location = new System.Drawing.Point(-1, 0);
-            this.dgvVenta.Name = "dgvVenta";
-            this.dgvVenta.RowTemplate.Height = 24;
-            this.dgvVenta.Size = new System.Drawing.Size(1087, 300);
-            this.dgvVenta.TabIndex = 0;
-            this.dgvVenta.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentas);
+            this.dgvVentas.AllowUserToDeleteRows = false;
+            this.dgvVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVentas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ImgPelicula,
+            this.NombrePelicula,
+            this.Column2,
+            this.Column3,
+            this.Column5,
+            this.Column4,
+            this.Column11,
+            this.Column6,
+            this.Column10,
+            this.Column7,
+            this.Column8,
+            this.IdCliente,
+            this.NombreCliente,
+            this.Column9});
+            this.dgvVentas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvVentas.Location = new System.Drawing.Point(0, 0);
+            this.dgvVentas.Name = "dgvVentas";
+            this.dgvVentas.RowTemplate.Height = 28;
+            this.dgvVentas.Size = new System.Drawing.Size(1749, 828);
+            this.dgvVentas.TabIndex = 0;
+            this.dgvVentas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentas_CellContentClick);
+            this.dgvVentas.CellStateChanged += new System.Windows.Forms.DataGridViewCellStateChangedEventHandler(this.dgvVentas_CellStateChanged);
+            this.dgvVentas.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentas_CellValueChanged);
+            this.dgvVentas.SelectionChanged += new System.EventHandler(this.dgvVentas_SelectionChanged);
+            this.dgvVentas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvVentas_KeyPress);
+            this.dgvVentas.Leave += new System.EventHandler(this.dgvVentas_Leave);
             // 
-            // dgvPeli
+            // ImgPelicula
             // 
-            this.dgvPeli.HeaderText = "Pelicula";
-            this.dgvPeli.Name = "dgvPeli";
+            this.ImgPelicula.HeaderText = "Img";
+            this.ImgPelicula.Name = "ImgPelicula";
+            this.ImgPelicula.ReadOnly = true;
+            this.ImgPelicula.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ImgPelicula.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // dgvHorario
+            // NombrePelicula
             // 
-            this.dgvHorario.HeaderText = "Horarios";
-            this.dgvHorario.Name = "dgvHorario";
+            this.NombrePelicula.DataPropertyName = "pelicula";
+            this.NombrePelicula.HeaderText = "Nombre de la Película";
+            this.NombrePelicula.Name = "NombrePelicula";
+            this.NombrePelicula.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.NombrePelicula.Width = 300;
             // 
-            // dgvBoletos
+            // Column2
             // 
-            this.dgvBoletos.HeaderText = "Boletos";
-            this.dgvBoletos.Name = "dgvBoletos";
+            this.Column2.DataPropertyName = "horarios";
+            this.Column2.HeaderText = "Horarios";
+            this.Column2.Name = "Column2";
+            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // dgvAsientos
+            // Column3
             // 
-            this.dgvAsientos.HeaderText = "Asientos Seleccionados";
-            this.dgvAsientos.Name = "dgvAsientos";
+            this.Column3.DataPropertyName = "tipoFuncion";
+            this.Column3.HeaderText = "Tipo";
+            this.Column3.Name = "Column3";
+            this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // dgvSubTotal
+            // Column5
             // 
-            this.dgvSubTotal.HeaderText = "SubTotal";
-            this.dgvSubTotal.Name = "dgvSubTotal";
+            this.Column5.DataPropertyName = "idioma";
+            this.Column5.HeaderText = "Idioma";
+            this.Column5.Name = "Column5";
+            this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // dgvIVA
+            // Column4
             // 
-            this.dgvIVA.HeaderText = "IVA";
-            this.dgvIVA.Name = "dgvIVA";
+            this.Column4.DataPropertyName = "salas";
+            this.Column4.HeaderText = "Salas";
+            this.Column4.Name = "Column4";
+            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // dgvDescuento
+            // Column11
             // 
-            this.dgvDescuento.HeaderText = "Descuentos";
-            this.dgvDescuento.Name = "dgvDescuento";
+            this.Column11.HeaderText = "CuantosAsientos";
+            this.Column11.MaxDropDownItems = 20;
+            this.Column11.Name = "Column11";
+            this.Column11.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column11.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // dgvTotal
+            // Column6
             // 
-            this.dgvTotal.HeaderText = "Total";
-            this.dgvTotal.Name = "dgvTotal";
+            this.Column6.DataPropertyName = "btnAsientos";
+            this.Column6.HeaderText = "Seleccionar Asientos";
+            this.Column6.Name = "Column6";
+            this.Column6.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Column6.Text = "Seleccionar Asientos";
+            this.Column6.ToolTipText = "Seleccionar Asientos";
+            this.Column6.UseColumnTextForButtonValue = true;
+            this.Column6.Width = 150;
             // 
-            // dataGridView2
+            // Column10
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(-1, 323);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowTemplate.Height = 24;
-            this.dataGridView2.Size = new System.Drawing.Size(1087, 300);
-            this.dataGridView2.TabIndex = 1;
+            this.Column10.DataPropertyName = "asientos";
+            this.Column10.HeaderText = "Asientos";
+            this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
             // 
-            // lblAsientos
+            // Column7
             // 
-            this.lblAsientos.AutoSize = true;
-            this.lblAsientos.Font = new System.Drawing.Font("Wide Latin", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAsientos.Location = new System.Drawing.Point(12, 303);
-            this.lblAsientos.Name = "lblAsientos";
-            this.lblAsientos.Size = new System.Drawing.Size(240, 37);
-            this.lblAsientos.TabIndex = 2;
-            this.lblAsientos.Text = "Asientos";
-            this.lblAsientos.Visible = false;
-            this.lblAsientos.Click += new System.EventHandler(this.label1_Click);
+            this.Column7.DataPropertyName = "precioUnitario";
+            this.Column7.HeaderText = "Precio Unitario";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
             // 
-            // BtnRegresar
+            // Column8
             // 
-            this.BtnRegresar.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnRegresar.Location = new System.Drawing.Point(15, 624);
-            this.BtnRegresar.Name = "BtnRegresar";
-            this.BtnRegresar.Size = new System.Drawing.Size(262, 39);
-            this.BtnRegresar.TabIndex = 3;
-            this.BtnRegresar.Text = "Regresar";
-            this.BtnRegresar.UseVisualStyleBackColor = true;
-            this.BtnRegresar.Click += new System.EventHandler(this.BtnRegresar_Click);
+            this.Column8.DataPropertyName = "descuento";
+            this.Column8.HeaderText = "Descuento";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
             // 
-            // btnFinalizar
+            // IdCliente
             // 
-            this.btnFinalizar.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFinalizar.Location = new System.Drawing.Point(718, 624);
-            this.btnFinalizar.Name = "btnFinalizar";
-            this.btnFinalizar.Size = new System.Drawing.Size(262, 39);
-            this.btnFinalizar.TabIndex = 4;
-            this.btnFinalizar.Text = "Detalle de Venta";
-            this.btnFinalizar.UseVisualStyleBackColor = true;
-            this.btnFinalizar.Click += new System.EventHandler(this.btnFinalizar_Click);
+            this.IdCliente.HeaderText = "IdCliente";
+            this.IdCliente.Name = "IdCliente";
+            // 
+            // NombreCliente
+            // 
+            this.NombreCliente.HeaderText = "Nombre del Cliente";
+            this.NombreCliente.Name = "NombreCliente";
+            this.NombreCliente.ReadOnly = true;
+            // 
+            // Column9
+            // 
+            this.Column9.DataPropertyName = "finVenta";
+            this.Column9.HeaderText = "Finalizar Venta";
+            this.Column9.Name = "Column9";
+            this.Column9.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column9.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Column9.Text = "Finalizar";
+            this.Column9.ToolTipText = "Finalizar Venta";
+            this.Column9.UseColumnTextForButtonValue = true;
             // 
             // FrmVentas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1086, 662);
-            this.Controls.Add(this.btnFinalizar);
-            this.Controls.Add(this.BtnRegresar);
-            this.Controls.Add(this.lblAsientos);
-            this.Controls.Add(this.dataGridView2);
-            this.Controls.Add(this.dgvVenta);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(1749, 828);
+            this.Controls.Add(this.dgvVentas);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FrmVentas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ventas";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmVentas_Load);
             this.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar1_Scroll);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVenta)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvVenta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvPeli;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgvHorario;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgvBoletos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvAsientos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvSubTotal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvIVA;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvDescuento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvTotal;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.Label lblAsientos;
-        private System.Windows.Forms.Button BtnRegresar;
-        private System.Windows.Forms.Button btnFinalizar;
+        private System.Windows.Forms.DataGridView dgvVentas;
+        private System.Windows.Forms.DataGridViewImageColumn ImgPelicula;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NombrePelicula;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Column11;
+        private System.Windows.Forms.DataGridViewButtonColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdCliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NombreCliente;
+        private System.Windows.Forms.DataGridViewButtonColumn Column9;
     }
 }

@@ -40,3 +40,5 @@ F:\UVM\Tareas UVM\07 Septimo Semestre\Ing. de Software I\Parcial 1\cinepremiere\
 F:\UVM\Tareas UVM\07 Septimo Semestre\Ing. de Software I\Parcial 1\cinepremiere\WindowsFormsTest\WindowsFormsTest\obj\Debug\WindowsFormsTest.exe
 F:\UVM\Tareas UVM\07 Septimo Semestre\Ing. de Software I\Parcial 1\cinepremiere\WindowsFormsTest\WindowsFormsTest\obj\Debug\WindowsFormsTest.pdb
 F:\UVM\Tareas UVM\07 Septimo Semestre\Ing. de Software I\Parcial 1\cinepremiere\WindowsFormsTest\WindowsFormsTest\obj\Debug\WindowsFormsTest.csprojResolveAssemblyReference.cache
+F:\UVM\Tareas UVM\07 Septimo Semestre\Ing. de Software I\Parcial 1\cinepremiere\WindowsFormsTest\WindowsFormsTest\obj\Debug\WindowsFormsTest.FrmVentasLugares.resources
+F:\UVM\Tareas UVM\07 Septimo Semestre\Ing. de Software I\Parcial 1\cinepremiere\WindowsFormsTest\WindowsFormsTest\obj\Debug\WindowsFormsTest.FrmUsuarios.resources

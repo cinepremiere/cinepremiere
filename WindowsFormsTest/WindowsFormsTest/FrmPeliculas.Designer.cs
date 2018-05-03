@@ -72,12 +72,12 @@
             // 
             // cmbClasifica
             // 
+            this.cmbClasifica.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbClasifica.FormattingEnabled = true;
             this.cmbClasifica.Location = new System.Drawing.Point(840, 52);
             this.cmbClasifica.Name = "cmbClasifica";
             this.cmbClasifica.Size = new System.Drawing.Size(200, 28);
             this.cmbClasifica.TabIndex = 2;
-            this.cmbClasifica.Text = "Seleccionar";
             // 
             // label2
             // 
@@ -99,12 +99,12 @@
             // 
             // cmbDistrib
             // 
+            this.cmbDistrib.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDistrib.FormattingEnabled = true;
             this.cmbDistrib.Location = new System.Drawing.Point(33, 142);
             this.cmbDistrib.Name = "cmbDistrib";
             this.cmbDistrib.Size = new System.Drawing.Size(288, 28);
             this.cmbDistrib.TabIndex = 5;
-            this.cmbDistrib.Text = "Seleccionar";
             // 
             // btnGuardar
             // 

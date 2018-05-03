@@ -16,6 +16,10 @@ namespace WindowsFormsTest
         private static string contrasena = "";
         private static ushort intentos = 0;
         private static bool bloqueo = false;
+        private ProcesosBD pbd;
+        private DataTable dt;
+        private DataSet ds;
+
         public FrmLogin()
         {
             InitializeComponent();
@@ -48,14 +52,39 @@ namespace WindowsFormsTest
             }
             else if (TxtUsuario.Text != "" && TxtContrasena.Text != "")
             {
+                string sql = "select claveTipoUsuario,claveUsuario,constrasena from Usuarios " +
+                    "where claveUsuario='" + TxtUsuario.Text + "' and constrasena = '"
+                    +TxtContrasena.Text+"'";
+
+                Console.WriteLine(sql);
+
+                pbd = new ProcesosBD();
+                pbd.Conectar();
+                dt = new DataTable();
+                dt = pbd.SqlSelect(sql).Tables[0];
+                if (dt.Rows.Count > 0)
+                {
+                    Program.ClaveUsario = int.Parse(dt.Rows[0][1].ToString());
+                    FrmPrincipal frmPrincipal = new FrmPrincipal();
+                    frmPrincipal.TipoUsuario = int.Parse(dt.Rows[0][0].ToString());        
+                    frmPrincipal.Show();
+                    foreach (Form frm in Application.OpenForms)
+                    {
+                        if (frm != frmPrincipal)    //Cerramos todos los formularios menos el formulario principal que contiene el menú
+                            frm.Hide();
+                    }
+                    //this.Hide();
+                }
+
                 intentos++;
                 if (intentos == 3)
                 {
                     MessageBox.Show("Revise sus credenciales.", "Contraseña Invalida", MessageBoxButtons.OK);
                     TxtContrasena.Focus();
+                    intentos = 0;
                 }
             }
-
+            
         }
 
         private void FrmLogin_Load(object sender, EventArgs e)
@@ -66,6 +95,7 @@ namespace WindowsFormsTest
             intentos = 0;
             bloqueo = false;
             TxtUsuario.Focus();
+
         }
 
         private void TxtUsuario_TextChanged(object sender, EventArgs e)

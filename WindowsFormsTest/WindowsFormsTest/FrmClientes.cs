@@ -40,6 +40,7 @@ namespace WindowsFormsTest
             int status = 1;
             int tipoCliente=0;
             clientes = new Clientes();
+            Boolean err = false;
 
             clientes.Nombres = txtNombreCliente.Text;
             clientes.Paterno = txtPaterno.Text;
@@ -65,7 +66,7 @@ namespace WindowsFormsTest
 
             string sql = "insert into Clientes(nombres,curp,paterno,materno,calle,numeroExterior," +
                 "numeroInterior,cp,colonia,localidad, telefonoCasa, telefonoMovil, fechaRegistro, " +
-                "mail, constrasena, puntos, status, tipoCliente)" +
+                "mail, constrasena, puntos, disponible, tipoCliente)" +
                 "values(" 
                 + "'" + clientes.Nombres + "',"
                 + "'" + clientes.Curp + "',"
@@ -92,13 +93,17 @@ namespace WindowsFormsTest
             {
                 pbd.Conectar();
                 pbd.SqlUpdate(sql);
-                MessageBox.Show("Registro exitoso");
                 limpiarControles();
                 CargarTabla();
             }
-            catch(System.Data.SqlClient.SqlException error)
+            catch(Exception error)
             {
+                err = true;
                 MessageBox.Show("No fue posible insertar en la base de datos, causa: " + error);
+            }
+            if (!err)
+            {
+                MessageBox.Show("Registro exitoso");
             }
             
         }

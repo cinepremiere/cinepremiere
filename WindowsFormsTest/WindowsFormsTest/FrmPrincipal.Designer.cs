@@ -80,6 +80,7 @@
             this.cambioDeUsuarioToolStripMenuItem.Name = "cambioDeUsuarioToolStripMenuItem";
             this.cambioDeUsuarioToolStripMenuItem.Size = new System.Drawing.Size(248, 30);
             this.cambioDeUsuarioToolStripMenuItem.Text = "Cambio de Usuario";
+            this.cambioDeUsuarioToolStripMenuItem.Click += new System.EventHandler(this.cambioDeUsuarioToolStripMenuItem_Click);
             // 
             // cerrarSesiónToolStripMenuItem
             // 
@@ -111,6 +112,7 @@
             this.boletosToolStripMenuItem.Name = "boletosToolStripMenuItem";
             this.boletosToolStripMenuItem.Size = new System.Drawing.Size(270, 30);
             this.boletosToolStripMenuItem.Text = "Boletos";
+            this.boletosToolStripMenuItem.Click += new System.EventHandler(this.boletosToolStripMenuItem_Click);
             // 
             // membresíasToolStripMenuItem
             // 
@@ -178,8 +180,9 @@
             // uusariosToolStripMenuItem
             // 
             this.uusariosToolStripMenuItem.Name = "uusariosToolStripMenuItem";
-            this.uusariosToolStripMenuItem.Size = new System.Drawing.Size(164, 30);
-            this.uusariosToolStripMenuItem.Text = "Uusarios";
+            this.uusariosToolStripMenuItem.Size = new System.Drawing.Size(335, 30);
+            this.uusariosToolStripMenuItem.Text = "Registrar o modificar Usuarios";
+            this.uusariosToolStripMenuItem.Click += new System.EventHandler(this.uusariosToolStripMenuItem_Click);
             // 
             // funcionesToolStripMenuItem
             // 
@@ -206,6 +209,8 @@
             this.Name = "FrmPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menú Principal CinePremier";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmPrincipal_FormClosing);
+            this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

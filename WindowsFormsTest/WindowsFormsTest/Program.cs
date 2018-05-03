@@ -8,6 +8,10 @@ namespace WindowsFormsTest
 {
     static class Program
     {
+        private static int claveUsario ;
+
+        public static int ClaveUsario { get => claveUsario; set => claveUsario = value; }
+
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
@@ -16,10 +20,10 @@ namespace WindowsFormsTest
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new FrmLogin());
+            Application.Run(new FrmLogin());
             //Application.Run(new FrmPeliculas());
             //Application.Run(new FrmClientes());
-            Application.Run(new FrmPrincipal());
+            //Application.Run(new FrmPrincipal());
         }
     }
 }

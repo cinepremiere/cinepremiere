@@ -13,20 +13,51 @@ namespace WindowsFormsTest
     {
         private SqlCommand comando;
         private SqlConnection conexion;
-        private SqlDataReader lector;
         private SqlDataAdapter adaptador;
         private DataSet ds;
+        private SqlTransaction transaction;
+
+        public SqlConnection Conexion { get => conexion; set => conexion = value; }
+        public SqlTransaction Transaction { get => transaction; set => transaction = value; }
 
         public void Conectar()
         {
             try
             {
                 //conexion = new SqlConnection("Data Source=(local); Initial Catalog=DB_CinePremier; Integrated Security=SSPI");
-                conexion = new SqlConnection("Data Source=(local); Initial Catalog=DB_CinePremier; User Id=sa; Password=lara");
+                Conexion = new SqlConnection("Data Source=(local); Initial Catalog=DB_CinePremier; User Id=sa; Password=lara");
             }
             catch (Exception e)
             {
                 MessageBox.Show("No se pudo conectar a la base de datos: " + e.ToString());
+            }
+        }
+
+        public void abrirConexion()
+        {
+            Conexion.Open();
+        }
+
+        public void comenzarTransaccion()
+        {
+            Transaction = Conexion.BeginTransaction("SampleTransaction");
+        }
+
+        public void sqlUpdateTransaction(string sql)
+        {
+            comando = Conexion.CreateCommand();
+            try
+            {
+                Console.WriteLine(sql);
+                //Conexion.Open();
+                comando.Connection = Conexion;
+                comando.Transaction = Transaction; 
+                comando.CommandText = sql;
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.ToString());
             }
         }
 
@@ -36,8 +67,8 @@ namespace WindowsFormsTest
             try
             {
                 Console.WriteLine(sql);
-                conexion.Open();
-                comando.Connection = conexion;
+                Conexion.Open();
+                comando.Connection = Conexion;
                 comando.CommandText = sql;
                 comando.ExecuteNonQuery();
             }
@@ -47,7 +78,7 @@ namespace WindowsFormsTest
             }
             finally
             {
-                conexion.Close();
+                Conexion.Close();
             }
         }
 
@@ -58,17 +89,17 @@ namespace WindowsFormsTest
             comando = new SqlCommand();
             try
             {
-                conexion.Open();
+                Conexion.Open();
                 comando.CommandText = sql;
                 adaptador.SelectCommand = comando;
-                adaptador.SelectCommand.Connection = conexion;
+                adaptador.SelectCommand.Connection = Conexion;
                 adaptador.Fill(ds);
             }
             catch (System.Data.SqlClient.SqlException error)
             {
                 MessageBox.Show(error.ToString());
             }
-            conexion.Close();
+            Conexion.Close();
             return ds;
         }
     }

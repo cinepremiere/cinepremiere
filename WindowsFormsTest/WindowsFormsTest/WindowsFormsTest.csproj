@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Butaca.cs" />
     <Compile Include="Clientes.cs" />
     <Compile Include="FrmClientes.cs">
       <SubType>Form</SubType>
@@ -86,7 +87,20 @@
     <Compile Include="FrmPrincipal.Designer.cs">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUsuarios.Designer.cs">
+      <DependentUpon>FrmUsuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmVentasLugares.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmVentasLugares.Designer.cs">
+      <DependentUpon>FrmVentasLugares.cs</DependentUpon>
+    </Compile>
     <Compile Include="Funciones.cs" />
+    <Compile Include="ISeleccionados.cs" />
     <Compile Include="Peliculas.cs" />
     <Compile Include="ProcesosBD.cs" />
     <Compile Include="Program.cs" />
@@ -97,6 +111,9 @@
     <Compile Include="FrmVentas.Designer.cs">
       <DependentUpon>FrmVentas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sala.cs" />
+    <Compile Include="SalaTipo1.cs" />
+    <Compile Include="SalaTipo2.cs" />
     <EmbeddedResource Include="FrmClientes.resx">
       <DependentUpon>FrmClientes.cs</DependentUpon>
     </EmbeddedResource>
@@ -112,6 +129,12 @@
     <EmbeddedResource Include="FrmPrincipal.resx">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmUsuarios.resx">
+      <DependentUpon>FrmUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmVentasLugares.resx">
+      <DependentUpon>FrmVentasLugares.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -120,6 +143,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="FrmVentas.resx">
       <DependentUpon>FrmVentas.cs</DependentUpon>
@@ -136,6 +160,55 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PantallaCine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\A.png" />
+    <Content Include="Resources\B.png" />
+    <Content Include="Resources\ButacaCine.png" />
+    <Content Include="Resources\ButacaCine1.png" />
+    <Content Include="Resources\ButacaCine10.png" />
+    <Content Include="Resources\ButacaCine2.png" />
+    <Content Include="Resources\ButacaCine3.png" />
+    <Content Include="Resources\ButacaCine4.png" />
+    <Content Include="Resources\ButacaCine5.png" />
+    <Content Include="Resources\ButacaCine6.png" />
+    <Content Include="Resources\ButacaCine7.png" />
+    <Content Include="Resources\ButacaCine8.png" />
+    <Content Include="Resources\ButacaCine9.png" />
+    <Content Include="Resources\ButacaCineDisponible.png" />
+    <Content Include="Resources\ButacaCineDisponible1.png" />
+    <Content Include="Resources\ButacaCineDisponible10.png" />
+    <Content Include="Resources\ButacaCineDisponible2.png" />
+    <Content Include="Resources\ButacaCineDisponible3.png" />
+    <Content Include="Resources\ButacaCineDisponible4.png" />
+    <Content Include="Resources\ButacaCineDisponible5.png" />
+    <Content Include="Resources\ButacaCineDisponible6.png" />
+    <Content Include="Resources\ButacaCineDisponible7.png" />
+    <Content Include="Resources\ButacaCineDisponible8.png" />
+    <Content Include="Resources\ButacaCineDisponible9.png" />
+    <Content Include="Resources\ButacaCineSeleccionada.png" />
+    <Content Include="Resources\ButacaCineSeleccionada1.png" />
+    <Content Include="Resources\ButacaCineSeleccionada10.png" />
+    <Content Include="Resources\ButacaCineSeleccionada2.png" />
+    <Content Include="Resources\ButacaCineSeleccionada3.png" />
+    <Content Include="Resources\ButacaCineSeleccionada4.png" />
+    <Content Include="Resources\ButacaCineSeleccionada5.png" />
+    <Content Include="Resources\ButacaCineSeleccionada6.png" />
+    <Content Include="Resources\ButacaCineSeleccionada7.png" />
+    <Content Include="Resources\ButacaCineSeleccionada8.png" />
+    <Content Include="Resources\ButacaCineSeleccionada9.png" />
+    <Content Include="Resources\C.png" />
+    <Content Include="Resources\D.png" />
+    <Content Include="Resources\E.png" />
+    <Content Include="Resources\F.png" />
+    <Content Include="Resources\G.png" />
+    <Content Include="Resources\H.png" />
+    <Content Include="Resources\I.png" />
+    <Content Include="Resources\J.png" />
+    <None Include="Resources\NumButacas.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

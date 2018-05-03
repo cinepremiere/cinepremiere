@@ -29,11 +29,11 @@ namespace WindowsFormsTest
         {
             CargarTabla();
 
-            System.Object[] liDistribuidoras = {"DISNEY", "FOX", "SONY-COLUMBIA",
+            string[] liDistribuidoras = {"DISNEY", "FOX", "SONY-COLUMBIA",
                 "WARNER", "UNIVERSAL", "PARAMOUNT", "VIDEOCINE", "CORAZÓN", "GUSSI", "ZIMA"};
             cmbDistrib.Items.AddRange(liDistribuidoras);
 
-            System.Object[] liClasificaciones = {"A", "AA", "B-15",
+            string[] liClasificaciones = {"A", "AA", "B-15",
                 "C", "D", "R", "18-A", "14-A", "PG", "G"};
             cmbClasifica.Items.AddRange(liClasificaciones);
 
