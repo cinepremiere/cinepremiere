@@ -457,7 +457,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1395, 880);
+            this.ClientSize = new System.Drawing.Size(1441, 880);
             this.Controls.Add(this.dtmFinJornada);
             this.Controls.Add(this.dtmInicioJornada);
             this.Controls.Add(this.dtmInicioContrato);
@@ -503,6 +503,7 @@
             this.Controls.Add(this.txtNombreUsuario);
             this.Controls.Add(this.label2);
             this.Name = "FrmUsuarios";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmUsuarios";
             this.Load += new System.EventHandler(this.FrmUsuarios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
