@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.dgvVentas = new System.Windows.Forms.DataGridView();
-            this.ImgPelicula = new System.Windows.Forms.DataGridViewImageColumn();
             this.NombrePelicula = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -51,7 +50,6 @@
             this.dgvVentas.AllowUserToDeleteRows = false;
             this.dgvVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVentas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ImgPelicula,
             this.NombrePelicula,
             this.Column2,
             this.Column3,
@@ -77,14 +75,6 @@
             this.dgvVentas.SelectionChanged += new System.EventHandler(this.dgvVentas_SelectionChanged);
             this.dgvVentas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvVentas_KeyPress);
             this.dgvVentas.Leave += new System.EventHandler(this.dgvVentas_Leave);
-            // 
-            // ImgPelicula
-            // 
-            this.ImgPelicula.HeaderText = "Img";
-            this.ImgPelicula.Name = "ImgPelicula";
-            this.ImgPelicula.ReadOnly = true;
-            this.ImgPelicula.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ImgPelicula.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // NombrePelicula
             // 
@@ -211,7 +201,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvVentas;
-        private System.Windows.Forms.DataGridViewImageColumn ImgPelicula;
         private System.Windows.Forms.DataGridViewTextBoxColumn NombrePelicula;
         private System.Windows.Forms.DataGridViewComboBoxColumn Column2;
         private System.Windows.Forms.DataGridViewComboBoxColumn Column3;

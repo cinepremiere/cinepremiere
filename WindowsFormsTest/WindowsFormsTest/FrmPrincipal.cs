@@ -85,5 +85,11 @@ namespace WindowsFormsTest
         {
             Application.Exit();
         }
+
+        private void pantallaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmPantallaClientes frmPantallaClientes = new FrmPantallaClientes();
+            frmPantallaClientes.Show();
+        }
     }
 }

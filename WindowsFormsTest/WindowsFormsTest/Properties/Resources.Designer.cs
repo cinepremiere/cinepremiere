@@ -63,6 +63,36 @@ namespace WindowsFormsTest.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ButacaCine {
+            get {
+                object obj = ResourceManager.GetObject("ButacaCine", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ButacaCineDisponible {
+            get {
+                object obj = ResourceManager.GetObject("ButacaCineDisponible", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ButacaCineSeleccionada {
+            get {
+                object obj = ResourceManager.GetObject("ButacaCineSeleccionada", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap NumButacas {
             get {
                 object obj = ResourceManager.GetObject("NumButacas", resourceCulture);

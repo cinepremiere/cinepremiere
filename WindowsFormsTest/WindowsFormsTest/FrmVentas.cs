@@ -26,20 +26,19 @@ namespace WindowsFormsTest
         private string root = @"F:\UVM\Tareas UVM\07 Septimo Semestre\Ing. de Software I\Parcial 1\";
         Dictionary<string, int> dgvCols = new Dictionary<string, int>
         {
-            {"ImgPelicula",0 },
-            {"NombrePelicula",1 },
-            {"Horario",2 },
-            {"TipoFuncion",3 },
-            {"Idioma",4 },
-            {"Sala",5 },
-            {"CantidadAsientos",6 },
-            {"SeleccionAsientos",7 },
-            {"AsientosSeleccionados",8 },
-            {"PrecioUnitario",9 },
-            {"Descuento",10 },
-            {"IdCliente",11 },
-            {"NombreCliente",12 },
-            {"CerrarVenta",13 },
+            {"NombrePelicula",0 },
+            {"Horario",1 },
+            {"TipoFuncion",2 },
+            {"Idioma",3 },
+            {"Sala",4 },
+            {"CantidadAsientos",5 },
+            {"SeleccionAsientos",6 },
+            {"AsientosSeleccionados",7 },
+            {"PrecioUnitario",8 },
+            {"Descuento",9 },
+            {"IdCliente",10 },
+            {"NombreCliente",11 },
+            {"CerrarVenta",12 },
         };
 
         public FrmVentas()
@@ -82,8 +81,8 @@ namespace WindowsFormsTest
             foreach(DataRow row in dt.Rows)
             {
                 var cmb = new DataGridViewComboBoxCell();
-                var img = new DataGridViewImageCell();
-                Bitmap bitmap;
+                //var img = new DataGridViewImageCell();
+                //Bitmap bitmap;
 
                 //produccion
                 sql = "select hora from Funciones where clavePelicula = '" + row["peliculas"] 
@@ -97,18 +96,19 @@ namespace WindowsFormsTest
                 cmb.ValueMember = "hora";
                 cmb.DisplayMember = "hora";
 
-                sql = "select top 1 (imgPath) from Funciones where clavePelicula = " +
-                    "'"+ row["peliculas"] + "'";
+                //sql = "select top 1 (imgPath) from Funciones where clavePelicula = " +
+                //    "'"+ row["peliculas"] + "'";
 
-                img.ImageLayout = DataGridViewImageCellLayout.Stretch;
+                //img.ImageLayout = DataGridViewImageCellLayout.Stretch;
+                
                 //MessageBox.Show(root + pdb.SqlSelect(sql).Tables[0].Rows[0][0]);
-                bitmap = new Bitmap(root + pdb.SqlSelect(sql).Tables[0].Rows[0][0]);
-                img.Value = bitmap;
+                //bitmap = new Bitmap(root + pdb.SqlSelect(sql).Tables[0].Rows[0][0]);
+                //img.Value = bitmap;
 
                 int n = dgvVentas.Rows.Add();
                 dgvVentas.Rows[n].Cells[dgvCols["NombrePelicula"]].Value = 
                     row["peliculas"].ToString();
-                dgvVentas.Rows[n].Cells[dgvCols["ImgPelicula"]] = img;
+                //dgvVentas.Rows[n].Cells[dgvCols["ImgPelicula"]] = img;
                 dgvVentas.Rows[n].Cells[dgvCols["Horario"]] = cmb;
                 dgvVentas.Rows[n].Cells[dgvCols["Descuento"]].Value = "$" 
                     + descuento.ToString() + ".00";

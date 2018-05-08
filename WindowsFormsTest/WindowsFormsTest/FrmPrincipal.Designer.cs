@@ -47,6 +47,8 @@
             this.uusariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.funcionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agregarOModificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pantallaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,7 +61,8 @@
             this.películasToolStripMenuItem,
             this.reportesToolStripMenuItem,
             this.rHToolStripMenuItem,
-            this.funcionesToolStripMenuItem});
+            this.funcionesToolStripMenuItem,
+            this.clientesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 33);
@@ -104,7 +107,7 @@
             this.membresíasToolStripMenuItem,
             this.tarjetaDeDescuentosToolStripMenuItem});
             this.generarVentaToolStripMenuItem.Name = "generarVentaToolStripMenuItem";
-            this.generarVentaToolStripMenuItem.Size = new System.Drawing.Size(212, 30);
+            this.generarVentaToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
             this.generarVentaToolStripMenuItem.Text = "Generar Venta";
             // 
             // boletosToolStripMenuItem
@@ -130,7 +133,7 @@
             // cancelarVentaToolStripMenuItem
             // 
             this.cancelarVentaToolStripMenuItem.Name = "cancelarVentaToolStripMenuItem";
-            this.cancelarVentaToolStripMenuItem.Size = new System.Drawing.Size(212, 30);
+            this.cancelarVentaToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
             this.cancelarVentaToolStripMenuItem.Text = "Cancelar Venta";
             // 
             // películasToolStripMenuItem
@@ -160,13 +163,13 @@
             // estadísticasToolStripMenuItem
             // 
             this.estadísticasToolStripMenuItem.Name = "estadísticasToolStripMenuItem";
-            this.estadísticasToolStripMenuItem.Size = new System.Drawing.Size(186, 30);
+            this.estadísticasToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
             this.estadísticasToolStripMenuItem.Text = "Estadísticas";
             // 
             // ventasToolStripMenuItem1
             // 
             this.ventasToolStripMenuItem1.Name = "ventasToolStripMenuItem1";
-            this.ventasToolStripMenuItem1.Size = new System.Drawing.Size(186, 30);
+            this.ventasToolStripMenuItem1.Size = new System.Drawing.Size(252, 30);
             this.ventasToolStripMenuItem1.Text = "Ventas";
             // 
             // rHToolStripMenuItem
@@ -198,6 +201,21 @@
             this.agregarOModificarToolStripMenuItem.Size = new System.Drawing.Size(256, 30);
             this.agregarOModificarToolStripMenuItem.Text = "Agregar o Modificar";
             this.agregarOModificarToolStripMenuItem.Click += new System.EventHandler(this.agregarOModificarToolStripMenuItem_Click);
+            // 
+            // clientesToolStripMenuItem
+            // 
+            this.clientesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pantallaToolStripMenuItem});
+            this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
+            this.clientesToolStripMenuItem.Text = "Clientes";
+            // 
+            // pantallaToolStripMenuItem
+            // 
+            this.pantallaToolStripMenuItem.Name = "pantallaToolStripMenuItem";
+            this.pantallaToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.pantallaToolStripMenuItem.Text = "Pantalla";
+            this.pantallaToolStripMenuItem.Click += new System.EventHandler(this.pantallaToolStripMenuItem_Click);
             // 
             // FrmPrincipal
             // 
@@ -239,5 +257,7 @@
         private System.Windows.Forms.ToolStripMenuItem boletosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem membresíasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tarjetaDeDescuentosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pantallaToolStripMenuItem;
     }
 }

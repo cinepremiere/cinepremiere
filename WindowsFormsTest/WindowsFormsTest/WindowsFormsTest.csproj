@@ -75,6 +75,12 @@
     <Compile Include="FrmLogin.Designer.cs">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmPantallaClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPantallaClientes.Designer.cs">
+      <DependentUpon>FrmPantallaClientes.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmPeliculas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +129,9 @@
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmPantallaClientes.resx">
+      <DependentUpon>FrmPantallaClientes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmPeliculas.resx">
       <DependentUpon>FrmPeliculas.cs</DependentUpon>
     </EmbeddedResource>
@@ -170,6 +179,7 @@
     <Content Include="Resources\ButacaCine.png" />
     <Content Include="Resources\ButacaCine1.png" />
     <Content Include="Resources\ButacaCine10.png" />
+    <None Include="Resources\ButacaCine11.png" />
     <Content Include="Resources\ButacaCine2.png" />
     <Content Include="Resources\ButacaCine3.png" />
     <Content Include="Resources\ButacaCine4.png" />
@@ -181,6 +191,7 @@
     <Content Include="Resources\ButacaCineDisponible.png" />
     <Content Include="Resources\ButacaCineDisponible1.png" />
     <Content Include="Resources\ButacaCineDisponible10.png" />
+    <None Include="Resources\ButacaCineDisponible11.png" />
     <Content Include="Resources\ButacaCineDisponible2.png" />
     <Content Include="Resources\ButacaCineDisponible3.png" />
     <Content Include="Resources\ButacaCineDisponible4.png" />
@@ -192,6 +203,7 @@
     <Content Include="Resources\ButacaCineSeleccionada.png" />
     <Content Include="Resources\ButacaCineSeleccionada1.png" />
     <Content Include="Resources\ButacaCineSeleccionada10.png" />
+    <None Include="Resources\ButacaCineSeleccionada11.png" />
     <Content Include="Resources\ButacaCineSeleccionada2.png" />
     <Content Include="Resources\ButacaCineSeleccionada3.png" />
     <Content Include="Resources\ButacaCineSeleccionada4.png" />
