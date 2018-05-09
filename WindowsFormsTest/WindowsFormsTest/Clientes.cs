@@ -8,7 +8,7 @@ namespace WindowsFormsTest
 {
     class Clientes
     {
-        string claveCliente;
+        int claveCliente;
         string nombres;
         string curp;
         string paterno;
@@ -21,19 +21,20 @@ namespace WindowsFormsTest
         string localidad;
         string telefonoCasa;
         string telefonoMovil;
-        DateTime fechaRegistro;
+        string fechaRegistro;
         string mail;
         string contrasena;
         int puntos;
+        int puntosUsados;
         Boolean status;
-        string tipoCliente;
+        int tipoCliente;
 
         public Clientes()
         {
             
         }
 
-        public Clientes(string claveCliente, string nombres, string curp, string paterno, string materno, string calle, string numExt, string numInt, string cp, string colonia, string localidad, string telefonoCasa, string telefonoMovil, DateTime fechaRegistro, string mail, string contrasena, int puntos, bool status, string tipoCliente)
+        public Clientes(int claveCliente, string nombres, string curp, string paterno, string materno, string calle, string numExt, string numInt, string cp, string colonia, string localidad, string telefonoCasa, string telefonoMovil, string fechaRegistro, string mail, string contrasena, int puntos, bool status, int tipoCliente)
         {
             this.claveCliente = claveCliente;
             this.nombres = nombres;
@@ -56,7 +57,31 @@ namespace WindowsFormsTest
             this.tipoCliente = tipoCliente;
         }
 
-        public string ClaveCliente { get => claveCliente; set => claveCliente = value; }
+        public Clientes(int claveCliente, string nombres, string curp, string paterno, string materno, string calle, string numExt, string numInt, string cp, string colonia, string localidad, string telefonoCasa, string telefonoMovil, string fechaRegistro, string mail, string contrasena, int puntos, int puntosUsados, bool status, int tipoCliente)
+        {
+            this.claveCliente = claveCliente;
+            this.nombres = nombres;
+            this.curp = curp;
+            this.paterno = paterno;
+            this.materno = materno;
+            this.calle = calle;
+            this.numExt = numExt;
+            this.numInt = numInt;
+            this.cp = cp;
+            this.colonia = colonia;
+            this.localidad = localidad;
+            this.telefonoCasa = telefonoCasa;
+            this.telefonoMovil = telefonoMovil;
+            this.fechaRegistro = fechaRegistro;
+            this.mail = mail;
+            this.contrasena = contrasena;
+            this.puntos = puntos;
+            this.puntosUsados = puntosUsados;
+            this.status = status;
+            this.tipoCliente = tipoCliente;
+        }
+
+        public int ClaveCliente { get => claveCliente; set => claveCliente = value; }
         public string Nombres { get => nombres; set => nombres = value; }
         public string Curp { get => curp; set => curp = value; }
         public string Paterno { get => paterno; set => paterno = value; }
@@ -69,11 +94,12 @@ namespace WindowsFormsTest
         public string Localidad { get => localidad; set => localidad = value; }
         public string TelefonoCasa { get => telefonoCasa; set => telefonoCasa = value; }
         public string TelefonoMovil { get => telefonoMovil; set => telefonoMovil = value; }
-        public DateTime FechaRegistro { get => fechaRegistro; set => fechaRegistro = value; }
+        public string FechaRegistro { get => fechaRegistro; set => fechaRegistro = value; }
         public string Mail { get => mail; set => mail = value; }
         public string Contrasena { get => contrasena; set => contrasena = value; }
         public int Puntos { get => puntos; set => puntos = value; }
         public bool Status { get => status; set => status = value; }
-        public string TipoCliente { get => tipoCliente; set => tipoCliente = value; }
+        public int TipoCliente { get => tipoCliente; set => tipoCliente = value; }
+        public int PuntosUsados { get => puntosUsados; set => puntosUsados = value; }
     }
 }

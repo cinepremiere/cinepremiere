@@ -65,7 +65,14 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.txtMaterno = new System.Windows.Forms.TextBox();
-            
+            this.btnModificar = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtPuntos = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtPuntosUsados = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -299,7 +306,7 @@
             // 
             // btnGuardarCliente
             // 
-            this.btnGuardarCliente.Location = new System.Drawing.Point(825, 273);
+            this.btnGuardarCliente.Location = new System.Drawing.Point(229, 408);
             this.btnGuardarCliente.Name = "btnGuardarCliente";
             this.btnGuardarCliente.Size = new System.Drawing.Size(176, 38);
             this.btnGuardarCliente.TabIndex = 31;
@@ -309,7 +316,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(1007, 273);
+            this.btnCancelar.Location = new System.Drawing.Point(436, 408);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(176, 38);
             this.btnCancelar.TabIndex = 32;
@@ -321,7 +328,7 @@
             this.dgvClientes.AllowUserToAddRows = false;
             this.dgvClientes.AllowUserToDeleteRows = false;
             this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClientes.Location = new System.Drawing.Point(21, 347);
+            this.dgvClientes.Location = new System.Drawing.Point(21, 471);
             this.dgvClientes.Name = "dgvClientes";
             this.dgvClientes.ReadOnly = true;
             this.dgvClientes.RowTemplate.Height = 28;
@@ -349,8 +356,10 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(87, 279);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(732, 26);
+            this.textBox1.Size = new System.Drawing.Size(1096, 26);
             this.textBox1.TabIndex = 36;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // label17
             // 
@@ -368,15 +377,67 @@
             this.txtMaterno.Size = new System.Drawing.Size(249, 26);
             this.txtMaterno.TabIndex = 38;
             // 
-            // dB_CinePremierDataSet
+            // btnModificar
             // 
-           
+            this.btnModificar.Location = new System.Drawing.Point(653, 408);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(183, 37);
+            this.btnModificar.TabIndex = 39;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Location = new System.Drawing.Point(871, 408);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(183, 37);
+            this.btnEliminar.TabIndex = 40;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(17, 334);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 20);
+            this.label1.TabIndex = 41;
+            this.label1.Text = "Puntos";
+            // 
+            // txtPuntos
+            // 
+            this.txtPuntos.Location = new System.Drawing.Point(87, 334);
+            this.txtPuntos.Name = "txtPuntos";
+            this.txtPuntos.Size = new System.Drawing.Size(100, 26);
+            this.txtPuntos.TabIndex = 42;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(250, 334);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(114, 20);
+            this.label18.TabIndex = 43;
+            this.label18.Text = "PuntosUsados";
+            // 
+            // txtPuntosUsados
+            // 
+            this.txtPuntosUsados.Location = new System.Drawing.Point(371, 333);
+            this.txtPuntosUsados.Name = "txtPuntosUsados";
+            this.txtPuntosUsados.Size = new System.Drawing.Size(100, 26);
+            this.txtPuntosUsados.TabIndex = 44;
             // 
             // FrmClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1195, 1028);
+            this.Controls.Add(this.txtPuntosUsados);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.txtPuntos);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnEliminar);
+            this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.txtMaterno);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.textBox1);
@@ -460,6 +521,12 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox txtMaterno;
-        
+        private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtPuntos;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox txtPuntosUsados;
     }
 }

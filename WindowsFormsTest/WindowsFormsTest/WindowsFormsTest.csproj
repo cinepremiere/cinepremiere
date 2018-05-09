@@ -120,6 +120,7 @@
     <Compile Include="Sala.cs" />
     <Compile Include="SalaTipo1.cs" />
     <Compile Include="SalaTipo2.cs" />
+    <Compile Include="Usuario.cs" />
     <EmbeddedResource Include="FrmClientes.resx">
       <DependentUpon>FrmClientes.cs</DependentUpon>
     </EmbeddedResource>
