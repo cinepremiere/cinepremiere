@@ -109,7 +109,7 @@ create table Clientes
 	telefonoMovil nvarchar (16) not null,
 	fechaRegistro date not null,
 	mail nvarchar(50) not null,
-	constrasena nvarchar (10) not null,
+	contrasena nvarchar (10) not null,
 	puntos int not null,
 	disponible bit not null,
 	tipoCliente smallint references TipoCliente(claveTipoCliente) not null,

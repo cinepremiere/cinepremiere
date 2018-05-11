@@ -72,6 +72,9 @@
             this.txtPuntos = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.txtPuntosUsados = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txtClave = new System.Windows.Forms.TextBox();
+            this.btnRecargarTabla = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -297,12 +300,12 @@
             // 
             // cmbTipoUsuario
             // 
+            this.cmbTipoUsuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoUsuario.FormattingEnabled = true;
             this.cmbTipoUsuario.Location = new System.Drawing.Point(959, 212);
             this.cmbTipoUsuario.Name = "cmbTipoUsuario";
             this.cmbTipoUsuario.Size = new System.Drawing.Size(224, 28);
             this.cmbTipoUsuario.TabIndex = 30;
-            this.cmbTipoUsuario.Text = "Seleccionar";
             // 
             // btnGuardarCliente
             // 
@@ -322,6 +325,7 @@
             this.btnCancelar.TabIndex = 32;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // dgvClientes
             // 
@@ -385,6 +389,7 @@
             this.btnModificar.TabIndex = 39;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnEliminar
             // 
@@ -394,6 +399,7 @@
             this.btnEliminar.TabIndex = 40;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // label1
             // 
@@ -427,11 +433,41 @@
             this.txtPuntosUsados.Size = new System.Drawing.Size(100, 26);
             this.txtPuntosUsados.TabIndex = 44;
             // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(487, 333);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(101, 20);
+            this.label19.TabIndex = 45;
+            this.label19.Text = "Clave Cliente";
+            // 
+            // txtClave
+            // 
+            this.txtClave.Enabled = false;
+            this.txtClave.Location = new System.Drawing.Point(595, 333);
+            this.txtClave.Name = "txtClave";
+            this.txtClave.Size = new System.Drawing.Size(204, 26);
+            this.txtClave.TabIndex = 46;
+            // 
+            // btnRecargarTabla
+            // 
+            this.btnRecargarTabla.Location = new System.Drawing.Point(21, 408);
+            this.btnRecargarTabla.Name = "btnRecargarTabla";
+            this.btnRecargarTabla.Size = new System.Drawing.Size(180, 37);
+            this.btnRecargarTabla.TabIndex = 47;
+            this.btnRecargarTabla.Text = "Recargar Tabla";
+            this.btnRecargarTabla.UseVisualStyleBackColor = true;
+            this.btnRecargarTabla.Click += new System.EventHandler(this.btnRecargarTabla_Click);
+            // 
             // FrmClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1195, 1028);
+            this.ClientSize = new System.Drawing.Size(1195, 1038);
+            this.Controls.Add(this.btnRecargarTabla);
+            this.Controls.Add(this.txtClave);
+            this.Controls.Add(this.label19);
             this.Controls.Add(this.txtPuntosUsados);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.txtPuntos);
@@ -528,5 +564,8 @@
         private System.Windows.Forms.TextBox txtPuntos;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox txtPuntosUsados;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox txtClave;
+        private System.Windows.Forms.Button btnRecargarTabla;
     }
 }

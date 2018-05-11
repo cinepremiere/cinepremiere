@@ -57,6 +57,12 @@
   <ItemGroup>
     <Compile Include="Butaca.cs" />
     <Compile Include="Clientes.cs" />
+    <Compile Include="FrmCancelaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCancelaciones.Designer.cs">
+      <DependentUpon>FrmCancelaciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmClientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +127,9 @@
     <Compile Include="SalaTipo1.cs" />
     <Compile Include="SalaTipo2.cs" />
     <Compile Include="Usuario.cs" />
+    <EmbeddedResource Include="FrmCancelaciones.resx">
+      <DependentUpon>FrmCancelaciones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmClientes.resx">
       <DependentUpon>FrmClientes.cs</DependentUpon>
     </EmbeddedResource>
