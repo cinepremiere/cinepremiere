@@ -141,73 +141,79 @@ namespace WindowsFormsTest
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar==13 && !textBox1.Text.Equals(""))
+            if (e.KeyChar==13)
             {
-                DataTable dt = new DataTable();
-                dt = buscarPorId();
-                if (dt.Rows.Count > 0)
+                if (textBox1.Text.Equals(""))
                 {
-                    Clientes clientes = new Clientes();
-                    if (dt.Rows.Count == 1)
-                    {
-                        dgvClientes.DataSource = dt.DefaultView;
-
-                        limpiarControles();
-                        clientes.Status = true;
-                        bool s = true;
-
-                        clientes.ClaveCliente = int.Parse(dt.Rows[0][0].ToString().Trim());
-                        txtClave.Text = clientes.ClaveCliente.ToString();
-                        claveCli = clientes.ClaveCliente;
-                        clientes.Nombres = dt.Rows[0][1].ToString().Trim();
-                        txtNombreCliente.Text = clientes.Nombres;
-                        clientes.Curp = dt.Rows[0][2].ToString().Trim();
-                        txtCurp.Text = clientes.Curp;
-                        clientes.Paterno = dt.Rows[0][3].ToString().Trim();
-                        txtPaterno.Text = clientes.Paterno;
-                        clientes.Materno = dt.Rows[0][4].ToString().Trim();
-                        txtMaterno.Text = clientes.Materno;
-                        clientes.Calle = dt.Rows[0][5].ToString().Trim();
-                        txtCalle.Text = clientes.Calle;
-                        clientes.NumExt = dt.Rows[0][6].ToString().Trim();
-                        txtNumExt.Text = clientes.NumExt;
-                        clientes.NumInt = dt.Rows[0][7].ToString().Trim();
-                        txtNumInt.Text = clientes.NumInt;
-                        clientes.Cp = dt.Rows[0][8].ToString().Trim();
-                        txtCP.Text = clientes.Cp;
-                        clientes.Colonia = dt.Rows[0][9].ToString().Trim();
-                        txtColonia.Text = clientes.Colonia;
-                        clientes.Localidad = dt.Rows[0][10].ToString().Trim();
-                        txtLocalidad.Text = clientes.Localidad;
-                        clientes.TelefonoCasa = dt.Rows[0][11].ToString().Trim();
-                        txtTelFijo.Text = clientes.TelefonoCasa;
-                        clientes.TelefonoMovil = dt.Rows[0][12].ToString().Trim();
-                        txtTelMovil.Text = clientes.TelefonoMovil;
-                        clientes.FechaRegistro = dt.Rows[0][13].ToString().Trim();
-                        clientes.Mail = dt.Rows[0][14].ToString().Trim();
-                        txtMail.Text = clientes.Mail;
-                        clientes.Contrasena = dt.Rows[0][15].ToString().Trim();
-                        txtPass.Text = clientes.Contrasena;
-                        clientes.Puntos = int.Parse(dt.Rows[0][16].ToString().Trim());
-                        txtPuntos.Text = clientes.Puntos.ToString();
-                        s= bool.Parse(dt.Rows[0][17].ToString().Trim());
-                        if (!s)
-                            clientes.Status = false;
-                        chkStatusUser.Checked = clientes.Status;
-                        clientes.TipoCliente = int.Parse(dt.Rows[0][18].ToString().Trim());
-                        cmbTipoUsuario.SelectedValue = clientes.TipoCliente;
-                        clientes.PuntosUsados = int.Parse(dt.Rows[0][19].ToString().Trim());
-                        txtPuntosUsados.Text = clientes.PuntosUsados.ToString();
-                    }
-                    else
-                    {
-
-                    }
+                    MessageBox.Show("Debe introducir uno de los siguientes datos " +
+                    "para relaizar la busqueda:" +
+                    " ID del cliente, CURP, Apellido Paterno, email o teléfono móvil. " +
+                    "Luego presione la tecla 'Enter' o 'Return'");
                 }
                 else
                 {
-                    MessageBox.Show("No se encontró ningún usuario con el criterio especificado");
-                }
+                    DataTable dt = new DataTable();
+                    dt = buscarPorId();
+                    if (dt.Rows.Count > 0)
+                    {
+                        Clientes clientes = new Clientes();
+                        if (dt.Rows.Count == 1)
+                        {
+                            dgvClientes.DataSource = dt.DefaultView;
+
+                            limpiarControles();
+
+                            clientes.ClaveCliente = int.Parse(dt.Rows[0][0].ToString().Trim());
+                            txtClave.Text = clientes.ClaveCliente.ToString();
+                            claveCli = clientes.ClaveCliente;
+                            clientes.Nombres = dt.Rows[0][1].ToString().Trim();
+                            txtNombreCliente.Text = clientes.Nombres;
+                            clientes.Curp = dt.Rows[0][2].ToString().Trim();
+                            txtCurp.Text = clientes.Curp;
+                            clientes.Paterno = dt.Rows[0][3].ToString().Trim();
+                            txtPaterno.Text = clientes.Paterno;
+                            clientes.Materno = dt.Rows[0][4].ToString().Trim();
+                            txtMaterno.Text = clientes.Materno;
+                            clientes.Calle = dt.Rows[0][5].ToString().Trim();
+                            txtCalle.Text = clientes.Calle;
+                            clientes.NumExt = dt.Rows[0][6].ToString().Trim();
+                            txtNumExt.Text = clientes.NumExt;
+                            clientes.NumInt = dt.Rows[0][7].ToString().Trim();
+                            txtNumInt.Text = clientes.NumInt;
+                            clientes.Cp = dt.Rows[0][8].ToString().Trim();
+                            txtCP.Text = clientes.Cp;
+                            clientes.Colonia = dt.Rows[0][9].ToString().Trim();
+                            txtColonia.Text = clientes.Colonia;
+                            clientes.Localidad = dt.Rows[0][10].ToString().Trim();
+                            txtLocalidad.Text = clientes.Localidad;
+                            clientes.TelefonoCasa = dt.Rows[0][11].ToString().Trim();
+                            txtTelFijo.Text = clientes.TelefonoCasa;
+                            clientes.TelefonoMovil = dt.Rows[0][12].ToString().Trim();
+                            txtTelMovil.Text = clientes.TelefonoMovil;
+                            clientes.FechaRegistro = dt.Rows[0][13].ToString().Trim();
+                            clientes.Mail = dt.Rows[0][14].ToString().Trim();
+                            txtMail.Text = clientes.Mail;
+                            clientes.Contrasena = dt.Rows[0][15].ToString().Trim();
+                            txtPass.Text = clientes.Contrasena;
+                            clientes.Puntos = int.Parse(dt.Rows[0][16].ToString().Trim());
+                            txtPuntos.Text = clientes.Puntos.ToString();
+                            chkStatusUser.Checked = bool.Parse(dt.Rows[0][17].ToString().Trim());
+                            clientes.TipoCliente = int.Parse(dt.Rows[0][18].ToString().Trim());
+                            cmbTipoUsuario.SelectedValue = clientes.TipoCliente;
+                            clientes.PuntosUsados = int.Parse(dt.Rows[0][19].ToString().Trim());
+                            txtPuntosUsados.Text = clientes.PuntosUsados.ToString();
+                        }
+                        else
+                        {
+                            dgvClientes.DataSource = dt.DefaultView;
+                            MessageBox.Show("De 'click' en la fila para realizar las operaciones.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró ningún usuario con el criterio especificado");
+                    }
+                }   
             }
         }
 
@@ -339,7 +345,7 @@ namespace WindowsFormsTest
             }
 
             //MessageBox.Show("se ha presionado enter");
-            string sql = "select top 1 * from clientes " +
+            string sql = "select * from clientes " +
             " where claveCliente =" + claveCliente.ToString() + "" +
             " or curp  ='" + textBox1.Text.ToString().Trim() + "'" +
             " or paterno ='" + textBox1.Text.ToString().Trim() + "' " +
@@ -360,5 +366,4 @@ namespace WindowsFormsTest
             CargarTabla();
         }
     }
-
 }

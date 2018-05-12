@@ -8,13 +8,13 @@ namespace WindowsFormsTest
 {
     class Peliculas
     {
-        private string claveNombrePelicula = "";
-        private string clasificacion = "";
-        private string distribuidor = "";
-        private string fechaEstreno = "";
-        private string fechaRetiro = "";
-        private string duracion = "";
-        private bool disponible = false;
+        private string claveNombrePelicula;
+        private string clasificacion;
+        private string distribuidor;
+        private string fechaEstreno;
+        private string fechaRetiro;
+        private string duracion;
+        private bool disponible;
 
         public Peliculas()
         {

@@ -172,6 +172,10 @@ create table Funciones
 ALTER TABLE Funciones
 ADD CONSTRAINT col_disp2 DEFAULT 1 FOR disponible
 go
+ALTER TABLE Funciones
+Add Constraint clavePelicula Foreign Key (clavePelicula) References Peliculas (claveNombrePelicula)
+ On Update Cascade On Delete Cascade
+ go
 create table TipoVenta
 (
 	claveTipoVenta bigint primary key identity(1,1),
@@ -373,11 +377,11 @@ values
 insert into Peliculas(claveNombrePelicula,clasificacion,distribuidor,fechaEstreno,fechaRetiro,
 duracion, disponible)
 values
-(upper('Titanes del Pacífico: La Resurrección'), 'B', 'Universal', GETDATE(), GETDATE()+15, '01:51',1),
-(upper('Jumanji'), 'B', 'Universal', GETDATE(), GETDATE()+15, '01:43',1),
-(upper('Black Panther'), 'B', 'Disney', GETDATE(), GETDATE()+15, '01:35',1),
-(upper('Mazinger Z'), 'B', 'Bandai', GETDATE(), GETDATE()+15, '01:20',1),
-(upper('Las Aventuras de Lara Croft'), 'B', 'Universal', GETDATE(), GETDATE()+15, '01:40',1)
+(upper('Titanes del Pacífico: La Resurrección'), 'B-15', 'UNIVERSAL', GETDATE(), GETDATE()+15, '01:51',1),
+(upper('Jumanji'), 'B-15', 'UNIVERSAL', GETDATE(), GETDATE()+15, '01:43',1),
+(upper('Black Panther'), 'B-15', 'DISNEY', GETDATE(), GETDATE()+15, '01:35',1),
+(upper('Mazinger Z'), 'B-15', 'BANDAI', GETDATE(), GETDATE()+15, '01:20',1),
+(upper('Las Aventuras de Lara Croft'), 'B-15', 'UNIVERSAL', GETDATE(), GETDATE()+15, '01:40',1)
 
 --select * from Funciones
 insert into Funciones(claveSala,clavePelicula,claveTipoFuncion,claveIdioma,claveSubtitulos,fecha,hora,disponible
