@@ -219,7 +219,7 @@ namespace WindowsFormsTest
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (!ClaveCli.Equals(""))
+            if (ClaveCli.Equals(""))
             {
                 MessageBox.Show("Debe obtener datos a partir de la búsqueda por medio del" +
                     " buscador");
