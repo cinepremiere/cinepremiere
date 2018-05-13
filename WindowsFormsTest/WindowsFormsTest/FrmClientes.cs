@@ -156,7 +156,7 @@ namespace WindowsFormsTest
                     dt = buscarPorId();
                     if (dt.Rows.Count > 0)
                     {
-                        Clientes clientes = new Clientes();
+                        clientes = new Clientes();
                         if (dt.Rows.Count == 1)
                         {
                             dgvClientes.DataSource = dt.DefaultView;
@@ -219,46 +219,54 @@ namespace WindowsFormsTest
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            vaciarFormAClientes();
-            int disponible = 1;
-
-            if (!clientes.Status)
+            if (!ClaveCli.Equals(""))
             {
-                disponible = 0;
+                MessageBox.Show("Debe obtener datos a partir de la búsqueda por medio del" +
+                    " buscador");
             }
-            
-            string sql = "update Clientes " +
-                " set Nombres='" + clientes.Nombres + "'," +
-                " curp ='" + clientes.Curp + "'," +
-                " paterno ='" + clientes.Paterno + "'," +
-                " materno ='" + clientes.Materno + "'," +
-                " calle ='" + clientes.Calle + "'," +
-                " numeroExterior ='" + clientes.NumExt + "'," +
-                " numeroInterior ='" + clientes.NumInt + "'," +
-                " cp ='" + clientes.Cp + "'," +
-                " colonia ='" + clientes.Colonia + "'," +
-                " localidad ='" + clientes.Localidad + "'," +
-                " telefonoCasa ='" + clientes.TelefonoCasa + "'," +
-                " telefonoMovil ='" + clientes.TelefonoMovil + "'," +
-                " fechaRegistro ='" + clientes.FechaRegistro + "'," +
-                " mail ='" + clientes.Mail + "'," +
-                " constrasena ='" + clientes.Contrasena + "'," +
-                " puntos =" + clientes.Puntos + "," +
-                " disponible =" + disponible + "," +
-                " tipoCliente =" + clientes.TipoCliente + "," +
-                " puntosUsados =" + clientes.PuntosUsados + "" +
-                " where claveCliente=" + claveCli;
-
-            ProcesosBD pbd = new ProcesosBD();
-            pbd.Conectar();
-            pbd.SqlUpdate(sql);
-            validarDatos();
-            MessageBox.Show("Modificación exitosa");
-            DataTable dt = new DataTable();
-            dt = buscarPorId();
-            if (dt.Rows.Count > 0)
+            else
             {
-                dgvClientes.DataSource = dt.DefaultView;
+                vaciarFormAClientes();
+                int disponible = 1;
+
+                if (!clientes.Status)
+                {
+                    disponible = 0;
+                }
+
+                string sql = "update Clientes " +
+                    " set Nombres='" + clientes.Nombres + "'," +
+                    " curp ='" + clientes.Curp + "'," +
+                    " paterno ='" + clientes.Paterno + "'," +
+                    " materno ='" + clientes.Materno + "'," +
+                    " calle ='" + clientes.Calle + "'," +
+                    " numeroExterior ='" + clientes.NumExt + "'," +
+                    " numeroInterior ='" + clientes.NumInt + "'," +
+                    " cp ='" + clientes.Cp + "'," +
+                    " colonia ='" + clientes.Colonia + "'," +
+                    " localidad ='" + clientes.Localidad + "'," +
+                    " telefonoCasa ='" + clientes.TelefonoCasa + "'," +
+                    " telefonoMovil ='" + clientes.TelefonoMovil + "'," +
+                    " fechaRegistro ='" + clientes.FechaRegistro + "'," +
+                    " mail ='" + clientes.Mail + "'," +
+                    " constrasena ='" + clientes.Contrasena + "'," +
+                    " puntos =" + clientes.Puntos + "," +
+                    " disponible =" + disponible + "," +
+                    " tipoCliente =" + clientes.TipoCliente + "," +
+                    " puntosUsados =" + clientes.PuntosUsados + "" +
+                    " where claveCliente=" + claveCli;
+
+                ProcesosBD pbd = new ProcesosBD();
+                pbd.Conectar();
+                pbd.SqlUpdate(sql);
+                validarDatos();
+                MessageBox.Show("Modificación exitosa");
+                DataTable dt = new DataTable();
+                dt = buscarPorId();
+                if (dt.Rows.Count > 0)
+                {
+                    dgvClientes.DataSource = dt.DefaultView;
+                }
             }
         }
 
@@ -307,29 +315,37 @@ namespace WindowsFormsTest
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            bool isInt = false;
-            int clave = 0;
-            if (txtClave!=null && txtClave.Text!="")
-                isInt = int.TryParse(txtClave.Text,out clave);
-
-            string sql = "delete from clientes where clavecliente=" + clave;
-            pbd.Conectar();
-
-            if (clave != 0)
+            if (txtClave.Text.Equals(""))
             {
-                DialogResult d = MessageBox.Show(
-                    "Seguro que desea eliminar al cliente con clave"
-                    + clave
-                        , "Aceptar", MessageBoxButtons.OKCancel);
+                MessageBox.Show("Debe obtener datos a partir de la búsqueda por medio del" +
+                    " buscador");
+            }
+            else
+            {
+                bool isInt = false;
+                int clave = 0;
+                if (txtClave != null && txtClave.Text != "")
+                    isInt = int.TryParse(txtClave.Text, out clave);
 
-                if (d.Equals(DialogResult.OK))
+                string sql = "delete from clientes where clavecliente=" + clave;
+                pbd.Conectar();
+
+                if (clave != 0)
                 {
-                    pbd.SqlUpdate(sql);
-                    MessageBox.Show("Se ha eliminado el registro exitosamente");
-                    txtClave.Text = "";
-                }
+                    DialogResult d = MessageBox.Show(
+                        "Seguro que desea eliminar al cliente con clave"
+                        + clave
+                            , "Aceptar", MessageBoxButtons.OKCancel);
 
-                CargarTabla();
+                    if (d.Equals(DialogResult.OK))
+                    {
+                        pbd.SqlUpdate(sql);
+                        MessageBox.Show("Se ha eliminado el registro exitosamente");
+                        txtClave.Text = "";
+                    }
+
+                    CargarTabla();
+                }
             }
         }
 

@@ -30,7 +30,7 @@
         {
             this.txtMaterno = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.dgvUsuarios = new System.Windows.Forms.DataGridView();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -72,6 +72,11 @@
             this.dtmInicioContrato = new System.Windows.Forms.DateTimePicker();
             this.dtmInicioJornada = new System.Windows.Forms.DateTimePicker();
             this.dtmFinJornada = new System.Windows.Forms.DateTimePicker();
+            this.btnRecargarTabla = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtClaveUsuario = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
             this.SuspendLayout();
             // 
@@ -91,12 +96,14 @@
             this.label17.TabIndex = 73;
             this.label17.Text = "Materno";
             // 
-            // textBox1
+            // txtBuscar
             // 
-            this.textBox1.Location = new System.Drawing.Point(184, 363);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(732, 26);
-            this.textBox1.TabIndex = 72;
+            this.txtBuscar.Location = new System.Drawing.Point(184, 363);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(732, 26);
+            this.txtBuscar.TabIndex = 72;
+            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
+            this.txtBuscar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscar_KeyPress);
             // 
             // label16
             // 
@@ -112,7 +119,7 @@
             this.dgvUsuarios.AllowUserToAddRows = false;
             this.dgvUsuarios.AllowUserToDeleteRows = false;
             this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvUsuarios.Location = new System.Drawing.Point(118, 431);
+            this.dgvUsuarios.Location = new System.Drawing.Point(116, 507);
             this.dgvUsuarios.Name = "dgvUsuarios";
             this.dgvUsuarios.ReadOnly = true;
             this.dgvUsuarios.RowTemplate.Height = 28;
@@ -121,16 +128,17 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(1104, 357);
+            this.btnCancelar.Location = new System.Drawing.Point(298, 427);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(176, 38);
             this.btnCancelar.TabIndex = 69;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnGuardarCliente
             // 
-            this.btnGuardarCliente.Location = new System.Drawing.Point(922, 357);
+            this.btnGuardarCliente.Location = new System.Drawing.Point(116, 427);
             this.btnGuardarCliente.Name = "btnGuardarCliente";
             this.btnGuardarCliente.Size = new System.Drawing.Size(176, 38);
             this.btnGuardarCliente.TabIndex = 68;
@@ -453,11 +461,63 @@
             this.dtmFinJornada.TabIndex = 87;
             this.dtmFinJornada.Value = new System.DateTime(2018, 4, 12, 23, 0, 0, 0);
             // 
+            // btnRecargarTabla
+            // 
+            this.btnRecargarTabla.Location = new System.Drawing.Point(481, 427);
+            this.btnRecargarTabla.Name = "btnRecargarTabla";
+            this.btnRecargarTabla.Size = new System.Drawing.Size(188, 38);
+            this.btnRecargarTabla.TabIndex = 88;
+            this.btnRecargarTabla.Text = "Recargar Tabla";
+            this.btnRecargarTabla.UseVisualStyleBackColor = true;
+            this.btnRecargarTabla.Click += new System.EventHandler(this.btnRecargarTabla_Click);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.Location = new System.Drawing.Point(676, 427);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(167, 38);
+            this.btnModificar.TabIndex = 89;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Location = new System.Drawing.Point(850, 427);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(162, 38);
+            this.btnEliminar.TabIndex = 90;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(923, 368);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(107, 20);
+            this.label15.TabIndex = 91;
+            this.label15.Text = "Clave Usuario";
+            // 
+            // txtClaveUsuario
+            // 
+            this.txtClaveUsuario.Enabled = false;
+            this.txtClaveUsuario.Location = new System.Drawing.Point(1037, 368);
+            this.txtClaveUsuario.Name = "txtClaveUsuario";
+            this.txtClaveUsuario.Size = new System.Drawing.Size(245, 26);
+            this.txtClaveUsuario.TabIndex = 92;
+            // 
             // FrmUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1441, 880);
+            this.Controls.Add(this.txtClaveUsuario);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.btnEliminar);
+            this.Controls.Add(this.btnModificar);
+            this.Controls.Add(this.btnRecargarTabla);
             this.Controls.Add(this.dtmFinJornada);
             this.Controls.Add(this.dtmInicioJornada);
             this.Controls.Add(this.dtmInicioContrato);
@@ -470,7 +530,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtMaterno);
             this.Controls.Add(this.label17);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.dgvUsuarios);
             this.Controls.Add(this.btnCancelar);
@@ -516,7 +576,7 @@
 
         private System.Windows.Forms.TextBox txtMaterno;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.DataGridView dgvUsuarios;
         private System.Windows.Forms.Button btnCancelar;
@@ -558,5 +618,10 @@
         private System.Windows.Forms.DateTimePicker dtmInicioContrato;
         private System.Windows.Forms.DateTimePicker dtmInicioJornada;
         private System.Windows.Forms.DateTimePicker dtmFinJornada;
+        private System.Windows.Forms.Button btnRecargarTabla;
+        private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txtClaveUsuario;
     }
 }

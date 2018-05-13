@@ -300,11 +300,11 @@ insert into Usuarios(curp,Nombres,paterno,materno,claveTipoUsuario,calle,numeroE
 suledo,constrasena)
 values
 ('POSC90112254A3HXDF','Carlos','Ponce de León','Sámano',3,'María','22','','08030','Camarón','Ciudad de México','',
-'5512462517',getdate(),'09:00','19:00','carlossamano@gmail.com',20000.0000,'123456'),
+'5512462517',getdate(),'09:00','19:00','carlossamano@gmail.com',3590.0000,'123456'),
 ('ALCE93112254A3HXDF','Eduardo','Alvarado','Cortés',2,'Aldama','15','','08030','Centro','Ciudad de México','',
-'5512461039',getdate(),'09:00','19:00','alvarado@gmail.com',22000.0000,'123456'),
+'5512461039',getdate(),'09:00','19:00','alvarado@gmail.com',23000.0000,'123456'),
 ('LAMN83112254A3HXDF','Noé Carlos','Lara','Martínez',1,'Violeta','85','I-3','08030','Buenavista','Ciudad de México','',
-'5512462219',getdate(),'09:00','19:00','noelaramartinez@gmail.com',25000.0000,'123456')
+'5512462219',getdate(),'09:00','19:00','noelaramartinez@gmail.com',45000.0000,'123456')
 
 --select * from Idioma
 insert into Idioma(idioma)

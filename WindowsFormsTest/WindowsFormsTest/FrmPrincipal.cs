@@ -91,5 +91,17 @@ namespace WindowsFormsTest
             FrmPantallaClientes frmPantallaClientes = new FrmPantallaClientes();
             frmPantallaClientes.Show();
         }
+
+        private void agregarOModificarSalaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmSalas frmSalas = new FrmSalas();
+            frmSalas.Show();
+        }
+
+        private void cancelarVentaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCancelaciones frmCancelaciones = new FrmCancelaciones();
+            frmCancelaciones.Show();
+        }
     }
 }

@@ -49,6 +49,8 @@
             this.agregarOModificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pantallaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.agregarOModificarSalaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,7 +64,8 @@
             this.reportesToolStripMenuItem,
             this.rHToolStripMenuItem,
             this.funcionesToolStripMenuItem,
-            this.clientesToolStripMenuItem});
+            this.clientesToolStripMenuItem,
+            this.salasToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 33);
@@ -107,7 +110,7 @@
             this.membresíasToolStripMenuItem,
             this.tarjetaDeDescuentosToolStripMenuItem});
             this.generarVentaToolStripMenuItem.Name = "generarVentaToolStripMenuItem";
-            this.generarVentaToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.generarVentaToolStripMenuItem.Size = new System.Drawing.Size(212, 30);
             this.generarVentaToolStripMenuItem.Text = "Generar Venta";
             // 
             // boletosToolStripMenuItem
@@ -135,6 +138,7 @@
             this.cancelarVentaToolStripMenuItem.Name = "cancelarVentaToolStripMenuItem";
             this.cancelarVentaToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
             this.cancelarVentaToolStripMenuItem.Text = "Cancelar Venta";
+            this.cancelarVentaToolStripMenuItem.Click += new System.EventHandler(this.cancelarVentaToolStripMenuItem_Click);
             // 
             // películasToolStripMenuItem
             // 
@@ -163,13 +167,13 @@
             // estadísticasToolStripMenuItem
             // 
             this.estadísticasToolStripMenuItem.Name = "estadísticasToolStripMenuItem";
-            this.estadísticasToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.estadísticasToolStripMenuItem.Size = new System.Drawing.Size(186, 30);
             this.estadísticasToolStripMenuItem.Text = "Estadísticas";
             // 
             // ventasToolStripMenuItem1
             // 
             this.ventasToolStripMenuItem1.Name = "ventasToolStripMenuItem1";
-            this.ventasToolStripMenuItem1.Size = new System.Drawing.Size(252, 30);
+            this.ventasToolStripMenuItem1.Size = new System.Drawing.Size(186, 30);
             this.ventasToolStripMenuItem1.Text = "Ventas";
             // 
             // rHToolStripMenuItem
@@ -217,6 +221,21 @@
             this.pantallaToolStripMenuItem.Text = "Pantalla";
             this.pantallaToolStripMenuItem.Click += new System.EventHandler(this.pantallaToolStripMenuItem_Click);
             // 
+            // salasToolStripMenuItem
+            // 
+            this.salasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.agregarOModificarSalaToolStripMenuItem});
+            this.salasToolStripMenuItem.Name = "salasToolStripMenuItem";
+            this.salasToolStripMenuItem.Size = new System.Drawing.Size(64, 29);
+            this.salasToolStripMenuItem.Text = "Salas";
+            // 
+            // agregarOModificarSalaToolStripMenuItem
+            // 
+            this.agregarOModificarSalaToolStripMenuItem.Name = "agregarOModificarSalaToolStripMenuItem";
+            this.agregarOModificarSalaToolStripMenuItem.Size = new System.Drawing.Size(293, 30);
+            this.agregarOModificarSalaToolStripMenuItem.Text = "Agregar o Modificar Sala";
+            this.agregarOModificarSalaToolStripMenuItem.Click += new System.EventHandler(this.agregarOModificarSalaToolStripMenuItem_Click);
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -259,5 +278,7 @@
         private System.Windows.Forms.ToolStripMenuItem tarjetaDeDescuentosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pantallaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem agregarOModificarSalaToolStripMenuItem;
     }
 }
