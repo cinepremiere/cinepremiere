@@ -80,7 +80,21 @@ namespace WindowsFormsTest
                 + "" + cmbTipoUsuario.SelectedValue.ToString() + ""
                 + ")";
 
-            
+            pbd.Conectar();
+            pbd.abrirConexion();
+            pbd.comenzarTransaccion();
+
+            try
+            {
+                pbd.sqlUpdateTransaction(sql);
+
+                sql = "insert into ";
+            }
+            catch
+            {
+
+            }
+
             Console.Write(sql);
             try
             {
@@ -132,6 +146,7 @@ namespace WindowsFormsTest
             cmbTipoUsuario.Text = "Seleccionar";
             txtPuntos.Text = "";
             txtPuntosUsados.Text = "";
+            ClaveCli = 0;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -219,7 +234,7 @@ namespace WindowsFormsTest
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (ClaveCli.Equals(""))
+            if (ClaveCli==0)
             {
                 MessageBox.Show("Debe obtener datos a partir de la búsqueda por medio del" +
                     " buscador");
@@ -315,7 +330,7 @@ namespace WindowsFormsTest
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (txtClave.Text.Equals(""))
+            if (ClaveCli == 0)
             {
                 MessageBox.Show("Debe obtener datos a partir de la búsqueda por medio del" +
                     " buscador");

@@ -60,7 +60,7 @@ namespace WindowsFormsTest
             }
             else if (TipoUsuario == 2)
             {
-
+                reportesToolStripMenuItem.Available = false;
             }
             else if (TipoUsuario == 3)
             {
@@ -68,6 +68,7 @@ namespace WindowsFormsTest
                 reportesToolStripMenuItem.Available = false;
                 rHToolStripMenuItem.Available = false;
                 funcionesToolStripMenuItem.Available = false;
+                salasToolStripMenuItem.Available = false;
             }
             else if (TipoUsuario == 4)
             {
@@ -102,6 +103,13 @@ namespace WindowsFormsTest
         {
             FrmCancelaciones frmCancelaciones = new FrmCancelaciones();
             frmCancelaciones.Show();
+        }
+
+        private void estadísticasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmVentasSemana frmEstadisticas = new FrmVentasSemana();
+
+            frmEstadisticas.Show();
         }
     }
 }

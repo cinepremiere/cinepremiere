@@ -5,6 +5,17 @@ use DB_CinePremier
 go
 set dateformat 'dmy'
 go
+
+create table Salario
+(
+	claveSalario int primary key identity(1,1),
+	salario decimal(10,2) not null,
+	descripcion nvarchar(25) not null,
+	disponible bit not null,
+)
+alter table Salario
+add constraint col_disp6 default 1 for disponible
+go
 create table TipoUsuario
 (
 	claveTipoUsuario smallint primary key identity(1, 1),
@@ -34,7 +45,7 @@ create table Usuarios
 	inicioTurno time not null,
 	finTurno time not null,
 	mail nvarchar(50) not null unique,
-	suledo decimal(10,4) not null,
+	claveSalario int references Salario(claveSalario) not null,
 	constrasena nvarchar (10) not null,
 	disponible bit not null,
 )
@@ -62,11 +73,21 @@ create table Subtitulos
 ALTER TABLE Subtitulos
 ADD CONSTRAINT col_stat4 DEFAULT 1 FOR disponible
 go
+create table ListaDePrecios
+(
+	claveListaDePrecios int primary key identity(1,1),
+	precio decimal(10,2) not null,
+	descripcion nvarchar(25) not null,
+	disponible bit not null,
+)
+alter table ListaDePrecios
+add constraint col_disp5 default 1 for disponible
+go
 create table TipoFuncion
 (
 	claveTipoFuncion smallint primary key identity(1, 1),
 	tipoFuncion char(10) not null unique,--2DR, 3DR, 4DX, IMAX2D, IMAX3D, 3DVIP, 2DVIP, RV
-	precio decimal(10,4) not null,
+	claveListaDePrecios int references ListaDePrecios(claveListaDePrecios) not null,
 	descripcion char(25) null,
 	disponible bit not null,
 )
@@ -86,7 +107,7 @@ create table TipoCliente
 (
 	claveTipoCliente smallint primary key identity(1, 1),
 	tipoCliente char(15) not null unique,--preferente, vip, premier
-	costo decimal(10,4) not null,
+	claveListaDePrecios int references ListaDePrecios(claveListaDePrecios) not null,
 	disponible bit not null,
 )
 ALTER TABLE TipoCliente
@@ -174,8 +195,8 @@ ADD CONSTRAINT col_disp2 DEFAULT 1 FOR disponible
 go
 ALTER TABLE Funciones
 Add Constraint clavePelicula Foreign Key (clavePelicula) References Peliculas (claveNombrePelicula)
- On Update Cascade On Delete Cascade
- go
+On Update Cascade On Delete Cascade
+go
 create table TipoVenta
 (
 	claveTipoVenta bigint primary key identity(1,1),
@@ -191,7 +212,7 @@ create table Ventas
 	claveUsuario bigint references Usuarios(claveUsuario) not null,
 	claveCliente bigint references Clientes(claveCliente) null,
 	horaFechaVenta datetime not null,
-	importeTotal decimal(10,4) not null,
+	importeTotal decimal(10,2) not null,
 )
 go
 create table Boletos
@@ -207,7 +228,7 @@ go
 create table Articulo
 (
 	claveArticulo nvarchar primary key,
-	precio decimal(10,4) not null,
+	precio decimal(10,2) not null,
 	descripcion nvarchar null,
 	disponible bit not null,
 )
@@ -220,10 +241,10 @@ create table DetallesVentas
 	boleto bigint references Boletos(boleto) null,
 	claveTipoVenta bigint references TipoVenta(claveTipoVenta) not null,
 	claveArticulo nvarchar references Articulo(claveArticulo) null,
-	descuento decimal(10,4) not null,
-	iva decimal(10,4) not null,
-	precioUnitario decimal(10,4) not null,
-	importeParcial decimal(10,4) not null,
+	descuento decimal(10,2) not null,
+	iva decimal(10,2) not null,
+	precioUnitario decimal(10,2) not null,
+	importeParcial decimal(10,2) not null,
 	fechaHoraRegistro datetime not null,
 	sumaPuntos bit not null,--para clientes con membresía
 	fechaPuntosUsados date null,
@@ -239,11 +260,22 @@ create table Cancelados
 	claveVenta bigint references Ventas(claveVenta) not null,
 	boleto bigint references Boletos(boleto) null,
 	fechaHoraCancelado datetime not null,
-	motivo nvarchar not null,
+	motivo nvarchar(100) not null,
 	claveUsuario bigint references Usuarios(claveUsuario) not null,
 	constrasena nvarchar (10) not null,
 )
 
+
+create table Salario
+(
+	claveSalario int primary key identity(1,1),
+	salario decimal(10,2) not null,
+	descripcion nvarchar(25) not null,
+	disponible bit not null,
+)
+alter table Salario
+add constraint col_disp6 default 1 for disponible
+go
 
 create index i1 on peliculas(indice);
 create index i2 on tipoUsuario(claveTipoUsuario);
@@ -263,6 +295,8 @@ create index i15 on DetallesVentas(claveVenta);
 create index i16 on TipoVenta(claveTipoVenta);
 create index i17 on Articulo(claveArticulo);
 create index i18 on Cancelados(claveVenta);
+create index i19 on ListaDePrecios(claveListaDePrecios);
+create index i20 on Salario(claveSalario)
 go
 
 create schema SCH_Ventas
@@ -285,6 +319,16 @@ MINVALUE 1
 NO CACHE
 go
 
+create schema SCH_Funciones
+go
+create sequence SCH_Funciones.AI_Funciones
+as bigint
+start with 1
+increment by 1
+MINVALUE 1
+NO CACHE
+go
+
 --Inserts
 --select * from TipoUsuario
 insert into TipoUsuario(tipoUsuario)
@@ -297,14 +341,14 @@ values('Gerente'),
 --select * from Usuarios
 insert into Usuarios(curp,Nombres,paterno,materno,claveTipoUsuario,calle,numeroExterior,numeroInterior
 ,cp,colonia,localidad,telefonoCasa,telefonoMovil,inicioContrato,inicioTurno,finTurno,mail,
-suledo,constrasena)
+claveSalario,constrasena)
 values
 ('POSC90112254A3HXDF','Carlos','Ponce de León','Sámano',3,'María','22','','08030','Camarón','Ciudad de México','',
-'5512462517',getdate(),'09:00','19:00','carlossamano@gmail.com',3590.0000,'123456'),
+'5512462517',getdate(),'09:00','19:00','carlossamano@gmail.com',1,'123456'),
 ('ALCE93112254A3HXDF','Eduardo','Alvarado','Cortés',2,'Aldama','15','','08030','Centro','Ciudad de México','',
-'5512461039',getdate(),'09:00','19:00','alvarado@gmail.com',23000.0000,'123456'),
+'5512461039',getdate(),'09:00','19:00','alvarado@gmail.com',4,'123456'),
 ('LAMN83112254A3HXDF','Noé Carlos','Lara','Martínez',1,'Violeta','85','I-3','08030','Buenavista','Ciudad de México','',
-'5512462219',getdate(),'09:00','19:00','noelaramartinez@gmail.com',45000.0000,'123456')
+'5512462219',getdate(),'09:00','19:00','noelaramartinez@gmail.com',5,'123456')
 
 --select * from Idioma
 insert into Idioma(idioma)
@@ -325,23 +369,23 @@ values
 ('N/A')
 
 --select * from TipoFuncion
-insert into TipoFuncion(tipoFuncion,precio,descripcion,disponible)
-values('2DR',65.0000,'2D REGULAR',1),
-('3DR',85.0000,'3D REGULAR',1),
-('4DX',100.0000,'4D',1),
-('2DI',90.0000,'2D IMAX',1),
-('3DI',110.0000,'3D IMAX',1),
-('3DVIP',130.0000,'3D VIP',1),
-('2DVIP',115.0000,'2D VIP',1),
-('Jr',60.0000,'Sala Junior',1),
-('RV',150.0000,'REALIDAD VIRTUAL',1)
+insert into TipoFuncion(tipoFuncion,claveListaDePrecios,descripcion,disponible)
+values('2DR',1,'2D REGULAR',1),
+('3DR',2,'3D REGULAR',1),
+('4DX',3,'4D',1),
+('2DI',4,'2D IMAX',1),
+('3DI',5,'3D IMAX',1),
+('3DVIP',6,'3D VIP',1),
+('2DVIP',7,'2D VIP',1),
+('Jr',8,'Sala Junior',1),
+('RV',9,'REALIDAD VIRTUAL',1)
 
 --select * from tipocliente
-insert into TipoCliente(tipoCliente,costo,disponible)
+insert into TipoCliente(tipoCliente,claveListaDePrecios,disponible)
 values
-('PREFERENTE',100,1),
-('PREMIER',150,1),
-('VIP',200,1)
+('PREFERENTE',11,1),
+('PREMIER',12,1),
+('VIP',13,1)
 
 
 --select * from Clientes
