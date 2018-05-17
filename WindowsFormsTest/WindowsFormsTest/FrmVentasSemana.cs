@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Office.Interop.Excel;
 
 namespace WindowsFormsTest
 {
@@ -96,7 +97,7 @@ namespace WindowsFormsTest
                 "group by DATENAME(MONTH,horaFechaVenta)";
 
             ProcesosBD pbd = new ProcesosBD();
-            DataTable dt = new DataTable();
+            System.Data.DataTable dt = new System.Data.DataTable();
             pbd.Conectar();
             dt = pbd.SqlSelect(sql).Tables[0];
 
@@ -118,8 +119,35 @@ namespace WindowsFormsTest
 
         public void exportarAExcell(DataGridView dgv)
         {
-            
+            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+            excel.Application.Workbooks.Add(true);
+
+            int indiceColumna = 0;
+
+            foreach(DataGridViewColumn col in dgv.Columns )
+            {
+                indiceColumna++;
+                excel.Cells[1, indiceColumna] = col.Name;
+            }
+
+            int indiceFila = 0;
+
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+                indiceFila++;
+                indiceColumna = 0;
+                foreach (DataGridViewColumn col in dgv.Columns)
+                {
+                    indiceColumna++;
+                    excel.Cells[indiceFila + 1, indiceColumna] = row.Cells[col.Name].Value;
+                }
+            }
+            excel.Visible = true;
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            exportarAExcell(dgvPeli);
+        }
     }
 }
