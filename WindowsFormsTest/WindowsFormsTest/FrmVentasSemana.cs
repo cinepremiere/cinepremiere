@@ -86,6 +86,10 @@ namespace WindowsFormsTest
 
         private void btnPeliBuscar_Click(object sender, EventArgs e)
         {
+            float[] ventaMensual=null;
+            string[] mes = null;
+
+
             string sql = "select SUM(importeTotal)ventaMensual, " +
                 "DATENAME(MONTH,horaFechaVenta)mes  from Ventas  " +
                 "where YEAR(horaFechaVenta) = '"+ cmbYearPeli.SelectedValue.ToString() +"' " +
@@ -98,8 +102,24 @@ namespace WindowsFormsTest
 
             if (dt.Rows.Count > 0)
             {
-
+                for(int i=0;i< dt.Rows.Count; i++)
+                {
+                    ventaMensual[i] = float.Parse(dt.Rows[i][0].ToString());
+                    mes[i] = dt.Rows[i][1].ToString();
+                }
+                
             }
         }
+
+        private void dgvPeli_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        public void exportarAExcell(DataGridView dgv)
+        {
+            
+        }
+
     }
 }
