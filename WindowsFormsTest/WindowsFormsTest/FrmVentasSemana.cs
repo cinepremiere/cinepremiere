@@ -86,8 +86,8 @@ namespace WindowsFormsTest
 
         private void btnPeliBuscar_Click(object sender, EventArgs e)
         {
-            float[] ventaMensual=null;
-            string[] mes = null;
+            List<float> ventaMensual=new List<float>();
+            List<string> mes = new List<string>();
 
 
             string sql = "select SUM(importeTotal)ventaMensual, " +
@@ -104,8 +104,8 @@ namespace WindowsFormsTest
             {
                 for(int i=0;i< dt.Rows.Count; i++)
                 {
-                    ventaMensual[i] = float.Parse(dt.Rows[i][0].ToString());
-                    mes[i] = dt.Rows[i][1].ToString();
+                    ventaMensual.Add(float.Parse(dt.Rows[i][0].ToString()));
+                    mes.Add(dt.Rows[i][1].ToString());
                 }
                 
             }

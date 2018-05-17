@@ -47,3 +47,4 @@ F:\UVM\Tareas UVM\07 Septimo Semestre\Ing. de Software I\Parcial 1\cinepremiere\
 F:\UVM\Tareas UVM\07 Septimo Semestre\Ing. de Software I\Parcial 1\cinepremiere\WindowsFormsTest\WindowsFormsTest\obj\Debug\WindowsFormsTest.FrmSalas.resources
 F:\UVM\Tareas UVM\07 Septimo Semestre\Ing. de Software I\Parcial 1\cinepremiere\WindowsFormsTest\WindowsFormsTest\obj\Debug\WindowsFormsTest.FrmVentasMes.resources
 F:\UVM\Tareas UVM\07 Septimo Semestre\Ing. de Software I\Parcial 1\cinepremiere\WindowsFormsTest\WindowsFormsTest\obj\Debug\WindowsFormsTest.FrmVentasSemana.resources
+F:\UVM\Tareas UVM\07 Septimo Semestre\Ing. de Software I\Parcial 1\cinepremiere\WindowsFormsTest\WindowsFormsTest\obj\Debug\WindowsFormsTest.csproj.ResolveComReference.cache
