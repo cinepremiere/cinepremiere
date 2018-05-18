@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Office.Interop.Excel;
+using System.Windows.Forms.DataVisualization.Charting;
+//using Microsoft.Office.Interop.Excel;
 
 namespace WindowsFormsTest
 {
@@ -49,7 +50,7 @@ namespace WindowsFormsTest
 
             DateTime fechaActual = DateTime.Today;
             string year = fechaActual.Year.ToString().Trim();
-            MessageBox.Show(year + "  " + fechaIni);
+            //MessageBox.Show(year + "  " + fechaIni);
 
             Dictionary<int, int> liYears = new Dictionary<int, int>();
             for(int i = int.Parse(year); i >= int.Parse(fechaIni); i--)
@@ -87,8 +88,8 @@ namespace WindowsFormsTest
 
         private void btnPeliBuscar_Click(object sender, EventArgs e)
         {
-            List<float> ventaMensual=new List<float>();
-            List<string> mes = new List<string>();
+            //List<float> ventaMensual=new List<float>();
+            //List<string> mes = new List<string>();
 
 
             string sql = "select SUM(importeTotal)ventaMensual, " +
@@ -103,13 +104,24 @@ namespace WindowsFormsTest
 
             if (dt.Rows.Count > 0)
             {
-                for(int i=0;i< dt.Rows.Count; i++)
+                dgvPeli.DataSource = dt.DefaultView;
+                chartPeliYear.Series["Meses"].ChartType = SeriesChartType.Column;
+                for (int i=0;i< dt.Rows.Count; i++)
                 {
-                    ventaMensual.Add(float.Parse(dt.Rows[i][0].ToString()));
-                    mes.Add(dt.Rows[i][1].ToString());
+                    //ventaMensual.Add(float.Parse(dt.Rows[i][0].ToString()));
+                    //mes.Add(dt.Rows[i][1].ToString());
+
+                    float ventaMensual= float.Parse(dt.Rows[i][0].ToString());
+                    string mes = dt.Rows[i][1].ToString();
+
+                    MessageBox.Show(ventaMensual + " " + mes);
+                    chartPeliYear.Series["Meses"].Points.AddXY("Mayo",ventaMensual);
                 }
-                
+
+                chartPeliYear.Series["Meses"].ChartArea = "ChartArea1";
             }
+
+
         }
 
         private void dgvPeli_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -119,30 +131,30 @@ namespace WindowsFormsTest
 
         public void exportarAExcell(DataGridView dgv)
         {
-            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
-            excel.Application.Workbooks.Add(true);
+            //Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+            //excel.Application.Workbooks.Add(true);
 
-            int indiceColumna = 0;
+            //int indiceColumna = 0;
 
-            foreach(DataGridViewColumn col in dgv.Columns )
-            {
-                indiceColumna++;
-                excel.Cells[1, indiceColumna] = col.Name;
-            }
+            //foreach(DataGridViewColumn col in dgv.Columns )
+            //{
+            //    indiceColumna++;
+            //    excel.Cells[1, indiceColumna] = col.Name;
+            //}
 
-            int indiceFila = 0;
+            //int indiceFila = 0;
 
-            foreach (DataGridViewRow row in dgv.Rows)
-            {
-                indiceFila++;
-                indiceColumna = 0;
-                foreach (DataGridViewColumn col in dgv.Columns)
-                {
-                    indiceColumna++;
-                    excel.Cells[indiceFila + 1, indiceColumna] = row.Cells[col.Name].Value;
-                }
-            }
-            excel.Visible = true;
+            //foreach (DataGridViewRow row in dgv.Rows)
+            //{
+            //    indiceFila++;
+            //    indiceColumna = 0;
+            //    foreach (DataGridViewColumn col in dgv.Columns)
+            //    {
+            //        indiceColumna++;
+            //        excel.Cells[indiceFila + 1, indiceColumna] = row.Cells[col.Name].Value;
+            //    }
+            //}
+            //excel.Visible = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
