@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPeliculas));
             this.label1 = new System.Windows.Forms.Label();
             this.txtNombrePeli = new System.Windows.Forms.TextBox();
             this.cmbClasifica = new System.Windows.Forms.ComboBox();
@@ -297,6 +298,7 @@
             this.Controls.Add(this.cmbClasifica);
             this.Controls.Add(this.txtNombrePeli);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmPeliculas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Películas";

@@ -217,6 +217,8 @@
     <Content Include="Resources\ButacaCine.png" />
     <Content Include="Resources\ButacaCine1.png" />
     <Content Include="Resources\ButacaCine10.png" />
+    <None Include="Resources\logoCP3.png" />
+    <None Include="Resources\logoCP2.png" />
     <None Include="Resources\logoCP.png" />
     <None Include="Resources\ButacaCine11.png" />
     <Content Include="Resources\ButacaCine2.png" />

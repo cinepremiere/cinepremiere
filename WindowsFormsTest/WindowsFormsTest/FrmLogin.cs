@@ -29,10 +29,51 @@ namespace WindowsFormsTest
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
+        {
+            
+            
+        }
+
+        private void FrmLogin_Load(object sender, EventArgs e)
+        {
+            this.Focus();
+            usuario = "";
+            contrasena = "";
+            intentos = 0;
+            bloqueo = false;
+            TxtUsuario.Focus();
+
+        }
+
+        private void TxtUsuario_TextChanged(object sender, EventArgs e)
+        {
+            //ultima actualizacion de prueba 
+            //comentarios prueba
+        }
+
+        private void btnIngresar_Click(object sender, EventArgs e)
+        {
+            validarUsuario();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void TxtContrasena_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                validarUsuario();
+            }
+        }
+
+        private void validarUsuario()
         {
             if (TxtUsuario.Text == "" && TxtContrasena.Text != "")
             {
@@ -54,7 +95,7 @@ namespace WindowsFormsTest
             {
                 string sql = "select claveTipoUsuario,claveUsuario,constrasena from Usuarios " +
                     "where claveUsuario='" + TxtUsuario.Text + "' and constrasena = '"
-                    +TxtContrasena.Text+"'";
+                    + TxtContrasena.Text + "'";
 
                 Console.WriteLine(sql);
 
@@ -66,7 +107,7 @@ namespace WindowsFormsTest
                 {
                     Program.ClaveUsario = int.Parse(dt.Rows[0][1].ToString());
                     FrmPrincipal frmPrincipal = new FrmPrincipal();
-                    frmPrincipal.TipoUsuario = int.Parse(dt.Rows[0][0].ToString());        
+                    frmPrincipal.TipoUsuario = int.Parse(dt.Rows[0][0].ToString());
                     frmPrincipal.Show();
                     foreach (Form frm in Application.OpenForms)
                     {
@@ -75,33 +116,17 @@ namespace WindowsFormsTest
                     }
                     //this.Hide();
                 }
-
-                intentos++;
-                if (intentos == 3)
+                else
                 {
-                    MessageBox.Show("Revise sus credenciales.", "Contraseña Invalida", MessageBoxButtons.OK);
-                    TxtContrasena.Focus();
-                    intentos = 0;
+                    intentos++;
+                    if (intentos == 3)
+                    {
+                        MessageBox.Show("Revise sus credenciales.", "Contraseña Invalida", MessageBoxButtons.OK);
+                        TxtContrasena.Focus();
+                        intentos = 0;
+                    }
                 }
             }
-            
-        }
-
-        private void FrmLogin_Load(object sender, EventArgs e)
-        {
-            this.Focus();
-            usuario = "";
-            contrasena = "";
-            intentos = 0;
-            bloqueo = false;
-            TxtUsuario.Focus();
-
-        }
-
-        private void TxtUsuario_TextChanged(object sender, EventArgs e)
-        {
-            //ultima actualizacion de prueba 
-            //comentarios prueba
         }
     }
 }

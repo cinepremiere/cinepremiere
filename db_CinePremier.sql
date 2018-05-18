@@ -46,7 +46,7 @@ create table Usuarios
 	finTurno time not null,
 	mail nvarchar(50) not null unique,
 	claveSalario int references Salario(claveSalario) not null,
-	constrasena nvarchar (10) not null,
+	contrasena nvarchar (10) not null,
 	disponible bit not null,
 )
 ALTER TABLE Usuarios
@@ -262,20 +262,8 @@ create table Cancelados
 	fechaHoraCancelado datetime not null,
 	motivo nvarchar(100) not null,
 	claveUsuario bigint references Usuarios(claveUsuario) not null,
-	constrasena nvarchar (10) not null,
+	contrasena nvarchar (10) not null,
 )
-
-
-create table Salario
-(
-	claveSalario int primary key identity(1,1),
-	salario decimal(10,2) not null,
-	descripcion nvarchar(25) not null,
-	disponible bit not null,
-)
-alter table Salario
-add constraint col_disp6 default 1 for disponible
-go
 
 create index i1 on peliculas(indice);
 create index i2 on tipoUsuario(claveTipoUsuario);
@@ -330,6 +318,33 @@ NO CACHE
 go
 
 --Inserts
+--select * from salario
+insert into Salario(salario,descripcion)
+values(4575,'Empleado de S'),
+(5000.00,'Mantenimiento'),
+(6500.00,'Cajero'),
+(3590.00,'Recepcionista'),
+(12000.00,'Supervisor'),
+(15000.00,'Gerente'),
+(8000.00,'Soporte Técnico')
+
+--select * from listadeprecios
+insert into ListaDePrecios(precio,descripcion)
+values
+(55,'Fun 2dR'),
+(65,'Fun 2dImax'),
+(75,'Fun 3dR'),
+(85,'Fun 3dImax'),
+(130,'Fun 2dVIP'),
+(150,'Fun 3dVIP'),
+(165,'Fun 4DX'),
+(70,'Fun JR'),
+(200,'Fun VR'),
+(50,'Mem Preferente'),
+(100,'Mem Premier'),
+(150,'Mem VIP'),
+(0,'IVA')
+
 --select * from TipoUsuario
 insert into TipoUsuario(tipoUsuario)
 values('Gerente'),
@@ -341,7 +356,7 @@ values('Gerente'),
 --select * from Usuarios
 insert into Usuarios(curp,Nombres,paterno,materno,claveTipoUsuario,calle,numeroExterior,numeroInterior
 ,cp,colonia,localidad,telefonoCasa,telefonoMovil,inicioContrato,inicioTurno,finTurno,mail,
-claveSalario,constrasena)
+claveSalario,contrasena)
 values
 ('POSC90112254A3HXDF','Carlos','Ponce de León','Sámano',3,'María','22','','08030','Camarón','Ciudad de México','',
 '5512462517',getdate(),'09:00','19:00','carlossamano@gmail.com',1,'123456'),
@@ -380,17 +395,18 @@ values('2DR',1,'2D REGULAR',1),
 ('Jr',8,'Sala Junior',1),
 ('RV',9,'REALIDAD VIRTUAL',1)
 
+
 --select * from tipocliente
 insert into TipoCliente(tipoCliente,claveListaDePrecios,disponible)
 values
-('PREFERENTE',11,1),
-('PREMIER',12,1),
-('VIP',13,1)
+('PREFERENTE',1,1),
+('PREMIER',2,1),
+('VIP',3,1)
 
 
 --select * from Clientes
 insert into Clientes(nombres,curp,paterno,materno,calle,numeroExterior,numeroInterior,cp,colonia,localidad
-,telefonoCasa,telefonoMovil,fechaRegistro,mail,constrasena,puntos,disponible,tipoCliente)
+,telefonoCasa,telefonoMovil,fechaRegistro,mail,contrasena,puntos,disponible,tipoCliente)
 values('Lizzete','VEML90112254A3HXDF','Vega','Martinez','Calle 1','23','','08020','Juarez','Ciudad de México','','5512345609',
 GETDATE(),'lizz@gmail.com','123456',1,1,1),
 ('Karina','YEMK90112254A3HXDF','Yerian','Martinez','Calle 5','13','','08010','Yerian','Ciudad de México','','5512345611',

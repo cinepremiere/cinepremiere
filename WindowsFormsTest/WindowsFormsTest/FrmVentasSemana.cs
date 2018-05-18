@@ -91,14 +91,48 @@ namespace WindowsFormsTest
             //List<float> ventaMensual=new List<float>();
             //List<string> mes = new List<string>();
 
+            string sql = "select SUM(importeTotal)ventaSemanal, " +
+                "DATENAME(WEEK,horaFechaVenta)semana  from Ventas  " +
+                "where YEAR(horaFechaVenta) = '" + cmbYearPeli.SelectedValue.ToString() + "' " +
+                "and month(horaFechaVenta) = "+ cmbMonthPeli.SelectedValue +" " +
+                "group by DATENAME(WEEK,horaFechaVenta)";
 
-            string sql = "select SUM(importeTotal)ventaMensual, " +
+
+            ProcesosBD pbd = new ProcesosBD();
+            System.Data.DataTable dt = new System.Data.DataTable();
+            pbd.Conectar();
+            dt = pbd.SqlSelect(sql).Tables[0];
+
+            if (dt.Rows.Count > 0)
+            {
+                dgvPeliMensual.DataSource = dt.DefaultView;
+                chartPeliMonth.Series["Semanas"].ChartType = SeriesChartType.Column;
+                chartPeliMonth.Series["Semanas"].Points.Clear();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    //ventaMensual.Add(float.Parse(dt.Rows[i][0].ToString()));
+                    //mes.Add(dt.Rows[i][1].ToString());
+
+                    float ventaMensual = float.Parse(dt.Rows[i][0].ToString());
+                    string semana = dt.Rows[i][1].ToString();
+
+                    //MessageBox.Show(ventaMensual + " " + semana);
+
+                    chartPeliMonth.Series["Semanas"].Points.AddXY(semana, ventaMensual);
+                }
+
+                chartPeliMonth.Series["Semanas"].ChartArea = "ChartArea1";
+            }
+
+
+
+            sql = "select SUM(importeTotal)ventaMensual, " +
                 "DATENAME(MONTH,horaFechaVenta)mes  from Ventas  " +
                 "where YEAR(horaFechaVenta) = '"+ cmbYearPeli.SelectedValue.ToString() +"' " +
                 "group by DATENAME(MONTH,horaFechaVenta)";
 
-            ProcesosBD pbd = new ProcesosBD();
-            System.Data.DataTable dt = new System.Data.DataTable();
+            pbd = new ProcesosBD();
+            dt = new System.Data.DataTable();
             pbd.Conectar();
             dt = pbd.SqlSelect(sql).Tables[0];
 
@@ -114,8 +148,8 @@ namespace WindowsFormsTest
                     float ventaMensual= float.Parse(dt.Rows[i][0].ToString());
                     string mes = dt.Rows[i][1].ToString();
 
-                    MessageBox.Show(ventaMensual + " " + mes);
-                    chartPeliYear.Series["Meses"].Points.AddXY("Mayo",ventaMensual);
+                    //MessageBox.Show(ventaMensual + " " + mes);
+                    chartPeliYear.Series["Meses"].Points.AddXY(mes,ventaMensual);
                 }
 
                 chartPeliYear.Series["Meses"].ChartArea = "ChartArea1";

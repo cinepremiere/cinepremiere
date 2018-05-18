@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmVentasLugares));
             this.label1 = new System.Windows.Forms.Label();
             this.flpButacas = new System.Windows.Forms.FlowLayoutPanel();
             this.btnAceptar = new System.Windows.Forms.Button();
@@ -163,6 +164,7 @@
             this.Controls.Add(this.flpButacas);
             this.Controls.Add(this.pbxPantalla);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmVentasLugares";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Selecciona los Asientos";
