@@ -199,8 +199,8 @@ namespace WindowsFormsTest
                 string motivo = txtMotivo.Text;
                 DataTable dt;
 
-                string sql = "select claveTipoUsuario,claveUsuario,constrasena from Usuarios " +
-                        "where claveUsuario='" + usuario + "' and constrasena = '"
+                string sql = "select claveTipoUsuario,claveUsuario,contrasena from Usuarios " +
+                        "where claveUsuario='" + usuario + "' and contrasena = '"
                         + pass + "' and disponible=1 and claveTipoUsuario in(1,2,4)";
 
                 Console.WriteLine(sql);

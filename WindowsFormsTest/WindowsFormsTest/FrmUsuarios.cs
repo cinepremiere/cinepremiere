@@ -72,7 +72,7 @@ namespace WindowsFormsTest
 
             sql = "insert into Usuarios(curp,  Nombres, paterno, materno, claveTipoUsuario" +
                 ", calle, numeroExterior, numeroInterior, cp, colonia, localidad, telefonoCasa" +
-                ", telefonoMovil, inicioContrato, inicioTurno, finTurno, mail, suledo, constrasena" +
+                ", telefonoMovil, inicioContrato, inicioTurno, finTurno, mail, suledo, contrasena" +
                 ", disponible)" +
                 "values(" +
                 "'" + txtCurp.Text + "'," +
@@ -184,7 +184,7 @@ namespace WindowsFormsTest
                     "finTurno='" + usuario.FinTurno + "'," +
                     "mail='" + usuario.Mail + "'," +
                     "suledo='" + usuario.Sueldo + "'," +
-                    "constrasena='" + usuario.Password + "'," +
+                    "contrasena='" + usuario.Password + "'," +
                     "disponible='" + usuario.Disponible + "' " +
                     "where claveUsuario = '" + claveUsuario + "'";
 

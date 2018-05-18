@@ -93,8 +93,8 @@ namespace WindowsFormsTest
             }
             else if (TxtUsuario.Text != "" && TxtContrasena.Text != "")
             {
-                string sql = "select claveTipoUsuario,claveUsuario,constrasena from Usuarios " +
-                    "where claveUsuario='" + TxtUsuario.Text + "' and constrasena = '"
+                string sql = "select claveTipoUsuario,claveUsuario,contrasena from Usuarios " +
+                    "where claveUsuario='" + TxtUsuario.Text + "' and contrasena = '"
                     + TxtContrasena.Text + "'";
 
                 Console.WriteLine(sql);

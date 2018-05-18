@@ -58,7 +58,7 @@ namespace WindowsFormsTest
 
             string sql = "insert into Clientes(nombres,curp,paterno,materno,calle,numeroExterior," +
                 "numeroInterior,cp,colonia,localidad, telefonoCasa, telefonoMovil, fechaRegistro, " +
-                "mail, constrasena, puntos, disponible, tipoCliente)" +
+                "mail, contrasena, puntos, disponible, tipoCliente)" +
                 "values(" 
                 + "'" + clientes.Nombres + "',"
                 + "'" + clientes.Curp + "',"
@@ -264,7 +264,7 @@ namespace WindowsFormsTest
                     " telefonoMovil ='" + clientes.TelefonoMovil + "'," +
                     " fechaRegistro ='" + clientes.FechaRegistro + "'," +
                     " mail ='" + clientes.Mail + "'," +
-                    " constrasena ='" + clientes.Contrasena + "'," +
+                    " contrasena ='" + clientes.Contrasena + "'," +
                     " puntos =" + clientes.Puntos + "," +
                     " disponible =" + disponible + "," +
                     " tipoCliente =" + clientes.TipoCliente + "," +
