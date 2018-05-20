@@ -399,9 +399,9 @@ values('2DR',1,'2D REGULAR',1),
 --select * from tipocliente
 insert into TipoCliente(tipoCliente,claveListaDePrecios,disponible)
 values
-('PREFERENTE',1,1),
-('PREMIER',2,1),
-('VIP',3,1)
+('PREFERENTE',10,1),
+('PREMIER',11,1),
+('VIP',12,1)
 
 
 --select * from Clientes

@@ -133,13 +133,16 @@
   <data name="PantallaCine" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PantallaCine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="logoCP3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logoCP3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ButacaCineSeleccionada" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ButacaCineSeleccionada11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ButacaCine" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ButacaCine11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="logoCP3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\logoCP3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="logoCP31" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logoCP31.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

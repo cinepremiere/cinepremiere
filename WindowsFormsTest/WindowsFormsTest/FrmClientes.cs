@@ -16,6 +16,25 @@ namespace WindowsFormsTest
         Clientes clientes;
         int claveCli = 0;
         Dictionary<int, string> liTIpoCli;
+        Validador validador = new Validador();
+        string msjObtenerDatos = "Debe introducir uno de los siguientes datos " +
+                    "para realizar la busqueda:" +
+                    " ID del cliente, CURP, Apellido Paterno, email o teléfono móvil. " +
+                    "Luego presione la tecla 'Enter' o 'Return'";
+        public static string validarNombreCompleto = "validarNombreCompleto";
+        public static string validarCurp = "validarCurp";
+        public static string validarsoloNumeros = "validarsoloNumeros";
+        public static string validarFormatoCorreo = "validarFormatoCorreo";
+        public static string validarFormatoCURP = "validarFormatoCURP";
+        Dictionary<string, string> liValidaciones = new Dictionary<string, string>
+        {
+            {validarNombreCompleto,validarNombreCompleto},
+            {validarCurp,validarCurp},
+            {validarsoloNumeros,validarsoloNumeros},
+            {validarFormatoCorreo,validarFormatoCorreo},
+            {validarFormatoCURP,validarFormatoCURP},
+        };
+
 
         public int ClaveCli { get => claveCli; set => claveCli = value; }
 
@@ -30,21 +49,25 @@ namespace WindowsFormsTest
             CargarTabla();
 
             liTIpoCli = new Dictionary<int, string>();
-            liTIpoCli.Add(1,"Preferente");
+            liTIpoCli.Add(1, "Preferente");
             liTIpoCli.Add(2, "Premier");
             liTIpoCli.Add(3, "VIP");
 
             cmbTipoUsuario.DataSource = new BindingSource(liTIpoCli, null);
             cmbTipoUsuario.DisplayMember = "Value";
             cmbTipoUsuario.ValueMember = "Key";
-            
+
             chkStatusUser.Checked = true;
+
+            txtPuntos.Text = 0 + "";
+            txtPuntosUsados.Text = 0 + "";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             int status = 1;
             clientes = new Clientes();
+            bool datosValidos = true;
             Boolean err = false;
 
             if (chkStatusUser.Checked == false)
@@ -53,68 +76,143 @@ namespace WindowsFormsTest
             }
 
             vaciarFormAClientes();
+            datosValidos = validarDatosEntrada();
+
             //MessageBox.Show(cmbTipoUsuario.SelectedValue +  "   "
             //    +((KeyValuePair<int,string>)cmbTipoUsuario.SelectedItem).Value);
 
-            string sql = "insert into Clientes(nombres,curp,paterno,materno,calle,numeroExterior," +
-                "numeroInterior,cp,colonia,localidad, telefonoCasa, telefonoMovil, fechaRegistro, " +
-                "mail, contrasena, puntos, disponible, tipoCliente)" +
-                "values(" 
-                + "'" + clientes.Nombres + "',"
-                + "'" + clientes.Curp + "',"
-                + "'" + clientes.Paterno + "',"
-                + "'" + clientes.Materno + "',"
-                + "'" + clientes.Calle + "',"
-                + "'" + clientes.NumExt + "',"
-                + "'" + clientes.NumInt + "',"
-                + "'" + clientes.Cp + "',"
-                + "'" + clientes.Colonia + "',"
-                + "'" + clientes.Localidad + "',"
-                + "'" + clientes.TelefonoCasa + "',"
-                + "'" + clientes.TelefonoMovil + "',"
-                + "getdate(),"
-                + "'" + clientes.Mail + "',"
-                + "'" + clientes.Contrasena + "',"
-                + "'" + clientes.Puntos + "',"
-                + "" + status + ","
-                + "" + cmbTipoUsuario.SelectedValue.ToString() + ""
-                + ")";
-
-            pbd.Conectar();
-            pbd.abrirConexion();
-            pbd.comenzarTransaccion();
-
-            try
+            if (datosValidos)
             {
-                pbd.sqlUpdateTransaction(sql);
+                string sql = "";
+                DataTable dt = new DataTable();
 
-                sql = "insert into ";
-            }
-            catch
-            {
-
-            }
-
-            Console.Write(sql);
-            try
-            {
+                sql = "select curp from clientes where curp='" + txtCurp.Text + "'" +
+                    " or telefonoMovil = '" + clientes.TelefonoMovil + "'";
                 pbd.Conectar();
-                validarDatos();
-                if (txtNombreCliente.Text != "")
-                    pbd.SqlUpdate(sql);
-                limpiarControles();
-                CargarTabla();
+                dt = pbd.SqlSelect(sql).Tables[0];
+
+                if (dt.Rows.Count > 0)
+                {
+                    MessageBox.Show("Ya existe un registro con esos datos no se pueden duplicar" +
+                        " verifique curp, claveCliente y telefono movil.");
+                }
+                else
+                {
+                    try
+                    {
+                        sql = "select next value for SCH_Ventas.AI_Ventas";
+
+                        pbd.Conectar();
+                        int claveVenta = int.Parse(pbd.SqlSelect(sql).Tables[0].Rows[0][0]
+                            .ToString());
+
+                        sql = "select precio from ListaDePrecios l,TipoCliente t " +
+                            "where l.claveListaDePrecios = t.claveListaDePrecios " +
+                            "and t.claveTipoCliente = "+ cmbTipoUsuario.SelectedValue.ToString() + "";
+                        pbd.Conectar();
+                        float importeTotal = float.Parse(pbd.SqlSelect(sql).Tables[0].Rows[0][0]
+                            .ToString());
+
+                        DialogResult d = MessageBox.Show("Confirmar Pago\n"
+                            + "Precio Unitario:  \t\t$" + importeTotal + ".00\n"
+                            + "Importe Total: \t\t$" + importeTotal + ".00\n"
+                            , "Aceptar", MessageBoxButtons.OKCancel);
+
+                        int i = 0;
+                        if (d.Equals(DialogResult.OK))
+                        {
+                            sql = "insert into Clientes(nombres,curp,paterno,materno,calle,numeroExterior," +
+                        "numeroInterior,cp,colonia,localidad, telefonoCasa, telefonoMovil, fechaRegistro, " +
+                        "mail, contrasena, puntos, disponible, tipoCliente)" +
+                        "values("
+                        + "'" + clientes.Nombres + "',"
+                        + "'" + clientes.Curp + "',"
+                        + "'" + clientes.Paterno + "',"
+                        + "'" + clientes.Materno + "',"
+                        + "'" + clientes.Calle + "',"
+                        + "'" + clientes.NumExt + "',"
+                        + "'" + clientes.NumInt + "',"
+                        + "'" + clientes.Cp + "',"
+                        + "'" + clientes.Colonia + "',"
+                        + "'" + clientes.Localidad + "',"
+                        + "'" + clientes.TelefonoCasa + "',"
+                        + "'" + clientes.TelefonoMovil + "',"
+                        + "getdate(),"
+                        + "'" + clientes.Mail + "',"
+                        + "'" + clientes.Contrasena + "',"
+                        + "'" + clientes.Puntos + "',"
+                        + "" + status + ","
+                        + "" + cmbTipoUsuario.SelectedValue.ToString() + ""
+                        + ")";
+
+                            Console.WriteLine(sql);
+
+                            pbd.Conectar();
+                            pbd.abrirConexion();
+                            pbd.comenzarTransaccion();
+                            pbd.sqlUpdateTransaction(sql);
+
+                            sql = "insert into ventas(claveVenta,claveCliente,claveUsuario" +
+                                        ",horaFechaVenta,importeTotal) values " +
+                                        "(" + claveVenta + "," +
+                                        "NULL" +
+                                        "," + Program.ClaveUsario + "" +
+                                        ",CONVERT(datetime, GETDATE(),103)" +
+                                        "," + importeTotal + ")";
+
+                            Console.WriteLine(sql);
+                            pbd.sqlUpdateTransaction(sql);
+
+                            sql = "insert into DetallesVentas(claveVenta,boleto,claveTipoVenta" +
+                                        ",descuento,iva,precioUnitario,importeParcial" +
+                                        ",fechaHoraRegistro,sumaPuntos) values";
+                            sql +=
+                                            "(" +
+                                            "" + claveVenta +
+                                            ",NULL" +
+                                            ",2" +//tipoventa 2 solo para venta de membresías
+                                            ",0" +
+                                            ",0" +
+                                            "," + importeTotal +
+                                            "," + importeTotal + "" +
+                                            ",CONVERT(datetime, GETDATE(),103)" +
+                                            ",0)";
+
+                            Console.WriteLine(sql);
+                            pbd.sqlUpdateTransaction(sql);
+
+                            pbd.Transaction.Commit();
+                        }
+                    }
+                    catch
+                    {
+                        try
+                        {
+                            pbd.Transaction.Rollback();
+                        }
+                        catch (Exception ex2)
+                        {
+                            // This catch block will handle any errors that may have occurred
+                            // on the server that would cause the rollback to fail, such as
+                            // a closed connection.
+                            Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                            Console.WriteLine("  Message: {0}", ex2.Message);
+                        }
+                    }
+                    finally
+                    {
+                        limpiarControles();
+                        pbd.Conexion.Close();
+                    }
+
+                    Console.Write(sql);
+                    if (!err)
+                    {
+                        MessageBox.Show("Registro exitoso");
+                        CargarTabla();
+                    }
+                }
             }
-            catch(Exception error)
-            {
-                err = true;
-                MessageBox.Show("No fue posible insertar en la base de datos, causa: " + error);
-            }
-            if (!err)
-            {
-                MessageBox.Show("Registro exitoso");
-            }
-            
         }
 
         private void CargarTabla()
@@ -128,42 +226,39 @@ namespace WindowsFormsTest
 
         private void limpiarControles()
         {
-            txtNombreCliente.Text="";
-            txtPaterno.Text="";
-            txtMaterno.Text="";
-            txtCurp.Text="";
-            txtCalle.Text="";
-            txtNumExt.Text="";
-            txtNumInt.Text="";
-            txtCP.Text="";
-            txtColonia.Text="";
-            txtLocalidad.Text="";
-            txtTelFijo.Text="";
-            txtTelMovil.Text="";
-            txtMail.Text="";
-            txtPass.Text="";
+            txtNombreCliente.Text = "";
+            txtPaterno.Text = "";
+            txtMaterno.Text = "";
+            txtCurp.Text = "";
+            txtCalle.Text = "";
+            txtNumExt.Text = "";
+            txtNumInt.Text = "";
+            txtCP.Text = "";
+            txtColonia.Text = "";
+            txtLocalidad.Text = "";
+            txtTelFijo.Text = "";
+            txtTelMovil.Text = "";
+            txtMail.Text = "";
+            txtPass.Text = "";
             chkStatusUser.Checked = true;
             cmbTipoUsuario.Text = "Seleccionar";
-            txtPuntos.Text = "";
-            txtPuntosUsados.Text = "";
+            txtPuntos.Text = 0 + "";
+            txtPuntosUsados.Text = 0 + "";
             ClaveCli = 0;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar==13)
+            if (e.KeyChar == 13)
             {
                 if (textBox1.Text.Equals(""))
                 {
-                    MessageBox.Show("Debe introducir uno de los siguientes datos " +
-                    "para relaizar la busqueda:" +
-                    " ID del cliente, CURP, Apellido Paterno, email o teléfono móvil. " +
-                    "Luego presione la tecla 'Enter' o 'Return'");
+                    MessageBox.Show(msjObtenerDatos);
                 }
                 else
                 {
@@ -228,16 +323,15 @@ namespace WindowsFormsTest
                     {
                         MessageBox.Show("No se encontró ningún usuario con el criterio especificado");
                     }
-                }   
+                }
             }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (ClaveCli==0)
+            if (ClaveCli == 0)
             {
-                MessageBox.Show("Debe obtener datos a partir de la búsqueda por medio del" +
-                    " buscador");
+                MessageBox.Show(msjObtenerDatos);
             }
             else
             {
@@ -289,8 +383,7 @@ namespace WindowsFormsTest
         {
             clientes = new Clientes();
             //MessageBox.Show(txtNombreCliente.Text);
-            if (txtNombreCliente.Text != "")
-            {
+            
                 clientes.Nombres = txtNombreCliente.Text;
                 clientes.Paterno = txtPaterno.Text;
                 clientes.Materno = txtMaterno.Text;
@@ -309,8 +402,125 @@ namespace WindowsFormsTest
                 clientes.TipoCliente = int.Parse(cmbTipoUsuario.SelectedValue.ToString());
                 clientes.Puntos = int.Parse(txtPuntos.Text);
                 clientes.PuntosUsados = int.Parse(txtPuntosUsados.Text);
+
+
+        }
+
+        private bool validarDatosEntrada()
+        {
+            bool datosValidos = true;
+            bool correoValido = true;
+            bool curpValido = true;
+            string msjerrores = "Error:\n";
+
+            if (txtNombreCliente.Text == null || txtNombreCliente.Text.Equals(""))
+            {
+                msjerrores += "El nombre no puede estar vacío\n";
+                datosValidos = false;
             }
-            
+            if(txtPaterno.Text == null || txtPaterno.Text.Equals(""))
+            {
+                msjerrores += "El apellido paterno no puede estar vacío\n";
+                datosValidos = false;
+            }
+            if (txtCurp.Text == null || txtCurp.Text.Equals(""))
+            {
+                msjerrores += "El curp no puede estar vacío\n";
+                datosValidos = false;
+            }
+            else
+            {
+                curpValido = validador.validarFormatoCURP(txtCurp.Text);
+                if (!curpValido)
+                {
+                    datosValidos = false;
+                    msjerrores += "El formato del CURP es: 4 letras,6 digitos (yymmdd)," +
+                        "6 letras,2 digitos\n";
+                }
+            }
+            if (txtCalle.Text == null || txtCalle.Text.Equals(""))
+            {
+                msjerrores += "La calle no puede estar vacía\n";
+                datosValidos = false;
+            }
+            if (txtNumExt.Text == null || txtNumExt.Text.Equals(""))
+            {
+                msjerrores += "El número exterior no puede estar vacío\n";
+                datosValidos = false;
+            }
+            if (txtCP.Text == null || txtCP.Text.Equals(""))
+            {
+                msjerrores += "El CP no puede estar vacío\n";
+                datosValidos = false;
+            }
+            else
+            {
+                if (txtCP.Text.Length < 5)
+                {
+                    msjerrores += "El CP no puede tener menos de 5 dígitos\n";
+                    datosValidos = false;
+                }
+            }
+            if (txtColonia.Text == null || txtColonia.Text.Equals(""))
+            {
+                msjerrores += "La colonia no puede estar vacía\n";
+                datosValidos = false;
+            }
+            if (txtLocalidad.Text == null || txtLocalidad.Text.Equals(""))
+            {
+                msjerrores += "La localidad no puede estar vacía\n";
+                datosValidos = false;
+            }
+            if (txtTelMovil.Text == null || txtTelMovil.Text.Equals(""))
+            {
+                msjerrores += "El número telefónico móvil no puede estar vacío\n";
+                datosValidos = false;
+            }
+            else
+            {
+                if (txtTelMovil.Text.Length < 10)
+                {
+                    msjerrores += "El móvil no puede tener menos de 10 dígitos\n";
+                    datosValidos = false;
+                }
+            }
+            if (txtMail.Text == null || txtMail.Text.Equals(""))
+            {
+                msjerrores += "El correo no puede estar vacío\n";
+                datosValidos = false;
+            }
+            else
+            {
+                correoValido = validador.validarFormatoCorreo(txtMail.Text);
+                if (!correoValido)
+                {
+                    datosValidos = false;
+                    msjerrores += "El formato del correo ingresado no es válido." +
+                        "Debe aproximarse al patrón: nombrecuenta@dominio.ext" +
+                        "y se aceptan . - _ y uno o más dígitos y más de un subdominio.";
+                }
+            }
+            if (txtPass.Text == null || txtPass.Text.Equals(""))
+            {
+                msjerrores += "El password no puede estar vacío\n";
+                datosValidos = false;
+            }
+            if(int.Parse(txtPuntosUsados.Text) > int.Parse(txtPuntos.Text))
+            {
+                msjerrores += "Puntos usados no puede ser mayor que puntos\n";
+                datosValidos = false;
+            }
+            if (!datosValidos)
+            {
+                MessageBox.Show(msjerrores);
+            }
+            if (txtTelFijo.Text.Length>0 && txtTelFijo.Text.Length < 10)
+            {
+                msjerrores += "El tel. fijo no puede tener menos de 10 dígitos\n";
+                datosValidos = false;
+            }
+
+            return datosValidos;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -395,6 +605,134 @@ namespace WindowsFormsTest
         private void btnRecargarTabla_Click(object sender, EventArgs e)
         {
             CargarTabla();
+        }
+
+        private void FrmClientes_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNombreCliente_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNombreCliente_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validarEntrada(e,liValidaciones[validarNombreCompleto]);
+        }
+
+        private void txtPaterno_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validarEntrada(e, liValidaciones[validarNombreCompleto]);
+        }
+
+
+        private void validarEntrada(KeyPressEventArgs e,string tipoValidacion)
+        {
+            bool esValido = true;
+
+            if (tipoValidacion.Equals(validarNombreCompleto))
+            {
+                esValido = validador.validarNombreCompleto(e.KeyChar.ToString());
+                if (!esValido)
+                {
+                    MessageBox.Show("No puede contener números ni los siguientes caracteres:\n" +
+                        "\\ / . ? ¡ ! * % $ ' # . ");
+                    e.Handled = true;
+                }
+                else
+                {
+                    e.Handled = false;
+                }
+            }
+            else if(tipoValidacion.Equals(validarCurp))
+            {
+                esValido = validador.validarCurp(e.KeyChar.ToString());
+                if (!esValido)
+                {
+                    MessageBox.Show("Este campo solo puede contener letras mayúsculas y números");
+                    e.Handled = true;
+                }
+                else
+                {
+                    e.Handled = false;
+                }
+            }
+            else if (tipoValidacion.Equals(validarsoloNumeros))
+            {
+                esValido = validador.validarsoloNumeros(e.KeyChar.ToString());
+                if (!esValido)
+                {
+                    MessageBox.Show("Este campo solo puede contener y números");
+                    e.Handled = true;
+                }
+                else
+                {
+                    e.Handled = false;
+                }
+            }
+        }
+
+        private void txtMaterno_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validarEntrada(e,liValidaciones[validarNombreCompleto]);
+        }
+
+        private void txtCurp_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validarEntrada(e, liValidaciones[validarCurp]);
+        }
+
+        private void txtCP_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validarEntrada(e, liValidaciones[validarsoloNumeros]);
+        }
+
+        private void txtTelFijo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validarEntrada(e, liValidaciones[validarsoloNumeros]);
+        }
+
+        private void txtTelMovil_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validarEntrada(e, liValidaciones[validarsoloNumeros]);
+        }
+
+        private void txtMail_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void txtPass_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void txtPuntos_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validarEntrada(e, liValidaciones[validarsoloNumeros]);
+        }
+
+        private void txtPuntosUsados_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validarEntrada(e, liValidaciones[validarsoloNumeros]);
+        }
+
+        private void txtPuntos_Leave(object sender, EventArgs e)
+        {
+            if(txtPuntos.Text == null || txtPuntos.Text.Equals(""))
+            {
+                txtPuntos.Text = 0 + "";
+            }
+        }
+
+        private void txtPuntosUsados_Leave(object sender, EventArgs e)
+        {
+            if (txtPuntosUsados.Text == null || txtPuntosUsados.Text.Equals(""))
+            {
+                txtPuntosUsados.Text = 0 + "";
+            }
         }
     }
 }

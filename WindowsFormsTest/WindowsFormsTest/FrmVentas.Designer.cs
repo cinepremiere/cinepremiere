@@ -49,6 +49,7 @@
             // dgvVentas
             // 
             this.dgvVentas.AllowUserToDeleteRows = false;
+            this.dgvVentas.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVentas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NombrePelicula,
@@ -73,6 +74,7 @@
             this.dgvVentas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentas_CellContentClick);
             this.dgvVentas.CellStateChanged += new System.Windows.Forms.DataGridViewCellStateChangedEventHandler(this.dgvVentas_CellStateChanged);
             this.dgvVentas.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentas_CellValueChanged);
+            this.dgvVentas.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvVentas_DataError);
             this.dgvVentas.SelectionChanged += new System.EventHandler(this.dgvVentas_SelectionChanged);
             this.dgvVentas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvVentas_KeyPress);
             this.dgvVentas.Leave += new System.EventHandler(this.dgvVentas_Leave);

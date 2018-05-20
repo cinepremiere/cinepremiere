@@ -146,6 +146,7 @@
     <Compile Include="SalaTipo1.cs" />
     <Compile Include="SalaTipo2.cs" />
     <Compile Include="Usuario.cs" />
+    <Compile Include="Validador.cs" />
     <EmbeddedResource Include="FrmCancelaciones.resx">
       <DependentUpon>FrmCancelaciones.cs</DependentUpon>
     </EmbeddedResource>
@@ -217,6 +218,7 @@
     <Content Include="Resources\ButacaCine.png" />
     <Content Include="Resources\ButacaCine1.png" />
     <Content Include="Resources\ButacaCine10.png" />
+    <None Include="Resources\logoCP31.png" />
     <None Include="Resources\logoCP3.png" />
     <None Include="Resources\logoCP2.png" />
     <None Include="Resources\logoCP.png" />

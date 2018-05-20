@@ -123,6 +123,16 @@ namespace WindowsFormsTest.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap logoCP31 {
+            get {
+                object obj = ResourceManager.GetObject("logoCP31", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap NumButacas {
             get {
                 object obj = ResourceManager.GetObject("NumButacas", resourceCulture);

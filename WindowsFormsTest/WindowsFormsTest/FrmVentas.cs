@@ -24,6 +24,8 @@ namespace WindowsFormsTest
         private float precioUnitario = 0.0f;
         private float descuento = 0.0f;
         private string root = @"F:\UVM\Tareas UVM\07 Septimo Semestre\Ing. de Software I\Parcial 1\";
+        int filaActual = 0;
+        int veces = 0;
         Dictionary<string, int> dgvCols = new Dictionary<string, int>
         {
             {"NombrePelicula",0 },
@@ -32,7 +34,7 @@ namespace WindowsFormsTest
             {"Idioma",3 },
             {"Sala",4 },
             {"CantidadAsientos",5 },
-            {"SeleccionAsientos",6 },
+            {"SeleccionarAsientos",6 },
             {"AsientosSeleccionados",7 },
             {"PrecioUnitario",8 },
             {"Descuento",9 },
@@ -110,7 +112,7 @@ namespace WindowsFormsTest
                     row["peliculas"].ToString();
                 //dgvVentas.Rows[n].Cells[dgvCols["ImgPelicula"]] = img;
                 dgvVentas.Rows[n].Cells[dgvCols["Horario"]] = cmb;
-                dgvVentas.Rows[n].Cells[dgvCols["Descuento"]].Value = "$" 
+                dgvVentas.Rows[n].Cells[dgvCols["Descuento"]].Value = "$"
                     + descuento.ToString() + ".00";
                 //MessageBox.Show(Program.ClaveUsario.ToString());
             }
@@ -119,6 +121,7 @@ namespace WindowsFormsTest
 
         private void dgvVentas_CellStateChanged(object sender, DataGridViewCellStateChangedEventArgs e)
         {
+            
             
         }
 
@@ -134,24 +137,71 @@ namespace WindowsFormsTest
                 var cmb = new DataGridViewComboBoxCell();
                 if (e.ColumnIndex == dgvCols["Horario"])
                 {
-                    //MessageBox.Show("se ha cambiado el estatus");
-                    string sql = "select claveTipoFuncion, descripcion from TipoFuncion " +
-                        "where claveTipoFuncion " +
-                        "in(select claveTipoFuncion from Funciones where clavePelicula = " +
-                        "'" + dgvVentas.Rows[e.RowIndex].Cells[dgvCols["NombrePelicula"]].Value.ToString().Trim() + "'" +
-                        " and hora =" +
-                        "'"+ dgvVentas.Rows[e.RowIndex].Cells[dgvCols["Horario"]].Value.ToString().Trim() + "')";
+                    string sql = "";
+                    //sql = "select f.claveTipoFuncion,descripcion,i.claveIdioma," +
+                    //    "i.idioma,s.claveSala from Funciones f, TipoFuncion t, Idioma i," +
+                    //    "Salas s where f.clavePelicula = " +
+                    //    "'" + dgvVentas.Rows[e.RowIndex].Cells[dgvCols["NombrePelicula"]].Value.ToString().Trim() + "' " +
+                    //    "and hora = '" + dgvVentas.Rows[e.RowIndex].Cells[dgvCols["Horario"]].Value.ToString().Trim() + "' " +
+                    //    "and f.claveTipoFuncion = t.claveTipoFuncion " +
+                    //    "and f.claveSala = s.claveSala and f.claveIdioma = i.claveIdioma";
 
-                    Console.WriteLine(sql);
+                    //Console.WriteLine(sql);
 
-                    pdb.Conectar();
-                    cmb.DataSource = pdb.SqlSelect(sql).Tables[0].DefaultView;
-                    cmb.ValueMember = "claveTipoFuncion";
-                    cmb.DisplayMember = "descripcion";
+                    //pdb.Conectar();
+                    //dt = pdb.SqlSelect(sql).Tables[0];
+                    //if (dt.Rows.Count > 0)
+                    //{
+                    //    if (dt.Rows.Count == 1)
+                    //    {
+                    //        cmb.DataSource = dt.DefaultView;
+                    //        cmb.ValueMember = "claveTipoFuncion";
+                    //        cmb.DisplayMember = "descripcion";
+                    //        dgvVentas.Rows[e.RowIndex].Cells[dgvCols["TipoFuncion"]] = cmb;
+                    //        MessageBox.Show(
+                    //            dt.Rows[0][0].ToString() + " " +
+                    //            dt.Rows[0][2].ToString() + " " +
+                    //            dt.Rows[0][4].ToString()
+                    //            );
+                    //        dgvVentas.Rows[e.RowIndex].Cells[dgvCols["TipoFuncion"]].Value = 
+                    //            dt.Rows[0][0].ToString();
 
+                    //        cmb = new DataGridViewComboBoxCell();
+                    //        cmb.DataSource = dt.DefaultView;
+                    //        cmb.ValueMember = "claveIdioma";
+                    //        cmb.DisplayMember = "idioma";
+                    //        dgvVentas.Rows[e.RowIndex].Cells[dgvCols["Idioma"]] = cmb;
+                    //        dgvVentas.Rows[e.RowIndex].Cells[dgvCols["Idioma"]].Value =
+                    //            dt.Rows[0][2].ToString();
+
+                    //        cmb = new DataGridViewComboBoxCell();
+                    //        cmb.DataSource = dt.DefaultView;
+                    //        cmb.ValueMember = "claveSala";
+                    //        cmb.DisplayMember = "clavesala";
+                    //        dgvVentas.Rows[e.RowIndex].Cells[dgvCols["Sala"]] = cmb;
+                    //        dgvVentas.Rows[e.RowIndex].Cells[dgvCols["Sala"]].Value =
+                    //            dt.Rows[0][4].ToString();
+                    //    }
+                    //    else
+                    //    {
+                            //MessageBox.Show("se ha cambiado el estatus");
+                            sql = "select claveTipoFuncion, descripcion from TipoFuncion " +
+                                "where claveTipoFuncion " +
+                                "in(select claveTipoFuncion from Funciones where clavePelicula = " +
+                                "'" + dgvVentas.Rows[e.RowIndex].Cells[dgvCols["NombrePelicula"]].Value.ToString().Trim() + "'" +
+                                " and hora =" +
+                                "'" + dgvVentas.Rows[e.RowIndex].Cells[dgvCols["Horario"]].Value.ToString().Trim() + "')";
+
+                            Console.WriteLine(sql);
+
+                            pdb.Conectar();
+                            cmb.DataSource = pdb.SqlSelect(sql).Tables[0].DefaultView;
+                            cmb.ValueMember = "claveTipoFuncion";
+                            cmb.DisplayMember = "descripcion";
                     
-
-                    dgvVentas.Rows[e.RowIndex].Cells[dgvCols["TipoFuncion"]] = cmb;
+                            dgvVentas.Rows[e.RowIndex].Cells[dgvCols["TipoFuncion"]] = cmb;
+                    //    }
+                    //}
                 }
                 else if (e.ColumnIndex == dgvCols["TipoFuncion"])
                 {
@@ -215,40 +265,58 @@ namespace WindowsFormsTest
                 }
                 else if (e.ColumnIndex == dgvCols["IdCliente"])
                 {
-                    if (precioUnitario > 0)
+                    if(dgvVentas.Rows[e.RowIndex].Cells[dgvCols["AsientosSeleccionados"]].Value != null)
                     {
-                        string nombre = "";
-                        claveCli = dgvVentas.Rows[e.RowIndex]
-                            .Cells[dgvCols["IdCliente"]].Value.ToString().Trim();
-                        int claveCliente = int.Parse(claveCli);
-                        DataTable dt = new DataTable();
-
-                        pdb.Conectar();
-
-                        string sql = "select puntos-puntosUsados puntos, " +
-                            "Nombres + ' ' + paterno + ' ' + materno nombre from Clientes where " +
-                            "claveCliente = " + claveCliente;
-                        dt = pdb.SqlSelect(sql).Tables[0];
-                        if (pdb.SqlSelect(sql).Tables[0].Rows.Count > 0)
+                        if (precioUnitario > 0)
                         {
-                            puntos = int.Parse(dt.Rows[0][0].ToString());
-                            nombre = dt.Rows[0][1].ToString();
-                            //MessageBox.Show(puntos + " " + precioUnitario + " " + nombre);
+                            string nombre = "";
+                            int claveCliente = 0;
+
+
+                            if (dgvVentas.Rows[e.RowIndex].Cells[dgvCols["IdCliente"]].Value != null
+                                && !dgvVentas.Rows[e.RowIndex].Cells[dgvCols["IdCliente"]].Value.Equals("")
+                                )
+                            {
+                                claveCli = dgvVentas.Rows[e.RowIndex]
+                                .Cells[dgvCols["IdCliente"]].Value.ToString().Trim();
+                                claveCliente = int.Parse(claveCli);
+                            }
+
+                            DataTable dt = new DataTable();
+
+                            pdb.Conectar();
+
+                            string sql = "select puntos-puntosUsados puntos, " +
+                                "Nombres + ' ' + paterno + ' ' + materno nombre from Clientes where " +
+                                "claveCliente = " + claveCliente;
+                            dt = pdb.SqlSelect(sql).Tables[0];
+                            if (pdb.SqlSelect(sql).Tables[0].Rows.Count > 0)
+                            {
+                                puntos = int.Parse(dt.Rows[0][0].ToString());
+                                nombre = dt.Rows[0][1].ToString();
+                                //MessageBox.Show(puntos + " " + precioUnitario + " " + nombre);
+                            }
+                            else
+                            {
+                                puntos = 0;
+                                dgvVentas.Rows[e.RowIndex].Cells[dgvCols["IdCliente"]].Value =
+                                "";
+                            }
+
+                            descuento = puntos * precioUnitario;
+
+                            dgvVentas.Rows[e.RowIndex].Cells[dgvCols["Descuento"]].Value =
+                                "$" + descuento + ".00";
+
+                            dgvVentas.Rows[e.RowIndex].Cells[dgvCols["NombreCliente"]].Value =
+                                nombre;
                         }
-
-                        descuento = puntos * precioUnitario;
-
-                        dgvVentas.Rows[e.RowIndex].Cells[dgvCols["Descuento"]].Value =
-                            "$" + descuento + ".00";
-
-                        dgvVentas.Rows[e.RowIndex].Cells[dgvCols["NombreCliente"]].Value =
-                            nombre;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Debe seleccionar una funcion para aplicar el descuento");
-                        dgvVentas.Rows[e.RowIndex].Cells[dgvCols["IdCliente"]].Value = "";
-                        claveCli = "NULL";
+                        else
+                        {
+                            MessageBox.Show("Debe seleccionar una funcion para aplicar el descuento");
+                            dgvVentas.Rows[e.RowIndex].Cells[dgvCols["IdCliente"]].Value = "";
+                            claveCli = "NULL";
+                        }
                     }
                 }
             }
@@ -266,204 +334,216 @@ namespace WindowsFormsTest
                 string sql = "";
                 if (e.ColumnIndex == dgvCols["CerrarVenta"])
                 {
-                    //MessageBox.Show("se ha presionado el boton");
-                    float precioBoletos =
-                        precioUnitario * 
-                        float.Parse(dgvVentas.Rows[e.RowIndex]
-                        .Cells[dgvCols["CantidadAsientos"]].Value.ToString());
-
-                    float importeTotal = precioBoletos - descuento;
-
-                    DialogResult d = MessageBox.Show("Confirmar Pago: $" 
-                        + importeTotal + ".00"
-                        , "Aceptar", MessageBoxButtons.OKCancel);
-
-                    int i = 0;
-                    if (d.Equals(DialogResult.OK))
+                    if(dgvVentas.Rows[e.RowIndex]
+                        .Cells[dgvCols["AsientosSeleccionados"]].Value != null)
                     {
-                        int p = 0;
-                        int sumaPuntos = 0;//solo puede ser 0 o 1
-                        ProcesosBD pbd = new ProcesosBD();
-                        pbd.Conectar();
-                        List<long> liClaveBoletos = new List<long>();
+                        //MessageBox.Show("se ha presionado el boton");
+                        int cantBoletos = int.Parse(dgvVentas.Rows[e.RowIndex]
+                            .Cells[dgvCols["CantidadAsientos"]].Value.ToString());
+                        float precioBoletos =
+                            precioUnitario * cantBoletos;
 
-                        sql = "select NEXT VALUE FOR SCH_Boletos.AI_Boletos";
-                        for (int n = 0; n < liButacas.Count; n++)
+                        float importeTotal = precioBoletos - descuento;
+
+                        DialogResult d = MessageBox.Show("Confirmar Pago\n"
+                            + "Cantidad de Boletos:  \t" + cantBoletos + "\n"
+                            + "Precio Unitario:  \t\t$" + precioUnitario + ".00\n"
+                            + "Descuento:  \t\t$" + descuento + ".00\n"
+                            + "Importe Total: \t\t$" + importeTotal + ".00\n"
+                            , "Aceptar", MessageBoxButtons.OKCancel);
+
+                        int i = 0;
+                        if (d.Equals(DialogResult.OK))
                         {
-                            liClaveBoletos.Add(long.Parse(pbd.SqlSelect(sql).Tables[0]
-                                .Rows[0][0].ToString()));
-                        }
+                            int p = 0;
+                            int sumaPuntos = 0;//solo puede ser 0 o 1
+                            ProcesosBD pbd = new ProcesosBD();
+                            pbd.Conectar();
+                            List<long> liClaveBoletos = new List<long>();
 
-                        sql = "select next value for SCH_Ventas.AI_Ventas";
-
-                        int claveVenta = int.Parse(pbd.SqlSelect(sql).Tables[0].Rows[0][0]
-                            .ToString());
-
-                        pbd.Conectar();
-                        pbd.abrirConexion();
-                        pbd.comenzarTransaccion();
-                        
-                        try
-                        {
-                            if (!claveCli.Equals("NULL"))
-                            {
-                                sumaPuntos = 1;//el cliente es válido por lo que la compra suma puntos
-                                                //este valor se usa en otro punto del código
-                                sql = "update Clientes " +
-                                "set puntosUsados = (select puntosUsados " +
-                                "from Clientes where claveCliente ="+
-                                "" + claveCli + ") + " + puntos + ", " +
-                                "puntos = (select puntos from Clientes where claveCliente = " +
-                                "" + claveCli + ") + " + p + " " +
-                                "where claveCliente = " +
-                                "" + claveCli + "";
-
-                                pbd.sqlUpdateTransaction(sql);
-                            }
-
-                            sql = "insert into ventas(claveVenta,claveCliente,claveUsuario" +
-                                ",horaFechaVenta,importeTotal) values " +
-                                "(" + claveVenta + "," +
-                                ""+ claveCli +"" +
-                                ","+ Program.ClaveUsario +"" +
-                                ",CONVERT(datetime, GETDATE(),103)" +
-                                "," + importeTotal + ")";
-
-                            pbd.sqlUpdateTransaction(sql);
-
-                            sql = "insert into Boletos(boleto,claveFuncion, asiento,fila" +
-                                ",fechaHoraImpresion,claveVenta)" +
-                            " values";
-                            foreach (KeyValuePair<int, Butaca> butaca in liButacas)
-                            {
-                                if (i == 0)
-                                {
-                                    sql += "(" +
-                                    ""+ liClaveBoletos[i++] +"," +
-                                    "" + claveFuncion + "," +
-                                    "" + butaca.Value.Asiento + "," +
-                                    "" + butaca.Value.Fila + "," +
-                                    "CONVERT(datetime,getdate(),103)" + "," +
-                                    "" + claveVenta +")";
-                                }
-                                else
-                                {
-                                    sql += ",(" +
-                                    "" + liClaveBoletos[i++] + "," +
-                                    "" + claveFuncion + "," +
-                                    "" + butaca.Value.Asiento + "," +
-                                    "" + butaca.Value.Fila + "," +
-                                    "CONVERT(datetime,getdate(),103)" + "," +
-                                    "" + claveVenta + ")";
-                                }
-                            }
-                            i = 0;
-                            pbd.sqlUpdateTransaction(sql);
-
-                            sql = "insert into DetallesVentas(claveVenta,boleto,claveTipoVenta" +
-                                ",descuento,iva,precioUnitario,importeParcial" +
-                                ",fechaHoraRegistro,sumaPuntos) values";
+                            sql = "select NEXT VALUE FOR SCH_Boletos.AI_Boletos";
                             for (int n = 0; n < liButacas.Count; n++)
                             {
-                                if (puntos <= 0)
-                                    descuento = 0;
-                                if (n == 0)
-                                {
-                                    sql +=
-                                    "(" +
-                                    "" + claveVenta + 
-                                    "," + liClaveBoletos[i++] + 
-                                    ",1" +//tipoventa 1 solo para venta de boletos
-                                    "," + descuento + "" +
-                                    ",0" +
-                                    "," + precioUnitario +
-                                    "," + (precioUnitario + precioUnitario * iva - descuento) + "" +
-                                    ",CONVERT(datetime, GETDATE(),103)" +
-                                    ","+ sumaPuntos +")";
-                                }
-                                else
-                                {
-                                    sql +=
-                                    ",(" +
-                                    "" + claveVenta + "" +
-                                    "," + liClaveBoletos[i++] + "" +
-                                    ",1" +//tipoventa 1 solo para venta de boletos
-                                    "," + descuento + "" +
-                                    ",0" +
-                                    "," + precioUnitario +
-                                    "," + (precioUnitario + precioUnitario * iva - descuento) + "" +
-                                    ",CONVERT(datetime, GETDATE(),103)" +
-                                    "," + sumaPuntos + ")";
-                                }
-
-                                puntos--;
+                                liClaveBoletos.Add(long.Parse(pbd.SqlSelect(sql).Tables[0]
+                                    .Rows[0][0].ToString()));
                             }
 
-                            pbd.sqlUpdateTransaction(sql);
-                            // Attempt to commit the transaction.
-                            pbd.Transaction.Commit();
-                            
-                            Console.WriteLine("Both records are written to database.");
-                            MessageBox.Show("Venta registrada");
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
-                            Console.WriteLine("  Message: {0}", ex.Message);
-                            MessageBox.Show("Venta no registrada");
-                            // Attempt to roll back the transaction.
+                            sql = "select next value for SCH_Ventas.AI_Ventas";
+
+                            int claveVenta = int.Parse(pbd.SqlSelect(sql).Tables[0].Rows[0][0]
+                                .ToString());
+
+                            pbd.Conectar();
+                            pbd.abrirConexion();
+                            pbd.comenzarTransaccion();
+
                             try
                             {
-                                pbd.Transaction.Rollback();
-                            }
-                            catch (Exception ex2)
-                            {
-                                // This catch block will handle any errors that may have occurred
-                                // on the server that would cause the rollback to fail, such as
-                                // a closed connection.
-                                Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
-                                Console.WriteLine("  Message: {0}", ex2.Message);
-                            }
-                        }
-                        finally
-                        {
-                            pbd.Conexion.Close();
-                            if (!claveCli.Equals("NULL"))
-                            {
-                                sql = "select count(boleto)puntos from DetallesVentas d " +
-                                    "where fechaHoraRegistro >= GETDATE()-90  and fechaPuntosUsados is null " +
-                                    "and boleto not in (select boleto from Cancelados)  " +
-                                    "and d.claveVenta not in (select d.claveVenta  from Cancelados) " +
-                                    "and sumaPuntos = 1  and claveVenta in (select claveVenta  " +
-                                    "from Ventas where claveCliente = " + claveCli + ")";
-
-                                Console.WriteLine(sql);
-
-                                dt = pbd.SqlSelect(sql).Tables[0];
-
-                                if (dt.Rows.Count > 0)
+                                if (!claveCli.Equals("NULL"))
                                 {
-                                    if (int.Parse(dt.Rows[0][0].ToString()) >= 5)
+                                    sumaPuntos = 1;//el cliente es válido por lo que la compra suma puntos
+                                                   //este valor se usa en otro punto del código
+                                    sql = "update Clientes " +
+                                    "set puntosUsados = (select puntosUsados " +
+                                    "from Clientes where claveCliente =" +
+                                    "" + claveCli + ") + " + puntos + ", " +
+                                    "puntos = (select puntos from Clientes where claveCliente = " +
+                                    "" + claveCli + ") + " + p + " " +
+                                    "where claveCliente = " +
+                                    "" + claveCli + "";
+
+                                    pbd.sqlUpdateTransaction(sql);
+                                }
+
+                                sql = "insert into ventas(claveVenta,claveCliente,claveUsuario" +
+                                    ",horaFechaVenta,importeTotal) values " +
+                                    "(" + claveVenta + "," +
+                                    "" + claveCli + "" +
+                                    "," + Program.ClaveUsario + "" +
+                                    ",CONVERT(datetime, GETDATE(),103)" +
+                                    "," + importeTotal + ")";
+
+                                pbd.sqlUpdateTransaction(sql);
+
+                                sql = "insert into Boletos(boleto,claveFuncion, asiento,fila" +
+                                    ",fechaHoraImpresion,claveVenta)" +
+                                " values";
+                                foreach (KeyValuePair<int, Butaca> butaca in liButacas)
+                                {
+                                    if (i == 0)
                                     {
-                                        p = int.Parse(dt.Rows[0][0].ToString()) / 5;
+                                        sql += "(" +
+                                        "" + liClaveBoletos[i++] + "," +
+                                        "" + claveFuncion + "," +
+                                        "" + butaca.Value.Asiento + "," +
+                                        "" + butaca.Value.Fila + "," +
+                                        "CONVERT(datetime,getdate(),103)" + "," +
+                                        "" + claveVenta + ")";
+                                    }
+                                    else
+                                    {
+                                        sql += ",(" +
+                                        "" + liClaveBoletos[i++] + "," +
+                                        "" + claveFuncion + "," +
+                                        "" + butaca.Value.Asiento + "," +
+                                        "" + butaca.Value.Fila + "," +
+                                        "CONVERT(datetime,getdate(),103)" + "," +
+                                        "" + claveVenta + ")";
+                                    }
+                                }
+                                i = 0;
+                                pbd.sqlUpdateTransaction(sql);
 
-                                        //MessageBox.Show("puntos" + p);
+                                sql = "insert into DetallesVentas(claveVenta,boleto,claveTipoVenta" +
+                                    ",descuento,iva,precioUnitario,importeParcial" +
+                                    ",fechaHoraRegistro,sumaPuntos) values";
+                                for (int n = 0; n < liButacas.Count; n++)
+                                {
+                                    if (puntos <= 0)
+                                        descuento = 0;
+                                    if (n == 0)
+                                    {
+                                        sql +=
+                                        "(" +
+                                        "" + claveVenta +
+                                        "," + liClaveBoletos[i++] +
+                                        ",1" +//tipoventa 1 solo para venta de boletos
+                                        "," + descuento + "" +
+                                        ",0" +
+                                        "," + precioUnitario +
+                                        "," + (precioUnitario + precioUnitario * iva - descuento) + "" +
+                                        ",CONVERT(datetime, GETDATE(),103)" +
+                                        "," + sumaPuntos + ")";
+                                    }
+                                    else
+                                    {
+                                        sql +=
+                                        ",(" +
+                                        "" + claveVenta + "" +
+                                        "," + liClaveBoletos[i++] + "" +
+                                        ",1" +//tipoventa 1 solo para venta de boletos
+                                        "," + descuento + "" +
+                                        ",0" +
+                                        "," + precioUnitario +
+                                        "," + (precioUnitario + precioUnitario * iva - descuento) + "" +
+                                        ",CONVERT(datetime, GETDATE(),103)" +
+                                        "," + sumaPuntos + ")";
+                                    }
 
-                                        sql = "update DetallesVentas set fechaPuntosUsados=GETDATE() " +
-                                            "where claveVenta in(select claveVenta from Ventas where " +
-                                            "claveCliente = " + claveCli + ")  " +
-                                            "and sumaPuntos = 1 " +//sumaPuntos=1 habilita la suma de los puntos 
-                                            "and fechaPuntosUsados is null";
+                                    puntos--;
+                                }
 
-                                        pbd.SqlUpdate(sql);
+                                pbd.sqlUpdateTransaction(sql);
+                                // Attempt to commit the transaction.
+                                pbd.Transaction.Commit();
 
-                                        sql = "update Clientes " +
-                                        "set puntos = (select puntos from Clientes where claveCliente = " +
-                                        "" + claveCli + ") + " + p + " " +
-                                        "where claveCliente = " +
-                                        "" + claveCli + "";
+                                Console.WriteLine("Both records are written to database.");
+                                MessageBox.Show("Venta registrada");
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
+                                Console.WriteLine("  Message: {0}", ex.Message);
+                                MessageBox.Show("Venta no registrada");
+                                // Attempt to roll back the transaction.
+                                try
+                                {
+                                    pbd.Transaction.Rollback();
+                                }
+                                catch (Exception ex2)
+                                {
+                                    // This catch block will handle any errors that may have occurred
+                                    // on the server that would cause the rollback to fail, such as
+                                    // a closed connection.
+                                    Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                                    Console.WriteLine("  Message: {0}", ex2.Message);
+                                }
+                            }
+                            finally
+                            {
+                                veces = 0;
+                                filaActual = e.RowIndex;
+                                limpiarControles();
+                                
 
-                                        pbd.SqlUpdate(sql);
+                                pbd.Conexion.Close();
+                                if (!claveCli.Equals("NULL"))
+                                {
+                                    sql = "select count(boleto)puntos from DetallesVentas d " +
+                                        "where fechaHoraRegistro >= GETDATE()-90  and fechaPuntosUsados is null " +
+                                        "and boleto not in (select boleto from Cancelados)  " +
+                                        "and d.claveVenta not in (select d.claveVenta  from Cancelados) " +
+                                        "and sumaPuntos = 1  and claveVenta in (select claveVenta  " +
+                                        "from Ventas where claveCliente = " + claveCli + ")";
+
+                                    Console.WriteLine(sql);
+
+                                    dt = pbd.SqlSelect(sql).Tables[0];
+
+                                    if (dt.Rows.Count > 0)
+                                    {
+                                        if (int.Parse(dt.Rows[0][0].ToString()) >= 5)
+                                        {
+                                            p = int.Parse(dt.Rows[0][0].ToString()) / 5;
+
+                                            //MessageBox.Show("puntos" + p);
+
+                                            sql = "update DetallesVentas set fechaPuntosUsados=GETDATE() " +
+                                                "where claveVenta in(select claveVenta from Ventas where " +
+                                                "claveCliente = " + claveCli + ")  " +
+                                                "and sumaPuntos = 1 " +//sumaPuntos=1 habilita la suma de los puntos 
+                                                "and fechaPuntosUsados is null";
+
+                                            pbd.SqlUpdate(sql);
+
+                                            sql = "update Clientes " +
+                                            "set puntos = (select puntos from Clientes where claveCliente = " +
+                                            "" + claveCli + ") + " + p + " " +
+                                            "where claveCliente = " +
+                                            "" + claveCli + "";
+
+                                            pbd.SqlUpdate(sql);
+                                        }
                                     }
                                 }
                             }
@@ -471,12 +551,13 @@ namespace WindowsFormsTest
                     }
                     else
                     {
-                        this.Close();
+                        MessageBox.Show("Debe seleccionar los asientos");
                     }
+                    
                 }
-                else if (e.ColumnIndex == dgvCols["SeleccionAsientos"])
+                else if (e.ColumnIndex == dgvCols["SeleccionarAsientos"])
                 {
-                    if(dgvVentas.Rows[e.RowIndex].Cells[dgvCols["Sala"]].Value != null)
+                    if(dgvVentas.Rows[e.RowIndex].Cells[dgvCols["CantidadAsientos"]].Value != null)
                     {
                         sql = "select capacidad from TipoSala t,Salas s,Funciones f " +
                             " where f.claveSala = s.claveSala and s.claveTipoSala = t.claveTipoSala" +
@@ -526,6 +607,16 @@ namespace WindowsFormsTest
             }
         }
 
+        private void limpiarControles()
+        {
+            dgvVentas.Rows[filaActual].Cells[dgvCols["CantidadAsientos"]].Value = null;
+            dgvVentas.Rows[filaActual].Cells[dgvCols["AsientosSeleccionados"]].Value = null;
+            dgvVentas.Rows[filaActual].Cells[dgvCols["PrecioUnitario"]].Value = null;
+            dgvVentas.Rows[filaActual].Cells[dgvCols["Descuento"]].Value = "$0.00";
+            dgvVentas.Rows[filaActual].Cells[dgvCols["IdCliente"]].Value = null;
+            dgvVentas.Rows[filaActual].Cells[dgvCols["NombreCliente"]].Value = null;
+        }
+
         #region ISeleccionados
         public void asientosSeleccionados(Dictionary<int, Butaca> liButacas)
         {
@@ -558,8 +649,9 @@ namespace WindowsFormsTest
 
             pbd.Conectar();
             
-            string sql = "select precio from TipoFuncion where claveTipoFuncion=" 
-                + dgvVentas.Rows[row].Cells[dgvCols["TipoFuncion"]].Value.ToString();
+            string sql = "select precio from ListaDePrecios where claveListaDePrecios in " +
+                "(select claveListaDePrecios from TipoFuncion where claveTipoFuncion = "
+                + dgvVentas.Rows[row].Cells[dgvCols["TipoFuncion"]].Value.ToString() + ")";
 
             string precio = pbd.SqlSelect(sql).Tables[0].Rows[0][0].ToString();
             //MessageBox.Show(precio);
@@ -573,6 +665,19 @@ namespace WindowsFormsTest
         private void dgvVentas_KeyPress(object sender, KeyPressEventArgs e)
         {
             
+        }
+
+        private void dgvVentas_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            if (e.Exception.Message.Equals("DataGridViewComboBoxCell value is not valid."))
+            {
+                object val = dgvVentas.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+                if (!((DataGridViewComboBoxColumn)dgvVentas.Columns[e.RowIndex]).Items.Contains(val))
+                {
+                    ((DataGridViewComboBoxColumn)dgvVentas.Columns[e.RowIndex]).Items.Add(val);
+                    e.ThrowException = false;
+                }
+            }
         }
     }
 }
