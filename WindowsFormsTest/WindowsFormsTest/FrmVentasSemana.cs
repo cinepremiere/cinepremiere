@@ -124,8 +124,6 @@ namespace WindowsFormsTest
                 chartPeliMonth.Series["Semanas"].ChartArea = "ChartArea1";
             }
 
-
-
             sql = "select SUM(importeTotal)ventaMensual, " +
                 "DATENAME(MONTH,horaFechaVenta)mes  from Ventas  " +
                 "where YEAR(horaFechaVenta) = '"+ cmbYearPeli.SelectedValue.ToString() +"' " +

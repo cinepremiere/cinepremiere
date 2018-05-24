@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 
@@ -18,6 +20,8 @@ namespace WindowsFormsTest
         int claveFunciones = 0;
         string clavePelicula = "";
         string defaultPelicula = "";
+        Dictionary<int, string> peliDuracion;
+        int h = 0;
 
         public FrmFunciones()
         {
@@ -28,40 +32,48 @@ namespace WindowsFormsTest
         {
             funciones = new Funciones();
             int status = 1;
+            bool datosValidos = true;
+            bool dispon = true;
 
-            funciones.ClaveSala = int.Parse(cmbSalas.SelectedValue.ToString());
-            funciones.ClavePelicula = cmbPeliculas.SelectedValue.ToString();
-            funciones.ClaveTipoFuncion = int.Parse(cmbTipoFuncion.SelectedValue.ToString());
-            funciones.ClaveIdioma = int.Parse(cmbIdioma.SelectedValue.ToString());
-            funciones.ClaveSubtitulos = int.Parse(cmbSubtitulos.SelectedValue.ToString());
-            funciones.Fecha = dtmFechaProy.Value;
-            funciones.Hora = dtmHoraProy.Value;
-            funciones.Disponible = chkPeliDisp.Checked;
-            if (!funciones.Disponible) status =0;
-            funciones.ImgPath = txtImgPath.Text;
+            dispon = validarDisponibilidad();
+            datosValidos =  validarDatosEntrada();
 
-            string sql = "insert into Funciones(claveSala,clavePelicula,claveTipoFuncion," +
-                "claveIdioma,claveSubtitulos,fecha,hora,disponible, imgPath)" +
-                "values("
-                + funciones.ClaveSala+ ","
-                + "'" + funciones.ClavePelicula.ToString().Trim()+ "',"
-                + funciones.ClaveTipoFuncion+ ","
-                + funciones.ClaveIdioma+ ","
-                + funciones.ClaveSubtitulos+ ","
-                + "'" + funciones.Fecha.ToString("yyyy/MM/dd") + "',"
-                + "'" + funciones.Hora.ToString("hh:mm") + "',"
-                + status + ","
-                + "'" + funciones.ImgPath + "'"
-                + ")";
-            Console.Write(sql);
-            pbd = new ProcesosBD();
-            pbd.Conectar();
+            if (datosValidos && dispon)
+            {
+                funciones.ClaveSala = int.Parse(cmbSalas.SelectedValue.ToString());
+                funciones.ClavePelicula = cmbPeliculas.SelectedValue.ToString();
+                funciones.ClaveTipoFuncion = int.Parse(cmbTipoFuncion.SelectedValue.ToString());
+                funciones.ClaveIdioma = int.Parse(cmbIdioma.SelectedValue.ToString());
+                funciones.ClaveSubtitulos = int.Parse(cmbSubtitulos.SelectedValue.ToString());
+                funciones.Fecha = dtmFechaProy.Value;
+                funciones.Hora = dtmHoraIni.Value;
+                funciones.Disponible = chkPeliDisp.Checked;
+                if (!funciones.Disponible) status = 0;
+                funciones.ImgPath = txtImgPath.Text;
 
-            pbd.SqlUpdate(sql);
+                string sql = "insert into Funciones(claveSala,clavePelicula,claveTipoFuncion," +
+                    "claveIdioma,claveSubtitulos,fecha,hora,disponible, imgPath)" +
+                    "values("
+                    + funciones.ClaveSala + ","
+                    + "'" + funciones.ClavePelicula.ToString().Trim() + "',"
+                    + funciones.ClaveTipoFuncion + ","
+                    + funciones.ClaveIdioma + ","
+                    + funciones.ClaveSubtitulos + ","
+                    + "'" + funciones.Fecha.ToString("yyyy/MM/dd") + "',"
+                    + "'" + funciones.Hora.ToString("hh:mm") + "',"
+                    + status + ","
+                    + "'" + funciones.ImgPath + "'"
+                    + ")";
+                Console.Write(sql);
+                pbd = new ProcesosBD();
+                pbd.Conectar();
 
-            MessageBox.Show("Se ha insertado el registro exitosamente");
+                pbd.SqlUpdate(sql);
 
-            CargarTabla();
+                MessageBox.Show("Se ha insertado el registro exitosamente");
+
+                CargarTabla();
+            }
         }
 
         private void FrmFunciones_Load(object sender, EventArgs e)
@@ -77,10 +89,11 @@ namespace WindowsFormsTest
             dtmFechaProy.Format = DateTimePickerFormat.Custom;
             dtmFechaProy.CustomFormat = "yyyy/MM/dd";
 
-            dtmHoraProy.Format = DateTimePickerFormat.Custom;
-            dtmHoraProy.CustomFormat = "HH:mm";
+            dtmHoraIni.Format = DateTimePickerFormat.Custom;
+            dtmHoraIni.CustomFormat = "HH:mm";
 
-            string sql = "select TRIM(clavenombrepelicula)clavenombrepelicula from Peliculas";
+            string sql = "select TRIM(clavenombrepelicula)clavenombrepelicula " +
+                "from Peliculas";
             ds = pbd.SqlSelect(sql);
             if (ds.Tables[0].Rows.Count > 0)
             {
@@ -131,16 +144,36 @@ namespace WindowsFormsTest
 
         public void CargarTabla()
         {
+            DataTable dt = new DataTable();
+            peliDuracion = new Dictionary<int, string>();
             pbd = new ProcesosBD();
             pbd.Conectar();
-            string sql = "select * from funciones order by clavefuncion desc";
-            dgvFunciones.DataSource = pbd.SqlSelect(sql).Tables[0];
+            string sql = "select *,duracion from funciones f,peliculas p " +
+                "where f.clavepelicula = p.clavenombrepelicula order by clavefuncion desc";
+            dt = pbd.SqlSelect(sql).Tables[0];
+
+            if (dt.Rows.Count > 0)
+            {
+                dgvFunciones.DataSource = dt.DefaultView;
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    peliDuracion.Add(int.Parse(dt.Rows[i][0].ToString()),
+                        dt.Rows[i][18].ToString().Substring(0, 5));
+                    //MessageBox.Show(int.Parse(dt.Rows[i][0].ToString()) + "   " +
+                    //    dt.Rows[i][18].ToString().Substring(0, 5));
+                }
+            }
         }
 
         private void btnExaminar_Click(object sender, EventArgs e)
         {
             Stream myStream = null;
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            var directory = AppDomain.CurrentDomain.BaseDirectory;
+            MessageBox.Show(directory);
+
 
             openFileDialog1.InitialDirectory = "F:\\UVM\\Tareas UVM\\07 Septimo Semestre\\" +
                 "Ing. de Software I\\Parcial 1\\cinepremiere\\Imgs\\";
@@ -178,7 +211,7 @@ namespace WindowsFormsTest
                 {
                     MessageBox.Show("Debe introducir uno de los siguientes datos " +
                     "para relaizar la busqueda:" +
-                    " ID del cliente, CURP, Apellido Paterno, email o teléfono móvil. " +
+                    "Id de la función o nombre de la pelicula. " +
                     "Luego presione la tecla 'Enter' o 'Return'");
                 }
                 else
@@ -187,11 +220,9 @@ namespace WindowsFormsTest
                     dt = buscarPorId();
                     if (dt.Rows.Count > 0)
                     {
-
                         dgvFunciones.DataSource = dt.DefaultView;
 
                         limpiarControles();
-
 
                         txtClave.Text = dt.Rows[0][0].ToString().Trim();
                         claveFunciones = int.Parse(txtClave.Text);
@@ -203,7 +234,7 @@ namespace WindowsFormsTest
                         cmbIdioma.SelectedValue = dt.Rows[0][4].ToString().Trim();
                         cmbSubtitulos.SelectedValue = dt.Rows[0][5].ToString().Trim();
                         dtmFechaProy.Value = DateTime.Parse(dt.Rows[0][6].ToString().Trim());
-                        dtmHoraProy.Value = DateTime.Parse(dt.Rows[0][7].ToString().Trim());
+                        dtmHoraIni.Value = DateTime.Parse(dt.Rows[0][7].ToString().Trim());
                         chkPeliDisp.Checked = bool.Parse(dt.Rows[0][8].ToString().Trim());
                         txtImgPath.Text = dt.Rows[0][9].ToString().Trim();
 
@@ -212,7 +243,7 @@ namespace WindowsFormsTest
                     }
                     else
                     {
-                        MessageBox.Show("No se encontró ningún usuario con el criterio especificado");
+                        MessageBox.Show("No se encontró ninguna función con el criterio especificado");
                     }
                 }
             }
@@ -226,7 +257,7 @@ namespace WindowsFormsTest
             cmbIdioma.SelectedValue = 1;
             cmbSubtitulos.SelectedValue = 1;
             dtmFechaProy.Value = DateTime.Today;
-            dtmHoraProy.Value = DateTime.Today;
+            dtmHoraIni.Value = DateTime.Today;
             chkPeliDisp.Checked = true;
             txtImgPath.Text = "";
             claveFunciones = 0;
@@ -268,7 +299,7 @@ namespace WindowsFormsTest
             funciones.ClaveIdioma = int.Parse(cmbIdioma.SelectedValue.ToString());
             funciones.ClaveSubtitulos = int.Parse(cmbSubtitulos.SelectedValue.ToString());
             funciones.Fecha = DateTime.Parse( dtmFechaProy.Text);
-            funciones.Hora = DateTime.Parse(dtmHoraProy.Text);
+            funciones.Hora = DateTime.Parse(dtmHoraIni.Text);
             funciones.Disponible = chkPeliDisp.Checked;
             funciones.ImgPath = txtImgPath.Text;
         }
@@ -296,6 +327,18 @@ namespace WindowsFormsTest
 
                 Console.WriteLine(sql);
 
+                if(validarDisponibilidad() && validarDatosEntrada())
+                {
+                    ProcesosBD pbd = new ProcesosBD();
+                    DataTable dt = new DataTable();
+                    pbd.Conectar();
+                    pbd.SqlUpdate(sql);
+                    dt = buscarPorId();
+                    dgvFunciones.DataSource = dt.DefaultView;
+                    MessageBox.Show("Actualización correcta");
+                    limpiarControles();
+                }
+
                 //validarDatos();
                 //ProcesosBD pbd = new ProcesosBD();
                 //DataTable dt = new DataTable();
@@ -310,7 +353,7 @@ namespace WindowsFormsTest
             {
                 MessageBox.Show("Debe traer los datos por medio de la barra buscar. " +
                     "Coloque cualquiera de los siguientes datos: " +
-                    "clave de Usuario, nombre del usuario, Paterno, Teléfono Móvil, mail" +
+                    "clave de Pelicula o nombre de pelicula " +
                     "y luego presione 'Enter' o 'Return'");
             }
         }
@@ -327,7 +370,170 @@ namespace WindowsFormsTest
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            DataTable dt = new DataTable();
+            if (claveFunciones != 0)
+            {
 
+                DialogResult d = MessageBox.Show("Se eliminará la funcion con id="+ claveFunciones
+                    + ". ¿Desea continuar?\n"
+                            , "Aceptar", MessageBoxButtons.OKCancel);
+
+                int i = 0;
+                if (d.Equals(DialogResult.OK))
+                {
+                    string sql = "delete from funciones where clavefuncion = " + txtBuscar.Text;
+                    pbd.Conectar();
+                    pbd.SqlSelect(sql);
+
+                    pbd.SqlUpdate(sql);
+
+                    limpiarControles();
+                    MessageBox.Show("Se ha eliminado el registro correctamente.");
+                    CargarTabla();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe realizar la busqueda del Id por medio del buscador");
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private bool validarDatosEntrada()
+        {
+            bool datosValidos = true;
+            string msjerrores = "Error:\n";
+
+
+           
+            if (txtImgPath.Text.Equals(""))
+            {
+                msjerrores += "Debe seleccionar una imagen para la pelicula\n";
+                datosValidos = false;
+            }
+            if (!datosValidos)
+            {
+                MessageBox.Show(msjerrores);
+            }
+
+            return datosValidos;
+        }
+
+        private bool validarDisponibilidad()
+        {
+            DataTable dt = new DataTable();
+            bool valido = true;
+
+            string sql = "select top 1 clavefuncion from funciones " +
+                "where clavesala = " + cmbSalas.SelectedValue +
+                " and clavePELICULA !='"+cmbPeliculas.SelectedValue+"' ";
+
+            ProcesosBD pdb = new ProcesosBD();
+            pbd.Conectar();
+            dt = pbd.SqlSelect(sql).Tables[0];
+
+            if (getHorarioIni() < 11 || getHorarioIni() > 23)
+            {
+                MessageBox.Show("Las funciones no pueden empezar " +
+                    "antes de las 11:00 am ni despues de las 23:00");
+                valido = false;
+            }
+            if (dt.Rows.Count > 0)
+            {
+                MessageBox.Show("Esta sala ya esta reservada para una función.Seleccione otra.");
+                valido = false;
+            }
+            //else
+            //{
+            //    MessageBox.Show("l HORA:" + dtmHoraIni.Value.ToString().Substring(10, 14));
+            //    sql = "select * from funciones where hora > '"+ dtmHoraIni.Value.ToString().Substring(10,14)+ "' " +
+            //        "and hora<'11:00'";
+            //    pbd.Conectar();
+            //    dt = pbd.SqlSelect(sql).Tables[0];
+            //    if (dt.Rows.Count > 0)
+            //    {
+            //        MessageBox.Show("No se pueden empalmar los horarios seleccione otro");
+            //        valido = false;
+            //    }
+                
+            //}
+
+            return valido;
+        }
+
+        private string horaFin()
+        {
+            string horaFinal = "";
+            string cadenaHora = dtmHoraIni.Value.ToString();
+            int horasIni = 0;
+            int minutosIni = 0;
+            string duracionCadena = "";
+            int duracion = 0;
+            h = 0;
+            int m = 0;
+
+            duracionCadena = peliDuracion[int.Parse(txtClave.Text)];
+            string[] arraux = duracionCadena.Split(':');
+            string[] arr = cadenaHora.Split(':');
+            duracion = int.Parse(arraux[0])*60;
+            duracion = duracion + int.Parse(arraux[1]);
+            
+
+            horasIni = int.Parse(arr[0]);
+            minutosIni = int.Parse(arr[1]);
+
+            h = duracion / 60;
+            m = duracion % 60;
+
+            if ((minutosIni + m) >= 60)
+            {
+                h++;
+                m = (minutosIni + m) % 60;
+            }
+
+            if (h < 10)
+            {
+                horaFinal = "0" + h;
+            }
+            else
+            {
+                horaFinal = "" + h;
+            }
+            if (m < 10)
+            {
+                horaFinal += ":0" + m;
+            }
+            else
+            {
+                horaFinal += ":" + m;
+            }
+
+            MessageBox.Show(horaFinal);
+            return horaFinal;
+        }
+
+
+        private int getHorarioIni()
+        {
+            string cadenaHora = dtmHoraIni.Value.ToString().Substring(10,15);
+
+            MessageBox.Show(cadenaHora);
+            int horasIni = 0;
+            
+            string[] arr = cadenaHora.Split(':');
+
+            horasIni = int.Parse(arr[0]);
+            
+            return horasIni;
+        }
+
+        private int getHorarioFin()
+        {
+            return 0;
         }
     }
 }

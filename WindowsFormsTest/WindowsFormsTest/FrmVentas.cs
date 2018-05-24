@@ -571,7 +571,10 @@ namespace WindowsFormsTest
                         Console.WriteLine("capacidad:"+capacidad);
 
                         sql = "select fila,asiento from Boletos where claveFuncion = "
-                            + claveFuncion + " order by 1,2 asc";
+                            + claveFuncion + "" +
+                            " and claveVenta not in(select c.claveVenta from Cancelados c," +
+                            "boletos b where c.claveVenta = b.claveVenta)" +
+                            " order by 1,2 asc";
 
                         Console.WriteLine("consulta para boletos: " + sql);
 

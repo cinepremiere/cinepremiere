@@ -237,7 +237,7 @@
             this.dgvPeliculas.Name = "dgvPeliculas";
             this.dgvPeliculas.ReadOnly = true;
             this.dgvPeliculas.RowTemplate.Height = 28;
-            this.dgvPeliculas.Size = new System.Drawing.Size(1002, 345);
+            this.dgvPeliculas.Size = new System.Drawing.Size(1002, 251);
             this.dgvPeliculas.TabIndex = 21;
             // 
             // btnRecargarTabla

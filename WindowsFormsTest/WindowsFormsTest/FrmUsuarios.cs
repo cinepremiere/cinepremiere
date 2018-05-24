@@ -10,6 +10,20 @@ namespace WindowsFormsTest
         ProcesosBD pbd;
         int claveUsuario = 0;
         Usuario usuario;
+        Validador validador = new Validador();
+        public static string validarNombreCompleto = "validarNombreCompleto";
+        public static string validarCurp = "validarCurp";
+        public static string validarsoloNumeros = "validarsoloNumeros";
+        public static string validarFormatoCorreo = "validarFormatoCorreo";
+        public static string validarFormatoCURP = "validarFormatoCURP";
+        Dictionary<string, string> liValidaciones = new Dictionary<string, string>
+        {
+            {validarNombreCompleto,validarNombreCompleto},
+            {validarCurp,validarCurp},
+            {validarsoloNumeros,validarsoloNumeros},
+            {validarFormatoCorreo,validarFormatoCorreo},
+            {validarFormatoCURP,validarFormatoCURP},
+        };
 
         public FrmUsuarios()
         {
@@ -23,6 +37,7 @@ namespace WindowsFormsTest
 
             dtmInicioJornada.Format = DateTimePickerFormat.Custom;
             dtmInicioJornada.CustomFormat = "HH:mm";
+            
 
             dtmFinJornada.Format = DateTimePickerFormat.Custom;
             dtmFinJornada.CustomFormat = "HH:mm";
@@ -30,6 +45,7 @@ namespace WindowsFormsTest
             string sql = "select claveTipoUsuario,tipoUsuario from TipoUsuario";
 
             pbd = new ProcesosBD();
+            DataTable dt = new DataTable();
             pbd.Conectar();
             cmbTipoUsuario.DataSource = pbd.SqlSelect(sql).Tables[0].DefaultView;
             cmbTipoUsuario.ValueMember = "claveTipoUsuario";
@@ -52,10 +68,20 @@ namespace WindowsFormsTest
             liSalario.Add("35000.0000", "35000.0000");
             liSalario.Add("45000.0000", "45000.0000");
 
+            sql = "select claveSalario,salario from Salario";
+
+            pbd.Conectar();
+            cmbSueldo.DataSource = pbd.SqlSelect(sql).Tables[0].DefaultView;
+            cmbSueldo.DisplayMember = "salario";
+            cmbSueldo.ValueMember = "claveSalario";
+            cmbSueldo.SelectedValue = 1;
+
             //cmbSueldo.Items.AddRange(liSalarios);
-            cmbSueldo.DataSource = new BindingSource(liSalario,null);
-            cmbSueldo.DisplayMember = "Value";
-            cmbSueldo.ValueMember = "Key";
+            //cmbSueldo.DataSource = new BindingSource(liSalario,null);
+            //cmbSueldo.DisplayMember = "Value";
+            //cmbSueldo.ValueMember = "Key";
+
+
 
             chkStatusUser.Checked = true;
 
@@ -65,47 +91,71 @@ namespace WindowsFormsTest
         private void btnGuardarCliente_Click(object sender, EventArgs e)
         {
             int disponible = 1;
+            bool datosValidos = true;
             if (!chkStatusUser.Checked)
                 disponible = 0;
 
             string sql = "";
 
-            sql = "insert into Usuarios(curp,  Nombres, paterno, materno, claveTipoUsuario" +
-                ", calle, numeroExterior, numeroInterior, cp, colonia, localidad, telefonoCasa" +
-                ", telefonoMovil, inicioContrato, inicioTurno, finTurno, mail, suledo, contrasena" +
-                ", disponible)" +
-                "values(" +
-                "'" + txtCurp.Text + "'," +
-                "'" + txtNombreUsuario.Text + "'," +
-                "'" + txtPaterno.Text + "'," +
-                "'" + txtMaterno.Text + "'," +
-                "'" + cmbTipoUsuario.SelectedValue.ToString() + "'," +
-                "'" + txtCalle.Text + "'," +
-                "'" + txtNumExt.Text + "'," +
-                "'" + txtNumInt.Text + "'," +
-                "'" + txtCP.Text + "'," +
-                "'" + txtColonia.Text + "'," +
-                "'" + txtLocalidad.Text + "'," +
-                "'" + txtTelFijo.Text + "'," +
-                "'" + txtTelMovil.Text + "'," +
-                "'" + dtmInicioContrato.Value.ToString("yyyy/MM/dd") + "'," +
-                "'" + dtmInicioJornada.Value.ToString("hh:mm") + "'," +
-                "'" + dtmFinJornada.Value.ToString("hh:mm") + "'," +
-                "'" + txtMail.Text + "'," +
-                "'" + cmbSueldo.Text+ "'," +
-                "'" + txtPass.Text + "'," +
-                disponible +
-                ")";
+            //vaciarFormAUsuario();
+            datosValidos = validarDatosEntrada();
+            
+            if (datosValidos)
+            {
+                DataTable dt = new DataTable();
 
-            Console.WriteLine(sql);
+                sql = "select curp from usuarios where curp='" + txtCurp.Text + "'" +
+                    " or telefonoMovil = '" + txtTelMovil.Text + "'" +
+                    " or mail = '" + txtMail.Text + "'";
+                pbd.Conectar();
+                dt = pbd.SqlSelect(sql).Tables[0];
 
-            pbd = new ProcesosBD();
-            pbd.Conectar();
-            pbd.SqlUpdate(sql);
-            MessageBox.Show("Se ha insertado el registro correctamente");
+                if (dt.Rows.Count > 0)
+                {
+                    MessageBox.Show("Ya existe un registro con esos datos, no se pueden duplicar," +
+                        " verifique curp, claveCliente, telefono movil o correo.");
+                }
+                else
+                {
 
-            limpiarControles();
-            CargarTabla();
+                    sql = "insert into Usuarios(curp,  Nombres, paterno, materno, claveTipoUsuario" +
+                        ", calle, numeroExterior, numeroInterior, cp, colonia, localidad, telefonoCasa" +
+                        ", telefonoMovil, inicioContrato, inicioTurno, finTurno, mail, claveSalario" +
+                        ", contrasena, disponible)" +
+                        "values(" +
+                        "'" + txtCurp.Text + "'," +
+                        "'" + txtNombreUsuario.Text + "'," +
+                        "'" + txtPaterno.Text + "'," +
+                        "'" + txtMaterno.Text + "'," +
+                        "'" + cmbTipoUsuario.SelectedValue.ToString() + "'," +
+                        "'" + txtCalle.Text + "'," +
+                        "'" + txtNumExt.Text + "'," +
+                        "'" + txtNumInt.Text + "'," +
+                        "'" + txtCP.Text + "'," +
+                        "'" + txtColonia.Text + "'," +
+                        "'" + txtLocalidad.Text + "'," +
+                        "'" + txtTelFijo.Text + "'," +
+                        "'" + txtTelMovil.Text + "'," +
+                        "'" + dtmInicioContrato.Value.ToString("yyyy/MM/dd") + "'," +
+                        "'" + dtmInicioJornada.Value.ToString("hh:mm") + "'," +
+                        "'" + dtmFinJornada.Value.ToString("hh:mm") + "'," +
+                        "'" + txtMail.Text + "'," +
+                        "'" + cmbSueldo.SelectedValue + "'," +
+                        "'" + txtPass.Text + "'," +
+                        disponible +
+                        ")";
+
+                    Console.WriteLine(sql);
+
+                    pbd = new ProcesosBD();
+                    pbd.Conectar();
+                    pbd.SqlUpdate(sql);
+                    MessageBox.Show("Se ha insertado el registro correctamente");
+
+                    limpiarControles();
+                    CargarTabla();
+                }
+            }
         }
 
         private void CargarTabla()
@@ -138,7 +188,7 @@ namespace WindowsFormsTest
             dtmInicioContrato.Value = DateTime.Today;
 
             chkStatusUser.Checked = true;
-            cmbSueldo.SelectedValue = "3590.0000";
+            cmbSueldo.SelectedValue = 1;
             txtMail.Text = "";
             txtPass.Text = "";
             txtNombreUsuario.Text = "";
@@ -165,9 +215,13 @@ namespace WindowsFormsTest
         {
             if (claveUsuario!=0)
             {
+                bool datosValidos = true;
                 vaciarFormAUsuario();
+                datosValidos = validarDatosEntrada();
 
-                string sql = "update Usuarios set " +
+                if (datosValidos)
+                {
+                    string sql = "update Usuarios set " +
                     "curp = '" + usuario.Curp + "'," +
                     "Nombres = '" + usuario.Nombres + "'," +
                     "paterno = '" + usuario.Paterno + "'," +
@@ -183,22 +237,24 @@ namespace WindowsFormsTest
                     "inicioTurno='" + usuario.InicioTurno + "'," +
                     "finTurno='" + usuario.FinTurno + "'," +
                     "mail='" + usuario.Mail + "'," +
-                    "suledo='" + usuario.Sueldo + "'," +
+                    "claveSalario='" + cmbSueldo.SelectedValue + "'," +
                     "contrasena='" + usuario.Password + "'," +
                     "disponible='" + usuario.Disponible + "' " +
                     "where claveUsuario = '" + claveUsuario + "'";
 
-                Console.WriteLine(sql);
+                    Console.WriteLine(sql);
 
-                //validarDatos();
-                ProcesosBD pbd = new ProcesosBD();
-                DataTable dt = new DataTable();
-                pbd.Conectar();
-                pbd.SqlUpdate(sql);
-                dt = buscarPorId();
-                dgvUsuarios.DataSource = dt.DefaultView;
-                MessageBox.Show("Actualización correcta");
-                limpiarControles();
+                    //validarDatos();
+                    ProcesosBD pbd = new ProcesosBD();
+                    DataTable dt = new DataTable();
+                    pbd.Conectar();
+                    pbd.SqlUpdate(sql);
+                    dt = buscarPorId();
+                    dgvUsuarios.DataSource = dt.DefaultView;
+                    MessageBox.Show("Actualización correcta");
+                    limpiarControles();
+                }
+                
             }
             else
             {
@@ -209,15 +265,126 @@ namespace WindowsFormsTest
             }
         }
 
-        private void validarDatos()
+        private bool validarDatosEntrada()
         {
-            throw new NotImplementedException();
+            bool datosValidos = true;
+            bool correoValido = true;
+            bool curpValido = true;
+            string msjerrores = "Error:\n";
+
+            if (txtNombreUsuario.Text == null || txtNombreUsuario.Text.Equals(""))
+            {
+                msjerrores += "El nombre no puede estar vacío\n";
+                datosValidos = false;
+            }
+            if (txtPaterno.Text == null || txtPaterno.Text.Equals(""))
+            {
+                msjerrores += "El apellido paterno no puede estar vacío\n";
+                datosValidos = false;
+            }
+            if (txtCurp.Text == null || txtCurp.Text.Equals(""))
+            {
+                msjerrores += "El curp no puede estar vacío\n";
+                datosValidos = false;
+            }
+            else
+            {
+                curpValido = validador.validarFormatoCURP(txtCurp.Text);
+                if (!curpValido)
+                {
+                    datosValidos = false;
+                    msjerrores += "El formato del CURP es: 4 letras,6 digitos (yymmdd)," +
+                        "6 letras,2 digitos\n";
+                }
+            }
+            if (txtCalle.Text == null || txtCalle.Text.Equals(""))
+            {
+                msjerrores += "La calle no puede estar vacía\n";
+                datosValidos = false;
+            }
+            if (txtNumExt.Text == null || txtNumExt.Text.Equals(""))
+            {
+                msjerrores += "El número exterior no puede estar vacío\n";
+                datosValidos = false;
+            }
+            if (txtCP.Text == null || txtCP.Text.Equals(""))
+            {
+                msjerrores += "El CP no puede estar vacío\n";
+                datosValidos = false;
+            }
+            else
+            {
+                if (txtCP.Text.Length < 5)
+                {
+                    msjerrores += "El CP no puede tener menos de 5 dígitos\n";
+                    datosValidos = false;
+                }
+            }
+            if (txtColonia.Text == null || txtColonia.Text.Equals(""))
+            {
+                msjerrores += "La colonia no puede estar vacía\n";
+                datosValidos = false;
+            }
+            if (txtLocalidad.Text == null || txtLocalidad.Text.Equals(""))
+            {
+                msjerrores += "La localidad no puede estar vacía\n";
+                datosValidos = false;
+            }
+            if (txtTelMovil.Text == null || txtTelMovil.Text.Equals(""))
+            {
+                msjerrores += "El número telefónico móvil no puede estar vacío\n";
+                datosValidos = false;
+            }
+            else
+            {
+                if (txtTelMovil.Text.Length < 10)
+                {
+                    msjerrores += "El móvil no puede tener menos de 10 dígitos\n";
+                    datosValidos = false;
+                }
+            }
+            if (txtMail.Text == null || txtMail.Text.Equals(""))
+            {
+                msjerrores += "El correo no puede estar vacío\n";
+                datosValidos = false;
+            }
+            else
+            {
+                //MessageBox.Show("se esta validando el correo");
+                correoValido = validador.validarFormatoCorreo(txtMail.Text);
+                if (!correoValido)
+                {
+                    datosValidos = false;
+                    msjerrores += "El formato del correo ingresado no es válido." +
+                        "Debe aproximarse al patrón: nombrecuenta@dominio.ext" +
+                        "y se aceptan . - _ y uno o más dígitos y más de un subdominio.\n";
+                }
+            }
+            if (txtPass.Text == null || txtPass.Text.Equals(""))
+            {
+                msjerrores += "El password no puede estar vacío\n";
+                datosValidos = false;
+            }
+            if (txtTelFijo.Text.Length > 0 && txtTelFijo.Text.Length < 10)
+            {
+                msjerrores += "El tel. fijo no puede tener menos de 10 dígitos\n";
+                datosValidos = false;
+            }
+            if (!datosValidos)
+            {
+                MessageBox.Show(msjerrores);
+            }
+            
+
+            return datosValidos;
         }
 
         private void vaciarFormAUsuario()
         {
             usuario = new Usuario();
             bool disponible = true;
+
+
 
             usuario.Curp = txtCurp.Text;
             usuario.Nombres = txtNombreUsuario.Text;
@@ -373,6 +540,87 @@ namespace WindowsFormsTest
                     "la barra buscar. Coloque cualquiera de los siguientes datos: clave de Usuario," +
                     " Nombres, Paterno, Móvil, mail. Luego presione 'Enter' o 'Return'");
             }
+        }
+
+        private void validarEntrada(KeyPressEventArgs e, string tipoValidacion)
+        {
+            bool esValido = true;
+
+            if (tipoValidacion.Equals(validarNombreCompleto))
+            {
+                esValido = validador.validarNombreCompleto(e.KeyChar.ToString());
+                if (!esValido)
+                {
+                    MessageBox.Show("No puede contener números ni los siguientes caracteres:\n" +
+                        "\\ / . ? ¡ ! * % $ ' # . ");
+                    e.Handled = true;
+                }
+                else
+                {
+                    e.Handled = false;
+                }
+            }
+            else if (tipoValidacion.Equals(validarCurp))
+            {
+                esValido = validador.validarCurp(e.KeyChar.ToString());
+                if (!esValido)
+                {
+                    MessageBox.Show("Este campo solo puede contener letras mayúsculas y números");
+                    e.Handled = true;
+                }
+                else
+                {
+                    e.Handled = false;
+                }
+            }
+            else if (tipoValidacion.Equals(validarsoloNumeros))
+            {
+                esValido = validador.validarsoloNumeros(e.KeyChar.ToString());
+                if (!esValido)
+                {
+                    MessageBox.Show("Este campo solo puede contener y números");
+                    e.Handled = true;
+                }
+                else
+                {
+                    e.Handled = false;
+                }
+            }
+        }
+
+        private void txtNombreUsuario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validarEntrada(e, liValidaciones[validarNombreCompleto]);
+        }
+
+        private void txtPaterno_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validarEntrada(e, liValidaciones[validarNombreCompleto]);
+        }
+
+        private void txtMaterno_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validarEntrada(e, liValidaciones[validarNombreCompleto]);
+        }
+
+        private void txtCurp_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validarEntrada(e, liValidaciones[validarCurp]);
+        }
+
+        private void txtTelFijo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validarEntrada(e, liValidaciones[validarsoloNumeros]);
+        }
+
+        private void txtTelMovil_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validarEntrada(e, liValidaciones[validarsoloNumeros]);
+        }
+
+        private void txtCP_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            validarEntrada(e, liValidaciones[validarsoloNumeros]);
         }
     }
 }

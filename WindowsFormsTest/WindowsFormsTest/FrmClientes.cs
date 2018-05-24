@@ -87,14 +87,15 @@ namespace WindowsFormsTest
                 DataTable dt = new DataTable();
 
                 sql = "select curp from clientes where curp='" + txtCurp.Text + "'" +
-                    " or telefonoMovil = '" + clientes.TelefonoMovil + "'";
+                    " or telefonoMovil = '" + clientes.TelefonoMovil + "'" +
+                    " or mail = '" + clientes.Mail + "'";
                 pbd.Conectar();
                 dt = pbd.SqlSelect(sql).Tables[0];
 
                 if (dt.Rows.Count > 0)
                 {
-                    MessageBox.Show("Ya existe un registro con esos datos no se pueden duplicar" +
-                        " verifique curp, claveCliente y telefono movil.");
+                    MessageBox.Show("Ya existe un registro con esos datos, no se pueden duplicar," +
+                        " verifique curp, claveCliente, telefono movil o correo.");
                 }
                 else
                 {
@@ -335,15 +336,18 @@ namespace WindowsFormsTest
             }
             else
             {
+                bool datosValidos = true;
                 vaciarFormAClientes();
+                datosValidos = validarDatosEntrada();
                 int disponible = 1;
 
                 if (!clientes.Status)
                 {
                     disponible = 0;
                 }
-
-                string sql = "update Clientes " +
+                if (datosValidos)
+                {
+                    string sql = "update Clientes " +
                     " set Nombres='" + clientes.Nombres + "'," +
                     " curp ='" + clientes.Curp + "'," +
                     " paterno ='" + clientes.Paterno + "'," +
@@ -365,16 +369,16 @@ namespace WindowsFormsTest
                     " puntosUsados =" + clientes.PuntosUsados + "" +
                     " where claveCliente=" + claveCli;
 
-                ProcesosBD pbd = new ProcesosBD();
-                pbd.Conectar();
-                pbd.SqlUpdate(sql);
-                validarDatos();
-                MessageBox.Show("Modificación exitosa");
-                DataTable dt = new DataTable();
-                dt = buscarPorId();
-                if (dt.Rows.Count > 0)
-                {
-                    dgvClientes.DataSource = dt.DefaultView;
+                    ProcesosBD pbd = new ProcesosBD();
+                    pbd.Conectar();
+                    pbd.SqlUpdate(sql);
+                    MessageBox.Show("Modificación exitosa");
+                    DataTable dt = new DataTable();
+                    dt = buscarPorId();
+                    if (dt.Rows.Count > 0)
+                    {
+                        dgvClientes.DataSource = dt.DefaultView;
+                    }
                 }
             }
         }
@@ -491,13 +495,14 @@ namespace WindowsFormsTest
             }
             else
             {
+                //MessageBox.Show("se esta validando el correo");
                 correoValido = validador.validarFormatoCorreo(txtMail.Text);
                 if (!correoValido)
                 {
                     datosValidos = false;
                     msjerrores += "El formato del correo ingresado no es válido." +
                         "Debe aproximarse al patrón: nombrecuenta@dominio.ext" +
-                        "y se aceptan . - _ y uno o más dígitos y más de un subdominio.";
+                        "y se aceptan . - _ y uno o más dígitos y más de un subdominio.\n";
                 }
             }
             if (txtPass.Text == null || txtPass.Text.Equals(""))
@@ -510,14 +515,14 @@ namespace WindowsFormsTest
                 msjerrores += "Puntos usados no puede ser mayor que puntos\n";
                 datosValidos = false;
             }
-            if (!datosValidos)
-            {
-                MessageBox.Show(msjerrores);
-            }
-            if (txtTelFijo.Text.Length>0 && txtTelFijo.Text.Length < 10)
+            if (txtTelFijo.Text.Length > 0 && txtTelFijo.Text.Length < 10)
             {
                 msjerrores += "El tel. fijo no puede tener menos de 10 dígitos\n";
                 datosValidos = false;
+            }
+            if (!datosValidos)
+            {
+                MessageBox.Show(msjerrores);
             }
 
             return datosValidos;
@@ -529,13 +534,6 @@ namespace WindowsFormsTest
             this.ClaveCli = 0;
             txtClave.Text = "";
             textBox1.Text = "";
-        }
-
-        private string validarDatos()
-        {
-
-
-            return "";
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)

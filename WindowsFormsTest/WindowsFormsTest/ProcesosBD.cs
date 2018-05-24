@@ -57,7 +57,10 @@ namespace WindowsFormsTest
             }
             catch (Exception error)
             {
-                MessageBox.Show(error.ToString());
+                comando.Transaction.Rollback();
+                MessageBox.Show("No se pudo realizar la inserción en la base de datos." +
+                    " Inténtelo de nuevo");
+                Console.WriteLine(error.Message);
             }
         }
 

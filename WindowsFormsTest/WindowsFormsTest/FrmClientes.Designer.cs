@@ -297,7 +297,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(424, 221);
+            this.label14.Location = new System.Drawing.Point(424, 216);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(102, 20);
             this.label14.TabIndex = 26;
@@ -334,7 +334,7 @@
             // 
             // btnGuardarCliente
             // 
-            this.btnGuardarCliente.Location = new System.Drawing.Point(229, 58);
+            this.btnGuardarCliente.Location = new System.Drawing.Point(228, 68);
             this.btnGuardarCliente.Name = "btnGuardarCliente";
             this.btnGuardarCliente.Size = new System.Drawing.Size(176, 38);
             this.btnGuardarCliente.TabIndex = 20;
@@ -344,7 +344,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(436, 58);
+            this.btnCancelar.Location = new System.Drawing.Point(435, 68);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(176, 38);
             this.btnCancelar.TabIndex = 21;
@@ -357,7 +357,7 @@
             this.dgvClientes.AllowUserToAddRows = false;
             this.dgvClientes.AllowUserToDeleteRows = false;
             this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClientes.Location = new System.Drawing.Point(17, 101);
+            this.dgvClientes.Location = new System.Drawing.Point(16, 111);
             this.dgvClientes.Name = "dgvClientes";
             this.dgvClientes.ReadOnly = true;
             this.dgvClientes.RowTemplate.Height = 28;
@@ -377,7 +377,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(17, 29);
+            this.label16.Location = new System.Drawing.Point(16, 28);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(59, 20);
             this.label16.TabIndex = 35;
@@ -385,7 +385,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(87, 26);
+            this.textBox1.Location = new System.Drawing.Point(86, 25);
             this.textBox1.MaxLength = 50;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(999, 26);
@@ -413,7 +413,7 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(653, 58);
+            this.btnModificar.Location = new System.Drawing.Point(654, 69);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(183, 37);
             this.btnModificar.TabIndex = 22;
@@ -423,7 +423,7 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(871, 58);
+            this.btnEliminar.Location = new System.Drawing.Point(856, 68);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(183, 37);
             this.btnEliminar.TabIndex = 23;
@@ -489,7 +489,7 @@
             // 
             // btnRecargarTabla
             // 
-            this.btnRecargarTabla.Location = new System.Drawing.Point(21, 58);
+            this.btnRecargarTabla.Location = new System.Drawing.Point(20, 68);
             this.btnRecargarTabla.Name = "btnRecargarTabla";
             this.btnRecargarTabla.Size = new System.Drawing.Size(180, 37);
             this.btnRecargarTabla.TabIndex = 24;
@@ -507,9 +507,9 @@
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.btnModificar);
             this.groupBox1.Controls.Add(this.btnEliminar);
-            this.groupBox1.Location = new System.Drawing.Point(6, 364);
+            this.groupBox1.Location = new System.Drawing.Point(6, 352);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1103, 353);
+            this.groupBox1.Size = new System.Drawing.Size(1103, 365);
             this.groupBox1.TabIndex = 46;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Operaciones";

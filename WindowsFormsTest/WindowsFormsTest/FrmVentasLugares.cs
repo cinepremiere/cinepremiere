@@ -252,7 +252,8 @@ namespace WindowsFormsTest
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (cantAsientosPorVender <= cantAsientosSelec)
+            //MessageBox.Show(cantAsientosSelec + "   " + cantAsientosPorVender);
+            if (cantAsientosPorVender == cantAsientosSelec-1)
             {
                 frmVentas.getAsientos(LiButacas, row);
                 //frmVentas.ShowDialog();

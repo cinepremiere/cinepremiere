@@ -42,7 +42,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.dtmFechaProy = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
-            this.dtmHoraProy = new System.Windows.Forms.DateTimePicker();
+            this.dtmHoraIni = new System.Windows.Forms.DateTimePicker();
             this.chkPeliDisp = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtImgPath = new System.Windows.Forms.TextBox();
@@ -57,14 +57,7 @@
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.txtClave = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.dtmFechaFin = new System.Windows.Forms.DateTimePicker();
-            this.label12 = new System.Windows.Forms.Label();
-            this.espacioEntreFunc = new System.Windows.Forms.NumericUpDown();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFunciones)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.espacioEntreFunc)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbPeliculas
@@ -178,28 +171,29 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(16, 185);
+            this.label7.Location = new System.Drawing.Point(15, 71);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(85, 20);
             this.label7.TabIndex = 12;
             this.label7.Text = "Hora Inicio";
             // 
-            // dtmHoraProy
+            // dtmHoraIni
             // 
-            this.dtmHoraProy.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtmHoraProy.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dtmHoraProy.Location = new System.Drawing.Point(157, 184);
-            this.dtmHoraProy.MinDate = new System.DateTime(2017, 1, 1, 0, 0, 0, 0);
-            this.dtmHoraProy.Name = "dtmHoraProy";
-            this.dtmHoraProy.ShowUpDown = true;
-            this.dtmHoraProy.Size = new System.Drawing.Size(200, 26);
-            this.dtmHoraProy.TabIndex = 13;
-            this.dtmHoraProy.Value = new System.DateTime(2018, 4, 12, 23, 0, 0, 0);
+            this.dtmHoraIni.CustomFormat = "hh:mm";
+            this.dtmHoraIni.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtmHoraIni.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dtmHoraIni.Location = new System.Drawing.Point(115, 72);
+            this.dtmHoraIni.MinDate = new System.DateTime(2017, 1, 1, 0, 0, 0, 0);
+            this.dtmHoraIni.Name = "dtmHoraIni";
+            this.dtmHoraIni.ShowUpDown = true;
+            this.dtmHoraIni.Size = new System.Drawing.Size(200, 26);
+            this.dtmHoraIni.TabIndex = 13;
+            this.dtmHoraIni.Value = new System.DateTime(2018, 4, 12, 23, 0, 0, 0);
             // 
             // chkPeliDisp
             // 
             this.chkPeliDisp.AutoSize = true;
-            this.chkPeliDisp.Location = new System.Drawing.Point(836, 131);
+            this.chkPeliDisp.Location = new System.Drawing.Point(915, 75);
             this.chkPeliDisp.Name = "chkPeliDisp";
             this.chkPeliDisp.Size = new System.Drawing.Size(109, 24);
             this.chkPeliDisp.TabIndex = 14;
@@ -209,7 +203,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(127, 131);
+            this.label8.Location = new System.Drawing.Point(71, 152);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(91, 20);
             this.label8.TabIndex = 15;
@@ -217,14 +211,14 @@
             // 
             // txtImgPath
             // 
-            this.txtImgPath.Location = new System.Drawing.Point(225, 128);
+            this.txtImgPath.Location = new System.Drawing.Point(169, 149);
             this.txtImgPath.Name = "txtImgPath";
             this.txtImgPath.Size = new System.Drawing.Size(427, 26);
             this.txtImgPath.TabIndex = 16;
             // 
             // btnExaminar
             // 
-            this.btnExaminar.Location = new System.Drawing.Point(658, 123);
+            this.btnExaminar.Location = new System.Drawing.Point(602, 144);
             this.btnExaminar.Name = "btnExaminar";
             this.btnExaminar.Size = new System.Drawing.Size(131, 39);
             this.btnExaminar.TabIndex = 17;
@@ -234,9 +228,9 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(111, 292);
+            this.btnGuardar.Location = new System.Drawing.Point(9, 293);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(178, 37);
+            this.btnGuardar.Size = new System.Drawing.Size(178, 55);
             this.btnGuardar.TabIndex = 18;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -244,9 +238,9 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(295, 292);
+            this.btnCancelar.Location = new System.Drawing.Point(193, 293);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(178, 37);
+            this.btnCancelar.Size = new System.Drawing.Size(178, 55);
             this.btnCancelar.TabIndex = 19;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -267,9 +261,9 @@
             // 
             // btnRecargar
             // 
-            this.btnRecargar.Location = new System.Drawing.Point(480, 292);
+            this.btnRecargar.Location = new System.Drawing.Point(378, 293);
             this.btnRecargar.Name = "btnRecargar";
-            this.btnRecargar.Size = new System.Drawing.Size(172, 37);
+            this.btnRecargar.Size = new System.Drawing.Size(172, 55);
             this.btnRecargar.TabIndex = 21;
             this.btnRecargar.Text = "Recargar Tabla";
             this.btnRecargar.UseVisualStyleBackColor = true;
@@ -277,9 +271,9 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(659, 292);
+            this.btnModificar.Location = new System.Drawing.Point(557, 293);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(176, 37);
+            this.btnModificar.Size = new System.Drawing.Size(176, 55);
             this.btnModificar.TabIndex = 22;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -287,11 +281,11 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(842, 292);
+            this.btnEliminar.Location = new System.Drawing.Point(739, 293);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(193, 37);
+            this.btnEliminar.Size = new System.Drawing.Size(193, 55);
             this.btnEliminar.TabIndex = 23;
-            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.Text = "Eliminar Por Id";
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
@@ -315,7 +309,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(813, 184);
+            this.label10.Location = new System.Drawing.Point(791, 152);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(109, 20);
             this.label10.TabIndex = 26;
@@ -324,76 +318,16 @@
             // txtClave
             // 
             this.txtClave.Enabled = false;
-            this.txtClave.Location = new System.Drawing.Point(929, 184);
+            this.txtClave.Location = new System.Drawing.Point(907, 152);
             this.txtClave.Name = "txtClave";
             this.txtClave.Size = new System.Drawing.Size(221, 26);
             this.txtClave.TabIndex = 27;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(865, 75);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(80, 20);
-            this.label11.TabIndex = 28;
-            this.label11.Text = "Fecha Fin";
-            // 
-            // dtmFechaFin
-            // 
-            this.dtmFechaFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtmFechaFin.Location = new System.Drawing.Point(951, 72);
-            this.dtmFechaFin.Name = "dtmFechaFin";
-            this.dtmFechaFin.Size = new System.Drawing.Size(200, 26);
-            this.dtmFechaFin.TabIndex = 29;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(13, 74);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(185, 20);
-            this.label12.TabIndex = 30;
-            this.label12.Text = "Espacio entre Funciones";
-            // 
-            // espacioEntreFunc
-            // 
-            this.espacioEntreFunc.Location = new System.Drawing.Point(205, 68);
-            this.espacioEntreFunc.Name = "espacioEntreFunc";
-            this.espacioEntreFunc.Size = new System.Drawing.Size(120, 26);
-            this.espacioEntreFunc.TabIndex = 31;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePicker1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dateTimePicker1.Location = new System.Drawing.Point(540, 184);
-            this.dateTimePicker1.MinDate = new System.DateTime(2017, 1, 1, 0, 0, 0, 0);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.ShowUpDown = true;
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 26);
-            this.dateTimePicker1.TabIndex = 33;
-            this.dateTimePicker1.Value = new System.DateTime(2018, 4, 12, 23, 0, 0, 0);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(399, 185);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(70, 20);
-            this.label13.TabIndex = 32;
-            this.label13.Text = "Hora Fin";
             // 
             // FrmFunciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1163, 684);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.espacioEntreFunc);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.dtmFechaFin);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.txtClave);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtBuscar);
@@ -408,7 +342,7 @@
             this.Controls.Add(this.txtImgPath);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.chkPeliDisp);
-            this.Controls.Add(this.dtmHoraProy);
+            this.Controls.Add(this.dtmHoraIni);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.dtmFechaProy);
             this.Controls.Add(this.label6);
@@ -428,7 +362,6 @@
             this.Text = "FrmFunciones";
             this.Load += new System.EventHandler(this.FrmFunciones_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFunciones)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.espacioEntreFunc)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -449,7 +382,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DateTimePicker dtmFechaProy;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.DateTimePicker dtmHoraProy;
+        private System.Windows.Forms.DateTimePicker dtmHoraIni;
         private System.Windows.Forms.CheckBox chkPeliDisp;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtImgPath;
@@ -464,11 +397,5 @@
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtClave;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.DateTimePicker dtmFechaFin;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.NumericUpDown espacioEntreFunc;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Label label13;
     }
 }
