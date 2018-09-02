@@ -481,7 +481,6 @@ namespace WindowsFormsTest
             string[] arr = cadenaHora.Split(':');
             duracion = int.Parse(arraux[0])*60;
             duracion = duracion + int.Parse(arraux[1]);
-            
 
             horasIni = int.Parse(arr[0]);
             minutosIni = int.Parse(arr[1]);
